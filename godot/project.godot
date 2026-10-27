@@ -1,0 +1,86 @@
+; Engine configuration file.
+; Sete Vidas - Godot 4.7 remake.
+
+config_version=5
+
+[application]
+
+config/name="Sete Vidas"
+config/description="Terror em 3D: você é o gato da casa. Só você vê o que anda pelos corredores."
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "Forward Plus")
+boot_splash/bg_color=Color(0.0196, 0.0275, 0.047, 1)
+boot_splash/show_image=false
+config/icon="res://icon.svg"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/en.po")
+locale/fallback="pt_BR"
+
+[autoload]
+
+Settings="*res://scripts/autoload/settings.gd"
+SaveGame="*res://scripts/autoload/save_game.gd"
+Surfaces="*res://scripts/autoload/surfaces.gd"
+Sfx="*res://scripts/autoload/sfx.gd"
+Music="*res://scripts/autoload/music.gd"
+Controls="*res://scripts/autoload/controls.gd"
+
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/mode=0
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/vsync/vsync_mode=1
+
+[gui]
+
+theme/default_theme_scale=1.0
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=false
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+common/physics_ticks_per_second=60
+common/physics_interpolation=true
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/screen_space_aa=1
+anti_aliasing/quality/use_debanding=true
+textures/default_filters/anisotropic_filtering_level=4
+textures/vram_compression/import_etc2_astc=false
+lights_and_shadows/positional_shadow/atlas_size=8192
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+environment/volumetric_fog/volume_size=96
+environment/volumetric_fog/volume_depth=96
+environment/ssao/quality=2
+environment/ssil/quality=1
+environment/glow/upscale_mode=1
+global_illumination/voxel_gi/quality=0
+anti_aliasing/screen_space_roughness_limiter/enabled=true
+
+[shader_globals]
+
+fear={
+"type": "float",
+"value": 0.0
+}
+hunt={
+"type": "float",
+"value": 0.0
+}
+cat_pos={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}

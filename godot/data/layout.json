@@ -1,0 +1,3758 @@
+{
+ "ARCHES": [
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "s0": 5.6,
+   "s1": 6.8,
+   "y0": 0,
+   "y1": 2.3
+  },
+  {
+   "axis": "z",
+   "fixed": 8,
+   "s0": 7,
+   "s1": 7.9,
+   "y0": -3,
+   "y1": -0.9
+  }
+ ],
+ "CAT_BED": [
+  4.25,
+  0,
+  4.6
+ ],
+ "CAT_START": [
+  2.9,
+  3,
+  3.9
+ ],
+ "CEILING_HOLES": {
+  "hall": [
+   {
+    "x0": 5,
+    "x1": 6.1,
+    "z0": 4,
+    "z1": 8.5
+   }
+  ],
+  "lavanderia": [
+   {
+    "x0": 11,
+    "x1": 12,
+    "z0": 5.2,
+    "z1": 9.2
+   }
+  ],
+  "corredor": [
+   {
+    "x0": 6.65,
+    "x1": 7.4,
+    "z0": 0.45,
+    "z1": 2.9
+   }
+  ]
+ },
+ "DOORS": [
+  {
+   "id": "d_sala",
+   "axis": "z",
+   "fixed": 5,
+   "s0": 1.5,
+   "s1": 2.4,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": -1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta da sala"
+  },
+  {
+   "id": "d_esc",
+   "axis": "z",
+   "fixed": 5,
+   "s0": 8.6,
+   "s1": 9.5,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 1,
+   "swing": -1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do escritório"
+  },
+  {
+   "id": "d_banb",
+   "axis": "z",
+   "fixed": 7.5,
+   "s0": 1.5,
+   "s1": 2.3,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do banheiro"
+  },
+  {
+   "id": "d_front",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 6,
+   "s1": 6.9,
+   "y": 0,
+   "h": 2.15,
+   "hinge": 1,
+   "swing": 1,
+   "state": "closed",
+   "style": "front",
+   "name": "porta da frente"
+  },
+  {
+   "id": "d_porao",
+   "axis": "z",
+   "fixed": 11,
+   "s0": 9.2,
+   "s1": 10,
+   "y": 0,
+   "h": 2.05,
+   "hinge": 1,
+   "swing": -1,
+   "state": "open",
+   "style": "basement",
+   "name": "porta do porão"
+  },
+  {
+   "id": "d_quarto",
+   "axis": "z",
+   "fixed": 5,
+   "s0": 1.2,
+   "s1": 2.1,
+   "y": 3,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": -1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do quarto"
+  },
+  {
+   "id": "d_hosp",
+   "axis": "z",
+   "fixed": 5,
+   "s0": 8.7,
+   "s1": 9.6,
+   "y": 3,
+   "h": 2.1,
+   "hinge": 1,
+   "swing": -1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta dos hóspedes"
+  },
+  {
+   "id": "d_banc",
+   "axis": "z",
+   "fixed": 7.5,
+   "s0": 8.7,
+   "s1": 9.5,
+   "y": 3,
+   "h": 2.1,
+   "hinge": 1,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do banheiro"
+  },
+  {
+   "id": "d_varanda",
+   "axis": "z",
+   "fixed": 7.5,
+   "s0": 4.6,
+   "s1": 5.5,
+   "y": 3,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": 1,
+   "state": "open",
+   "style": "glass",
+   "name": "porta da varanda"
+  },
+  {
+   "id": "d_sala_esc",
+   "axis": "x",
+   "fixed": 5.5,
+   "s0": 0.65,
+   "s1": 1.5,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta entre a sala e o escritório"
+  },
+  {
+   "id": "d_quarto_hosp",
+   "axis": "x",
+   "fixed": 5.5,
+   "s0": 0.7,
+   "s1": 1.55,
+   "y": 3,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta entre os quartos"
+  },
+  {
+   "id": "d_esc_jan",
+   "axis": "x",
+   "fixed": 10,
+   "s0": 0.5,
+   "s1": 1.35,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 0,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do escritório para a sala de jantar"
+  },
+  {
+   "id": "d_hall_jan",
+   "axis": "x",
+   "fixed": 10,
+   "s0": 5.3,
+   "s1": 6.1,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 1,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta do hall para a sala de jantar"
+  },
+  {
+   "id": "d_jan_desp",
+   "axis": "z",
+   "fixed": 7.5,
+   "s0": 11.3,
+   "s1": 12.15,
+   "y": 0,
+   "h": 2.1,
+   "hinge": 1,
+   "swing": 1,
+   "state": "open",
+   "style": "interior",
+   "name": "porta da despensa"
+  },
+  {
+   "id": "d_back",
+   "axis": "x",
+   "fixed": 13,
+   "s0": 6.5,
+   "s1": 7.35,
+   "y": 0,
+   "h": 2.15,
+   "hinge": 1,
+   "swing": -1,
+   "state": "closed",
+   "style": "front",
+   "name": "porta dos fundos"
+  }
+ ],
+ "FLOOR_HOLES": {
+  "corredor": [
+   {
+    "x0": 5,
+    "x1": 6.1,
+    "z0": 4,
+    "z1": 8.5
+   }
+  ],
+  "cozinha": [
+   {
+    "x0": 11,
+    "x1": 12,
+    "z0": 5.2,
+    "z1": 9.2
+   }
+  ],
+  "sotao": [
+   {
+    "x0": 6.65,
+    "x1": 7.4,
+    "z0": 0.45,
+    "z1": 2.9
+   }
+  ]
+ },
+ "HATCH": {
+  "x0": 6.65,
+  "x1": 7.4,
+  "z0": 0.45,
+  "z1": 2.9
+ },
+ "HIDE_SPOTS": [
+  {
+   "id": "sofa",
+   "name": "atrás do sofá",
+   "p": [
+    2.5,
+    0,
+    0.6
+   ],
+   "exit": [
+    2.5,
+    0,
+    0.62
+   ],
+   "room": "sala",
+   "yaw": 0
+  },
+  {
+   "id": "mesa",
+   "name": "sob a mesa da cozinha",
+   "p": [
+    9.2,
+    0,
+    6.7
+   ],
+   "exit": [
+    8.35,
+    0,
+    6.7
+   ],
+   "room": "cozinha",
+   "yaw": 0
+  },
+  {
+   "id": "escrivaninha",
+   "name": "sob a escrivaninha",
+   "p": [
+    2.4,
+    0,
+    9.6
+   ],
+   "exit": [
+    1.2,
+    0,
+    9.5
+   ],
+   "room": "escritorio",
+   "yaw": 3.141592653589793
+  },
+  {
+   "id": "caixas",
+   "name": "entre as caixas",
+   "p": [
+    2.18,
+    -3,
+    9.3
+   ],
+   "exit": [
+    2.2,
+    -3,
+    8.5
+   ],
+   "room": "porao",
+   "yaw": 0
+  },
+  {
+   "id": "tabua",
+   "name": "sob a tábua de passar",
+   "p": [
+    9.9,
+    -3,
+    4.45
+   ],
+   "exit": [
+    9.9,
+    -3,
+    3.8
+   ],
+   "room": "lavanderia",
+   "yaw": 0
+  },
+  {
+   "id": "galpao",
+   "name": "dentro do galpão",
+   "p": [
+    16.0,
+    -0.9,
+    16.6
+   ],
+   "exit": [
+    16.0,
+    -0.9,
+    14.4
+   ],
+   "room": "",
+   "yaw": 3.141592653589793
+  },
+  {
+   "id": "lenha",
+   "name": "atrás da pilha de lenha",
+   "p": [
+    -0.6,
+    -0.9,
+    11.6
+   ],
+   "exit": [
+    -0.6,
+    -0.9,
+    13.6
+   ],
+   "room": "",
+   "yaw": 0
+  },
+  {
+   "id": "arbusto",
+   "name": "no meio do arbusto",
+   "p": [
+    -0.75,
+    -0.9,
+    7.0
+   ],
+   "exit": [
+    -1.6,
+    -0.9,
+    7.0
+   ],
+   "room": "",
+   "yaw": -1.5707963267948966
+  }
+ ],
+ "LIGHTS": [
+  {
+   "index": 0,
+   "room": "porao",
+   "pos": [
+    3.8,
+    -0.55,
+    5.2
+   ],
+   "color": "#ffc985",
+   "intensity": 16.8,
+   "distance": 12,
+   "fixture": "bulb",
+   "sw": {
+    "p": [
+     7.93,
+     -1.9,
+     6.6
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do porão"
+  },
+  {
+   "index": 1,
+   "room": "lavanderia",
+   "pos": [
+    10,
+    -0.42,
+    3
+   ],
+   "color": "#e4ecff",
+   "intensity": 15,
+   "distance": 11,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     8.07,
+     -1.9,
+     6.6
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz da lavanderia"
+  },
+  {
+   "index": 2,
+   "room": "sala",
+   "pos": [
+    2.5,
+    2.2,
+    2.75
+   ],
+   "color": "#ffd59a",
+   "intensity": 22.4,
+   "distance": 12,
+   "fixture": "chandelier",
+   "sw": {
+    "p": [
+     4.93,
+     1.1,
+     2.65
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz da sala"
+  },
+  {
+   "index": 3,
+   "room": "escritorio",
+   "pos": [
+    2.5,
+    2.4,
+    7.75
+   ],
+   "color": "#ffe2b0",
+   "intensity": 18.7,
+   "distance": 11,
+   "fixture": "pendant",
+   "sw": {
+    "p": [
+     4.93,
+     1.1,
+     8.35
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do escritório"
+  },
+  {
+   "index": 4,
+   "room": "hall",
+   "pos": [
+    6.6,
+    2.45,
+    3.4
+   ],
+   "color": "#ffd9a0",
+   "intensity": 18.7,
+   "distance": 12,
+   "fixture": "pendant",
+   "sw": {
+    "p": [
+     5.07,
+     1.1,
+     1.2
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do hall"
+  },
+  {
+   "index": 5,
+   "room": "cozinha",
+   "pos": [
+    9.75,
+    2.5,
+    6.75
+   ],
+   "color": "#fff0d4",
+   "intensity": 22.4,
+   "distance": 12,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     7.57,
+     1.1,
+     5.3
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz da cozinha"
+  },
+  {
+   "index": 6,
+   "room": "banheiro_baixo",
+   "pos": [
+    9.75,
+    2.5,
+    1.75
+   ],
+   "color": "#fff1de",
+   "intensity": 15,
+   "distance": 9,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     7.57,
+     1.1,
+     1.15
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do banheiro"
+  },
+  {
+   "index": 7,
+   "room": "quarto",
+   "pos": [
+    2.5,
+    5.45,
+    2.75
+   ],
+   "color": "#ffd6a2",
+   "intensity": 18.7,
+   "distance": 11,
+   "fixture": "pendant",
+   "sw": {
+    "p": [
+     4.93,
+     4.1,
+     2.35
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do quarto"
+  },
+  {
+   "index": 8,
+   "room": "quarto",
+   "pos": [
+    0.3,
+    3.98,
+    1.68
+   ],
+   "color": "#ffad66",
+   "intensity": 7.2,
+   "distance": 6.5,
+   "fixture": "lamp",
+   "name": "abajur"
+  },
+  {
+   "index": 9,
+   "room": "hospedes",
+   "pos": [
+    2.5,
+    5.45,
+    7.75
+   ],
+   "color": "#ffdcae",
+   "intensity": 16.8,
+   "distance": 11,
+   "fixture": "pendant",
+   "sw": {
+    "p": [
+     4.93,
+     4.1,
+     8.45
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz dos hóspedes"
+  },
+  {
+   "index": 10,
+   "room": "corredor",
+   "pos": [
+    6.4,
+    5.5,
+    5.2
+   ],
+   "color": "#ffe0b0",
+   "intensity": 18.7,
+   "distance": 12,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     6.9,
+     4.1,
+     9.89
+    ],
+    "n": [
+     0,
+     0,
+     -1
+    ]
+   },
+   "name": "luz do corredor"
+  },
+  {
+   "index": 11,
+   "room": "banheiro_cima",
+   "pos": [
+    9.75,
+    5.5,
+    8
+   ],
+   "color": "#fff1de",
+   "intensity": 15,
+   "distance": 9,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     7.57,
+     4.1,
+     8.45
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do banheiro"
+  },
+  {
+   "index": 12,
+   "room": "sotao",
+   "pos": [
+    3.75,
+    8.15,
+    5.0
+   ],
+   "color": "#ffc27a",
+   "intensity": 15,
+   "distance": 11,
+   "fixture": "bulb",
+   "sw": {
+    "p": [
+     7.4,
+     6.55,
+     3.95
+    ],
+    "n": [
+     -1,
+     0,
+     0
+    ]
+   },
+   "name": "luz do sótão"
+  },
+  {
+   "index": 13,
+   "room": "exterior",
+   "pos": [
+    5.52,
+    3.0,
+    -5.0
+   ],
+   "color": "#ffb560",
+   "intensity": 120,
+   "distance": 27.5,
+   "fixture": "street",
+   "name": "poste"
+  },
+  {
+   "index": 14,
+   "room": "dynamic",
+   "pos": [
+    0,
+    -50,
+    0
+   ],
+   "color": "#9fc8ff",
+   "intensity": 9,
+   "distance": 6,
+   "fixture": "none",
+   "name": "tela"
+  },
+  {
+   "index": 15,
+   "room": "dynamic",
+   "pos": [
+    0,
+    -50,
+    0
+   ],
+   "color": "#ff3b2f",
+   "intensity": 22,
+   "distance": 9,
+   "fixture": "none",
+   "name": "fx"
+  },
+  {
+   "index": 16,
+   "room": "dynamic",
+   "pos": [
+    0,
+    -50,
+    0
+   ],
+   "color": "#9db8ff",
+   "intensity": 2.4,
+   "distance": 3.6,
+   "fixture": "none",
+   "name": "visão noturna"
+  },
+  {
+   "index": 17,
+   "room": "hospedes",
+   "pos": [
+    0.3,
+    3.98,
+    9.2
+   ],
+   "color": "#ffb066",
+   "intensity": 6.5,
+   "distance": 6.5,
+   "fixture": "lamp",
+   "name": "abajur de Davi"
+  },
+  {
+   "index": 18,
+   "room": "jantar",
+   "pos": [
+    3.9,
+    2.4,
+    11.75
+   ],
+   "color": "#ffdcab",
+   "intensity": 18.0,
+   "distance": 10,
+   "fixture": "pendant",
+   "sw": {
+    "p": [
+     6.35,
+     1.1,
+     10.11
+    ],
+    "n": [
+     0,
+     0,
+     1
+    ]
+   },
+   "name": "luz da sala de jantar"
+  },
+  {
+   "index": 19,
+   "room": "despensa",
+   "pos": [
+    9.75,
+    2.5,
+    11.5
+   ],
+   "color": "#ffe7c4",
+   "intensity": 12.0,
+   "distance": 8,
+   "fixture": "flush",
+   "sw": {
+    "p": [
+     7.57,
+     1.1,
+     12.55
+    ],
+    "n": [
+     1,
+     0,
+     0
+    ]
+   },
+   "name": "luz da despensa"
+  }
+ ],
+ "NAV_EDGES": [
+  [
+   "g_hall_front",
+   "g_d_sala_h"
+  ],
+  [
+   "g_d_sala_h",
+   "g_sala_door"
+  ],
+  [
+   "g_sala_door",
+   "g_sala_mid"
+  ],
+  [
+   "g_sala_mid",
+   "g_sala_win"
+  ],
+  [
+   "g_hall_front",
+   "g_hall_mid"
+  ],
+  [
+   "g_d_sala_h",
+   "g_hall_mid"
+  ],
+  [
+   "g_hall_mid",
+   "g_d_banb_h"
+  ],
+  [
+   "g_hall_front",
+   "g_d_banb_h"
+  ],
+  [
+   "g_d_banb_h",
+   "g_banb_door"
+  ],
+  [
+   "g_banb_door",
+   "g_banb_mid"
+  ],
+  [
+   "g_hall_mid",
+   "g_stairs_b"
+  ],
+  [
+   "g_hall_mid",
+   "g_hall_kitchen"
+  ],
+  [
+   "g_hall_kitchen",
+   "g_coz_arch"
+  ],
+  [
+   "g_hall_kitchen",
+   "g_hall_back"
+  ],
+  [
+   "g_hall_back",
+   "g_d_esc_h"
+  ],
+  [
+   "g_d_esc_h",
+   "g_esc_door"
+  ],
+  [
+   "g_esc_door",
+   "g_esc_mid"
+  ],
+  [
+   "g_coz_arch",
+   "g_coz_n"
+  ],
+  [
+   "g_coz_n",
+   "g_coz_sink"
+  ],
+  [
+   "g_coz_arch",
+   "g_coz_bowl"
+  ],
+  [
+   "g_coz_bowl",
+   "g_coz_e"
+  ],
+  [
+   "g_coz_e",
+   "g_coz_radio"
+  ],
+  [
+   "g_coz_bdoor",
+   "g_bst_top"
+  ],
+  [
+   "b_bst_bot",
+   "b_lav_mid"
+  ],
+  [
+   "b_lav_door",
+   "b_porao_door"
+  ],
+  [
+   "b_porao_door",
+   "b_porao_mid"
+  ],
+  [
+   "b_porao_mid",
+   "b_porao_circle"
+  ],
+  [
+   "g_stairs_b",
+   "f_stairs_t"
+  ],
+  [
+   "f_stairs_t",
+   "f_d_hosp_c"
+  ],
+  [
+   "f_stairs_t",
+   "f_cor_back"
+  ],
+  [
+   "f_d_hosp_c",
+   "f_hosp_door"
+  ],
+  [
+   "f_hosp_door",
+   "f_hosp_mid"
+  ],
+  [
+   "f_hosp_mid",
+   "f_hosp_bed"
+  ],
+  [
+   "f_d_hosp_c",
+   "f_cor_back"
+  ],
+  [
+   "f_cor_back",
+   "f_d_banc_c"
+  ],
+  [
+   "f_d_banc_c",
+   "f_banc_door"
+  ],
+  [
+   "f_banc_door",
+   "f_banc_mid"
+  ],
+  [
+   "f_banc_mid",
+   "f_banc_tub"
+  ],
+  [
+   "f_cor_back",
+   "f_cor_mid"
+  ],
+  [
+   "f_cor_mid",
+   "f_cor_s"
+  ],
+  [
+   "f_cor_s",
+   "f_var_door"
+  ],
+  [
+   "f_var_door",
+   "f_var_mid"
+  ],
+  [
+   "f_cor_s",
+   "f_cor_n"
+  ],
+  [
+   "f_cor_n",
+   "f_cor_front"
+  ],
+  [
+   "f_cor_front",
+   "f_d_quarto_c"
+  ],
+  [
+   "f_d_quarto_c",
+   "f_quarto_door"
+  ],
+  [
+   "f_quarto_door",
+   "f_quarto_bed"
+  ],
+  [
+   "f_cor_s",
+   "f_ladder",
+   true
+  ],
+  [
+   "a_hatch",
+   "a_hole_w",
+   true
+  ],
+  [
+   "a_hole_w",
+   "a_mid",
+   true
+  ],
+  [
+   "a_mid",
+   "a_chest",
+   true
+  ],
+  [
+   "g_sala_tv",
+   "g_sala_esc_s"
+  ],
+  [
+   "g_sala_esc_s",
+   "g_sala_esc_e"
+  ],
+  [
+   "g_sala_esc_e",
+   "g_esc_mid"
+  ],
+  [
+   "f_quarto_bed",
+   "f_quarto_s"
+  ],
+  [
+   "f_quarto_s",
+   "f_quarto_hosp_q"
+  ],
+  [
+   "f_quarto_hosp_q",
+   "f_quarto_hosp_h"
+  ],
+  [
+   "f_quarto_hosp_h",
+   "f_hosp_mid"
+  ],
+  [
+   "g_esc_jan_e",
+   "g_esc_jan_j"
+  ],
+  [
+   "g_esc_jan_j",
+   "g_jan_w"
+  ],
+  [
+   "g_jan_mid",
+   "g_hall_jan_j"
+  ],
+  [
+   "g_hall_jan_j",
+   "g_hall_jan_h"
+  ],
+  [
+   "g_hall_jan_h",
+   "g_hall_back"
+  ],
+  [
+   "g_hall_jan_h",
+   "g_d_esc_h"
+  ],
+  [
+   "g_hall_jan_j",
+   "g_jan_e"
+  ],
+  [
+   "g_jan_e",
+   "g_jan_back"
+  ],
+  [
+   "g_jan_e",
+   "g_jan_desp"
+  ],
+  [
+   "g_jan_desp",
+   "g_desp_door"
+  ],
+  [
+   "g_desp_door",
+   "g_desp_mid"
+  ],
+  [
+   "g_sala_mid",
+   "g_sala_e"
+  ],
+  [
+   "g_sala_door",
+   "g_sala_e"
+  ],
+  [
+   "g_sala_e",
+   "g_sala_e2"
+  ],
+  [
+   "g_sala_e2",
+   "g_sala_tv"
+  ],
+  [
+   "g_sala_win",
+   "g_sala_w2"
+  ],
+  [
+   "g_sala_w2",
+   "g_sala_w3"
+  ],
+  [
+   "g_sala_w3",
+   "g_sala_esc_s"
+  ],
+  [
+   "g_esc_mid",
+   "g_esc_w"
+  ],
+  [
+   "g_esc_w",
+   "g_esc_jan_e"
+  ],
+  [
+   "g_coz_sink",
+   "g_coz_se"
+  ],
+  [
+   "g_coz_se",
+   "g_coz_bdoor"
+  ],
+  [
+   "g_bst_top",
+   "g_bst_edge"
+  ],
+  [
+   "g_bst_edge",
+   "b_bst_bot"
+  ],
+  [
+   "b_lav_mid",
+   "b_lav_w"
+  ],
+  [
+   "b_lav_w",
+   "b_lav_door"
+  ],
+  [
+   "g_jan_w",
+   "g_jan_wm"
+  ],
+  [
+   "g_jan_wm",
+   "g_jan_mid"
+  ],
+  [
+   "a_ladder",
+   "a_hatch",
+   true
+  ],
+  [
+   "f_ladder",
+   "a_ladder",
+   true
+  ]
+ ],
+ "NAV_NODES": [
+  {
+   "id": "g_hall_front",
+   "p": [
+    6.45,
+    0,
+    1
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_d_sala_h",
+   "p": [
+    5.6,
+    0,
+    1.95
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_sala_door",
+   "p": [
+    4.4,
+    0,
+    2.2
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_mid",
+   "p": [
+    2.5,
+    0,
+    2.27
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_tv",
+   "p": [
+    2.5,
+    0,
+    4.45
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_win",
+   "p": [
+    0.7,
+    0,
+    2.6
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_hall_mid",
+   "p": [
+    6.5,
+    0,
+    3.0
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_d_banb_h",
+   "p": [
+    6.9,
+    0,
+    1.9
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_banb_door",
+   "p": [
+    8.1,
+    0,
+    1.9
+   ],
+   "room": "banheiro_baixo"
+  },
+  {
+   "id": "g_banb_mid",
+   "p": [
+    9.3,
+    0,
+    1.4
+   ],
+   "room": "banheiro_baixo"
+  },
+  {
+   "id": "g_stairs_b",
+   "p": [
+    5.55,
+    0,
+    3.8
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_hall_kitchen",
+   "p": [
+    6.85,
+    0,
+    6.2
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_hall_back",
+   "p": [
+    6.6,
+    0,
+    9.05
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_d_esc_h",
+   "p": [
+    5.6,
+    0,
+    9.05
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_esc_door",
+   "p": [
+    4.4,
+    0,
+    9.05
+   ],
+   "room": "escritorio"
+  },
+  {
+   "id": "g_esc_mid",
+   "p": [
+    2.5,
+    0,
+    7.9
+   ],
+   "room": "escritorio"
+  },
+  {
+   "id": "g_coz_arch",
+   "p": [
+    8.1,
+    0,
+    6.2
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_n",
+   "p": [
+    8.1,
+    0,
+    8.5
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_sink",
+   "p": [
+    8.8,
+    0,
+    8.95
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_bowl",
+   "p": [
+    8.65,
+    0,
+    4.7
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_e",
+   "p": [
+    10.05,
+    0,
+    5
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_radio",
+   "p": [
+    10.05,
+    0,
+    6.4
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_coz_bdoor",
+   "p": [
+    10.72,
+    0,
+    9.65
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_bst_top",
+   "p": [
+    11.5,
+    0,
+    9.4
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "b_bst_bot",
+   "p": [
+    11.5,
+    -3,
+    5
+   ],
+   "room": "lavanderia"
+  },
+  {
+   "id": "b_lav_mid",
+   "p": [
+    10.2,
+    -3,
+    3.4
+   ],
+   "room": "lavanderia"
+  },
+  {
+   "id": "b_lav_door",
+   "p": [
+    8.6,
+    -3,
+    7.45
+   ],
+   "room": "lavanderia"
+  },
+  {
+   "id": "b_porao_door",
+   "p": [
+    7.4,
+    -3,
+    7.45
+   ],
+   "room": "porao"
+  },
+  {
+   "id": "b_porao_mid",
+   "p": [
+    4.6,
+    -3,
+    6
+   ],
+   "room": "porao"
+  },
+  {
+   "id": "b_porao_circle",
+   "p": [
+    3.6,
+    -3,
+    4.4
+   ],
+   "room": "porao"
+  },
+  {
+   "id": "f_stairs_t",
+   "p": [
+    5.55,
+    3,
+    8.7
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_d_hosp_c",
+   "p": [
+    5.55,
+    3,
+    9.15
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_hosp_door",
+   "p": [
+    4.4,
+    3,
+    9.15
+   ],
+   "room": "hospedes"
+  },
+  {
+   "id": "f_hosp_mid",
+   "p": [
+    3,
+    3,
+    8.4
+   ],
+   "room": "hospedes"
+  },
+  {
+   "id": "f_hosp_bed",
+   "p": [
+    2.65,
+    3,
+    8.3
+   ],
+   "room": "hospedes"
+  },
+  {
+   "id": "f_cor_back",
+   "p": [
+    6.65,
+    3,
+    9.15
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_d_banc_c",
+   "p": [
+    6.95,
+    3,
+    9.1
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_banc_door",
+   "p": [
+    8.1,
+    3,
+    9.1
+   ],
+   "room": "banheiro_cima"
+  },
+  {
+   "id": "f_banc_mid",
+   "p": [
+    9.5,
+    3,
+    7.9
+   ],
+   "room": "banheiro_cima"
+  },
+  {
+   "id": "f_banc_tub",
+   "p": [
+    10.6,
+    3,
+    8.75
+   ],
+   "room": "banheiro_cima"
+  },
+  {
+   "id": "f_cor_mid",
+   "p": [
+    6.8,
+    3,
+    6
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_cor_s",
+   "p": [
+    6.9,
+    3,
+    5.05
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_var_door",
+   "p": [
+    8.2,
+    3,
+    5.05
+   ],
+   "room": "varanda"
+  },
+  {
+   "id": "f_var_mid",
+   "p": [
+    9.4,
+    3,
+    1.8
+   ],
+   "room": "varanda"
+  },
+  {
+   "id": "f_cor_front",
+   "p": [
+    5.75,
+    3,
+    3.3
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_d_quarto_c",
+   "p": [
+    5.6,
+    3,
+    1.65
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "f_quarto_door",
+   "p": [
+    4.4,
+    3,
+    1.65
+   ],
+   "room": "quarto"
+  },
+  {
+   "id": "f_quarto_bed",
+   "p": [
+    2.7,
+    3,
+    2.85
+   ],
+   "room": "quarto"
+  },
+  {
+   "id": "f_ladder",
+   "p": [
+    7.025,
+    3,
+    4.1
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "a_hatch",
+   "p": [
+    6.3,
+    6,
+    0.6
+   ],
+   "room": "sotao"
+  },
+  {
+   "id": "a_mid",
+   "p": [
+    3.75,
+    6,
+    5
+   ],
+   "room": "sotao"
+  },
+  {
+   "id": "a_chest",
+   "p": [
+    3.1,
+    6,
+    8.1
+   ],
+   "room": "sotao"
+  },
+  {
+   "id": "g_sala_esc_s",
+   "p": [
+    1.07,
+    0,
+    4.9
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_esc_e",
+   "p": [
+    1.07,
+    0,
+    6.1
+   ],
+   "room": "escritorio"
+  },
+  {
+   "id": "f_quarto_hosp_q",
+   "p": [
+    1.12,
+    3,
+    4.9
+   ],
+   "room": "quarto"
+  },
+  {
+   "id": "f_quarto_s",
+   "p": [
+    2.9,
+    3,
+    4.35
+   ],
+   "room": "quarto"
+  },
+  {
+   "id": "f_quarto_hosp_h",
+   "p": [
+    1.12,
+    3,
+    6.1
+   ],
+   "room": "hospedes"
+  },
+  {
+   "id": "g_esc_jan_e",
+   "p": [
+    0.92,
+    0,
+    9.45
+   ],
+   "room": "escritorio"
+  },
+  {
+   "id": "g_esc_jan_j",
+   "p": [
+    0.92,
+    0,
+    10.6
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_hall_jan_h",
+   "p": [
+    5.7,
+    0,
+    9.25
+   ],
+   "room": "hall"
+  },
+  {
+   "id": "g_hall_jan_j",
+   "p": [
+    5.7,
+    0,
+    10.5
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_jan_w",
+   "p": [
+    1.0,
+    0,
+    11.7
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_jan_mid",
+   "p": [
+    3.45,
+    0,
+    10.4
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_jan_e",
+   "p": [
+    6.6,
+    0,
+    11.7
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_jan_back",
+   "p": [
+    6.9,
+    0,
+    12.45
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_jan_desp",
+   "p": [
+    7.05,
+    0,
+    11.72
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "g_desp_door",
+   "p": [
+    7.95,
+    0,
+    11.72
+   ],
+   "room": "despensa"
+  },
+  {
+   "id": "g_desp_mid",
+   "p": [
+    9.8,
+    0,
+    11.6
+   ],
+   "room": "despensa"
+  },
+  {
+   "id": "g_sala_e",
+   "p": [
+    3.72,
+    0,
+    2.3
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_e2",
+   "p": [
+    3.72,
+    0,
+    3.95
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_w2",
+   "p": [
+    1.52,
+    0,
+    3.0
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_sala_w3",
+   "p": [
+    1.52,
+    0,
+    4.5
+   ],
+   "room": "sala"
+  },
+  {
+   "id": "g_esc_w",
+   "p": [
+    1.05,
+    0,
+    8.4
+   ],
+   "room": "escritorio"
+  },
+  {
+   "id": "g_coz_se",
+   "p": [
+    10.68,
+    0,
+    8.95
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "g_bst_edge",
+   "p": [
+    11.5,
+    0,
+    9.1
+   ],
+   "room": "cozinha"
+  },
+  {
+   "id": "b_lav_w",
+   "p": [
+    8.9,
+    -3,
+    3.9
+   ],
+   "room": "lavanderia"
+  },
+  {
+   "id": "a_ladder",
+   "p": [
+    7.025,
+    6,
+    0.28
+   ],
+   "room": "sotao"
+  },
+  {
+   "id": "g_jan_wm",
+   "p": [
+    2.4,
+    0,
+    10.42
+   ],
+   "room": "jantar"
+  },
+  {
+   "id": "f_cor_n",
+   "p": [
+    6.38,
+    3,
+    3.8
+   ],
+   "room": "corredor"
+  },
+  {
+   "id": "a_hole_w",
+   "p": [
+    6.1,
+    6,
+    2.3
+   ],
+   "room": "sotao"
+  }
+ ],
+ "RITUAL_CENTER": [
+  3.6,
+  -3,
+  4.4
+ ],
+ "ROOMS": [
+  {
+   "id": "porao",
+   "name": "Porão",
+   "y": -3,
+   "x0": 0,
+   "x1": 8,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_brick",
+   "floor": "floor_concrete",
+   "ceiling": true,
+   "light": 0
+  },
+  {
+   "id": "lavanderia",
+   "name": "Lavanderia",
+   "y": -3,
+   "x0": 8,
+   "x1": 12,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_lavanderia",
+   "floor": "floor_concrete",
+   "ceiling": true,
+   "light": 1
+  },
+  {
+   "id": "sala",
+   "name": "Sala",
+   "y": 0,
+   "x0": 0,
+   "x1": 5,
+   "z0": 0,
+   "z1": 5.5,
+   "h": 2.8,
+   "wall": "wall_sala",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 2
+  },
+  {
+   "id": "escritorio",
+   "name": "Escritório",
+   "y": 0,
+   "x0": 0,
+   "x1": 5,
+   "z0": 5.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_escritorio",
+   "floor": "floor_wood_dark",
+   "ceiling": true,
+   "light": 3
+  },
+  {
+   "id": "hall",
+   "name": "Hall",
+   "y": 0,
+   "x0": 5,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_hall",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 4
+  },
+  {
+   "id": "cozinha",
+   "name": "Cozinha",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 3.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_cozinha",
+   "floor": "floor_checker",
+   "ceiling": true,
+   "light": 5
+  },
+  {
+   "id": "banheiro_baixo",
+   "name": "Banheiro de baixo",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 0,
+   "z1": 3.5,
+   "h": 2.8,
+   "wall": "wall_banheiro",
+   "floor": "floor_tile",
+   "ceiling": true,
+   "light": 6
+  },
+  {
+   "id": "quarto",
+   "name": "Quarto da Clara",
+   "y": 3,
+   "x0": 0,
+   "x1": 5,
+   "z0": 0,
+   "z1": 5.5,
+   "h": 2.8,
+   "wall": "wall_quarto",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 7
+  },
+  {
+   "id": "hospedes",
+   "name": "Quarto de hóspedes",
+   "y": 3,
+   "x0": 0,
+   "x1": 5,
+   "z0": 5.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_hospedes",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 9
+  },
+  {
+   "id": "corredor",
+   "name": "Corredor",
+   "y": 3,
+   "x0": 5,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_corredor",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 10
+  },
+  {
+   "id": "banheiro_cima",
+   "name": "Banheiro de cima",
+   "y": 3,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 6,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_banheiro",
+   "floor": "floor_tile",
+   "ceiling": true,
+   "light": 11
+  },
+  {
+   "id": "varanda",
+   "name": "Varanda",
+   "y": 3,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 0,
+   "z1": 6,
+   "h": 2.8,
+   "wall": "exterior",
+   "floor": "floor_wood_dark",
+   "ceiling": false,
+   "exterior": true,
+   "light": null
+  },
+  {
+   "id": "sotao",
+   "name": "Sótão",
+   "y": 6,
+   "x0": 0,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 3.3,
+   "wall": "wall_attic",
+   "floor": "floor_attic",
+   "ceiling": false,
+   "light": 12
+  },
+  {
+   "id": "jantar",
+   "name": "Sala de jantar",
+   "y": 0,
+   "x0": 0,
+   "x1": 7.5,
+   "z0": 10,
+   "z1": 13,
+   "h": 2.8,
+   "wall": "wall_jantar",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 18
+  },
+  {
+   "id": "despensa",
+   "name": "Despensa",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 10,
+   "z1": 13,
+   "h": 2.8,
+   "wall": "wall_despensa",
+   "floor": "floor_checker",
+   "ceiling": true,
+   "light": 19
+  }
+ ],
+ "ROOM_BY_ID": {
+  "porao": {
+   "id": "porao",
+   "name": "Porão",
+   "y": -3,
+   "x0": 0,
+   "x1": 8,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_brick",
+   "floor": "floor_concrete",
+   "ceiling": true,
+   "light": 0
+  },
+  "lavanderia": {
+   "id": "lavanderia",
+   "name": "Lavanderia",
+   "y": -3,
+   "x0": 8,
+   "x1": 12,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_lavanderia",
+   "floor": "floor_concrete",
+   "ceiling": true,
+   "light": 1
+  },
+  "sala": {
+   "id": "sala",
+   "name": "Sala",
+   "y": 0,
+   "x0": 0,
+   "x1": 5,
+   "z0": 0,
+   "z1": 5.5,
+   "h": 2.8,
+   "wall": "wall_sala",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 2
+  },
+  "escritorio": {
+   "id": "escritorio",
+   "name": "Escritório",
+   "y": 0,
+   "x0": 0,
+   "x1": 5,
+   "z0": 5.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_escritorio",
+   "floor": "floor_wood_dark",
+   "ceiling": true,
+   "light": 3
+  },
+  "hall": {
+   "id": "hall",
+   "name": "Hall",
+   "y": 0,
+   "x0": 5,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_hall",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 4
+  },
+  "cozinha": {
+   "id": "cozinha",
+   "name": "Cozinha",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 3.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_cozinha",
+   "floor": "floor_checker",
+   "ceiling": true,
+   "light": 5
+  },
+  "banheiro_baixo": {
+   "id": "banheiro_baixo",
+   "name": "Banheiro de baixo",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 0,
+   "z1": 3.5,
+   "h": 2.8,
+   "wall": "wall_banheiro",
+   "floor": "floor_tile",
+   "ceiling": true,
+   "light": 6
+  },
+  "quarto": {
+   "id": "quarto",
+   "name": "Quarto da Clara",
+   "y": 3,
+   "x0": 0,
+   "x1": 5,
+   "z0": 0,
+   "z1": 5.5,
+   "h": 2.8,
+   "wall": "wall_quarto",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 7
+  },
+  "hospedes": {
+   "id": "hospedes",
+   "name": "Quarto de hóspedes",
+   "y": 3,
+   "x0": 0,
+   "x1": 5,
+   "z0": 5.5,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_hospedes",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 9
+  },
+  "corredor": {
+   "id": "corredor",
+   "name": "Corredor",
+   "y": 3,
+   "x0": 5,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_corredor",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 10
+  },
+  "banheiro_cima": {
+   "id": "banheiro_cima",
+   "name": "Banheiro de cima",
+   "y": 3,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 6,
+   "z1": 10,
+   "h": 2.8,
+   "wall": "wall_banheiro",
+   "floor": "floor_tile",
+   "ceiling": true,
+   "light": 11
+  },
+  "varanda": {
+   "id": "varanda",
+   "name": "Varanda",
+   "y": 3,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 0,
+   "z1": 6,
+   "h": 2.8,
+   "wall": "exterior",
+   "floor": "floor_wood_dark",
+   "ceiling": false,
+   "exterior": true,
+   "light": null
+  },
+  "sotao": {
+   "id": "sotao",
+   "name": "Sótão",
+   "y": 6,
+   "x0": 0,
+   "x1": 7.5,
+   "z0": 0,
+   "z1": 10,
+   "h": 3.3,
+   "wall": "wall_attic",
+   "floor": "floor_attic",
+   "ceiling": false,
+   "light": 12
+  },
+  "jantar": {
+   "id": "jantar",
+   "name": "Sala de jantar",
+   "y": 0,
+   "x0": 0,
+   "x1": 7.5,
+   "z0": 10,
+   "z1": 13,
+   "h": 2.8,
+   "wall": "wall_jantar",
+   "floor": "floor_wood",
+   "ceiling": true,
+   "light": 18
+  },
+  "despensa": {
+   "id": "despensa",
+   "name": "Despensa",
+   "y": 0,
+   "x0": 7.5,
+   "x1": 12,
+   "z0": 10,
+   "z1": 13,
+   "h": 2.8,
+   "wall": "wall_despensa",
+   "floor": "floor_checker",
+   "ceiling": true,
+   "light": 19
+  }
+ },
+ "ROOM_H": 2.8,
+ "ROUTES": {
+  "flap": {
+   "inside": [
+    10.78,
+    0,
+    12.55
+   ],
+   "outside": [
+    10.78,
+    -0.9,
+    13.75
+   ],
+   "name": "a portinhola"
+  },
+  "porao_win": {
+   "inside": [
+    0.7,
+    -3,
+    5.6
+   ],
+   "outside": [
+    -0.7,
+    -0.9,
+    5.6
+   ],
+   "name": "a janela do porão"
+  },
+  "tree": {
+   "inside": [
+    11.55,
+    3,
+    0.55
+   ],
+   "outside": [
+    13.1,
+    -0.9,
+    2.0
+   ],
+   "name": "a árvore"
+  }
+ },
+ "RUGS": [
+  [
+   1.1,
+   2.15,
+   3.9,
+   4.25,
+   0
+  ],
+  [
+   1.0,
+   7.0,
+   3.8,
+   9.0,
+   0
+  ],
+  [
+   5.55,
+   0.4,
+   6.95,
+   3.3,
+   0
+  ],
+  [
+   1.6,
+   1.0,
+   4.2,
+   4.6,
+   3
+  ],
+  [
+   6.2,
+   4.6,
+   7.2,
+   9.6,
+   3
+  ]
+ ],
+ "SPOTS": {
+  "bed": {
+   "node": "f_quarto_bed",
+   "p": [
+    1.2,
+    3.05,
+    2.8
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "bedside": {
+   "node": "f_quarto_bed",
+   "p": [
+    2.65,
+    3,
+    2.8
+   ],
+   "yaw": -1.5707963267948966
+  },
+  "kitchenSink": {
+   "node": "g_coz_sink",
+   "p": [
+    8.8,
+    0,
+    8.95
+   ],
+   "yaw": 0
+  },
+  "kitchenWindow": {
+   "node": "g_coz_e",
+   "p": [
+    11.45,
+    0,
+    4.35
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "bathroomUp": {
+   "node": "f_banc_mid",
+   "p": [
+    9.8,
+    3,
+    7.6
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "tub": {
+   "node": "f_banc_tub",
+   "p": [
+    10.6,
+    3,
+    8.75
+   ],
+   "yaw": 0
+  },
+  "tv": {
+   "node": "g_sala_tv",
+   "p": [
+    2.5,
+    0,
+    4.45
+   ],
+   "yaw": 0
+  },
+  "radio": {
+   "node": "g_coz_radio",
+   "p": [
+    10.05,
+    0,
+    6.4
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "laptop": {
+   "node": "g_esc_mid",
+   "p": [
+    2.45,
+    0,
+    8.85
+   ],
+   "yaw": 0
+  },
+  "frontDoor": {
+   "node": "g_hall_front",
+   "p": [
+    6.45,
+    0,
+    0.75
+   ],
+   "yaw": 3.141592653589793
+  },
+  "salaWindow": {
+   "node": "g_sala_win",
+   "p": [
+    0.75,
+    0,
+    2.75
+   ],
+   "yaw": -1.5707963267948966
+  },
+  "bowl": {
+   "node": "g_coz_bowl",
+   "p": [
+    8.65,
+    0,
+    4.32
+   ],
+   "yaw": 3.141592653589793
+  },
+  "sofa": {
+   "node": "g_sala_mid",
+   "p": [
+    2.5,
+    0.2,
+    1.62
+   ],
+   "yaw": 0
+  },
+  "desk": {
+   "node": "g_esc_mid",
+   "p": [
+    2.45,
+    0,
+    8.75
+   ],
+   "yaw": 0
+  },
+  "hallPhone": {
+   "node": "g_hall_mid",
+   "p": [
+    6.75,
+    0,
+    3
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "davBed": {
+   "node": "f_hosp_bed",
+   "p": [
+    1.2,
+    3.05,
+    8.3
+   ],
+   "yaw": 1.5707963267948966
+  },
+  "davBedside": {
+   "node": "f_hosp_bed",
+   "p": [
+    2.65,
+    3,
+    8.3
+   ],
+   "yaw": -1.5707963267948966
+  },
+  "sofaR": {
+   "node": "g_sala_mid",
+   "p": [
+    3.08,
+    0.2,
+    1.62
+   ],
+   "yaw": 0
+  },
+  "bathTubIn": {
+   "node": "f_banc_tub",
+   "p": [
+    10.75,
+    3.12,
+    9.57
+   ],
+   "yaw": -1.5707963267948966
+  }
+ },
+ "STAIR_BASE": {
+  "x0": 11,
+  "x1": 12,
+  "z0": 5.2,
+  "z1": 9.2
+ },
+ "STAIR_MAIN": {
+  "x0": 5,
+  "x1": 6.1,
+  "z0": 4,
+  "z1": 8.5
+ },
+ "TERRAIN_Y": -0.9,
+ "WALLS": [
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": -0.1,
+   "b": 8,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "exterior_base",
+   "pos": "wall_brick"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": 8,
+   "b": 12.1,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "exterior_base",
+   "pos": "wall_lavanderia"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": -0.1,
+   "b": 8,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "wall_brick",
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 8,
+   "b": 12.1,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "wall_lavanderia",
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 0,
+   "b": 10,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "exterior_base",
+   "pos": "wall_brick"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 0,
+   "b": 10,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "wall_lavanderia",
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "z",
+   "fixed": 8,
+   "a": 0,
+   "b": 10,
+   "y": -3,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_brick",
+   "pos": "wall_lavanderia"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": -0.1,
+   "b": 5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_sala"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": 5,
+   "b": 7.5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_hall"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": 7.5,
+   "b": 12.1,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_banheiro"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": -0.1,
+   "b": 5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_escritorio",
+   "pos": "wall_jantar"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 5,
+   "b": 7.5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_hall",
+   "pos": "wall_jantar"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 7.5,
+   "b": 11,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_cozinha",
+   "pos": "wall_despensa"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 11,
+   "b": 12.1,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_corredor",
+   "pos": "wall_despensa"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 0,
+   "b": 5.5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_sala"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 5.5,
+   "b": 10,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_escritorio"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 0,
+   "b": 3.5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_banheiro",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 3.5,
+   "b": 5.2,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_cozinha",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 5.2,
+   "b": 10,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_corredor",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 5,
+   "a": 0,
+   "b": 5.5,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_sala",
+   "pos": "wall_hall"
+  },
+  {
+   "axis": "z",
+   "fixed": 5,
+   "a": 5.5,
+   "b": 10,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_escritorio",
+   "pos": "wall_hall"
+  },
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "a": 0,
+   "b": 3.5,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_hall",
+   "pos": "wall_banheiro"
+  },
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "a": 3.5,
+   "b": 10,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_hall",
+   "pos": "wall_cozinha"
+  },
+  {
+   "axis": "x",
+   "fixed": 5.5,
+   "a": 0,
+   "b": 5,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_sala",
+   "pos": "wall_escritorio"
+  },
+  {
+   "axis": "x",
+   "fixed": 3.5,
+   "a": 7.5,
+   "b": 12,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_banheiro",
+   "pos": "wall_cozinha"
+  },
+  {
+   "axis": "z",
+   "fixed": 11,
+   "a": 5.2,
+   "b": 10,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_cozinha",
+   "pos": "wall_corredor"
+  },
+  {
+   "axis": "x",
+   "fixed": 5.2,
+   "a": 11,
+   "b": 12,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_cozinha",
+   "pos": "wall_corredor"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": -0.1,
+   "b": 5,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_quarto"
+  },
+  {
+   "axis": "x",
+   "fixed": 0,
+   "a": 5,
+   "b": 7.6,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_corredor"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": -0.1,
+   "b": 5,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_hospedes",
+   "pos": "exterior"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 5,
+   "b": 7.5,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_corredor",
+   "pos": "exterior"
+  },
+  {
+   "axis": "x",
+   "fixed": 10,
+   "a": 7.5,
+   "b": 12.1,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_banheiro",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 0,
+   "b": 5.5,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_quarto"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 5.5,
+   "b": 10,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_hospedes"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 5.9,
+   "b": 10,
+   "y": 2.8,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_banheiro",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "a": 0,
+   "b": 6,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "wall_corredor",
+   "pos": "exterior"
+  },
+  {
+   "axis": "x",
+   "fixed": 6,
+   "a": 7.6,
+   "b": 12.1,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_banheiro"
+  },
+  {
+   "axis": "z",
+   "fixed": 5,
+   "a": 0,
+   "b": 5.5,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_quarto",
+   "pos": "wall_corredor"
+  },
+  {
+   "axis": "z",
+   "fixed": 5,
+   "a": 5.5,
+   "b": 10,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_hospedes",
+   "pos": "wall_corredor"
+  },
+  {
+   "axis": "x",
+   "fixed": 5.5,
+   "a": 0,
+   "b": 5,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_quarto",
+   "pos": "wall_hospedes"
+  },
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "a": 6,
+   "b": 10,
+   "y": 3,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_corredor",
+   "pos": "wall_banheiro"
+  },
+  {
+   "axis": "x",
+   "fixed": 13,
+   "a": -0.1,
+   "b": 7.5,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_jantar",
+   "pos": "exterior"
+  },
+  {
+   "axis": "x",
+   "fixed": 13,
+   "a": -0.1,
+   "b": 7.5,
+   "y": -0.9,
+   "h": 0.7,
+   "t": 0.2,
+   "neg": null,
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "x",
+   "fixed": 13,
+   "a": 7.5,
+   "b": 12.1,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_despensa",
+   "pos": "exterior"
+  },
+  {
+   "axis": "x",
+   "fixed": 13,
+   "a": 7.5,
+   "b": 12.1,
+   "y": -0.9,
+   "h": 0.7,
+   "t": 0.2,
+   "neg": null,
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 10.1,
+   "b": 13.1,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "exterior",
+   "pos": "wall_jantar"
+  },
+  {
+   "axis": "z",
+   "fixed": 0,
+   "a": 10.1,
+   "b": 13.1,
+   "y": -0.9,
+   "h": 0.7,
+   "t": 0.2,
+   "neg": "exterior_base",
+   "pos": null
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 10.1,
+   "b": 13.1,
+   "y": -0.2,
+   "h": 3,
+   "t": 0.2,
+   "neg": "wall_despensa",
+   "pos": "exterior"
+  },
+  {
+   "axis": "z",
+   "fixed": 12,
+   "a": 10.1,
+   "b": 13.1,
+   "y": -0.9,
+   "h": 0.7,
+   "t": 0.2,
+   "neg": null,
+   "pos": "exterior_base"
+  },
+  {
+   "axis": "z",
+   "fixed": 7.5,
+   "a": 10.1,
+   "b": 12.9,
+   "y": 0,
+   "h": 2.8,
+   "t": 0.12,
+   "neg": "wall_jantar",
+   "pos": "wall_despensa"
+  }
+ ],
+ "WINDOWS": [
+  {
+   "id": "w_porao1",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 2,
+   "s1": 3.2,
+   "y0": -0.82,
+   "y1": -0.35,
+   "exterior": true,
+   "inside": 1,
+   "small": true
+  },
+  {
+   "id": "w_porao2",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 5,
+   "s1": 6.2,
+   "y0": -0.82,
+   "y1": -0.35,
+   "exterior": true,
+   "inside": 1,
+   "small": true
+  },
+  {
+   "id": "w_lav",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 9,
+   "s1": 10,
+   "y0": -0.82,
+   "y1": -0.35,
+   "exterior": true,
+   "inside": 1,
+   "small": true
+  },
+  {
+   "id": "w_sala_f",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 1.2,
+   "s1": 3.8,
+   "y0": 0.85,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_sala_w",
+   "axis": "z",
+   "fixed": 0,
+   "s0": 2,
+   "s1": 3.5,
+   "y0": 0.85,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_banb",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 9.6,
+   "s1": 10.6,
+   "y0": 1.55,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true,
+   "small": true
+  },
+  {
+   "id": "w_esc_w",
+   "axis": "z",
+   "fixed": 0,
+   "s0": 7,
+   "s1": 8.5,
+   "y0": 0.85,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_coz_e",
+   "axis": "z",
+   "fixed": 12,
+   "s0": 3.8,
+   "s1": 4.9,
+   "y0": 1.15,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": -1,
+   "curtains": true
+  },
+  {
+   "id": "w_quarto_f",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 1.5,
+   "s1": 3.5,
+   "y0": 3.85,
+   "y1": 5.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_quarto_w",
+   "axis": "z",
+   "fixed": 0,
+   "s0": 4.2,
+   "s1": 5,
+   "y0": 3.85,
+   "y1": 5.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_cor_f",
+   "axis": "x",
+   "fixed": 0,
+   "s0": 5.5,
+   "s1": 6.2,
+   "y0": 3.9,
+   "y1": 5.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_hosp_b",
+   "axis": "x",
+   "fixed": 10,
+   "s0": 2,
+   "s1": 3.5,
+   "y0": 3.9,
+   "y1": 5.25,
+   "exterior": true,
+   "inside": -1,
+   "curtains": true
+  },
+  {
+   "id": "w_hosp_w",
+   "axis": "z",
+   "fixed": 0,
+   "s0": 7,
+   "s1": 8.5,
+   "y0": 3.85,
+   "y1": 5.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_banc_e",
+   "axis": "z",
+   "fixed": 12,
+   "s0": 7.3,
+   "s1": 8.3,
+   "y0": 4.3,
+   "y1": 5.3,
+   "exterior": true,
+   "inside": -1
+  },
+  {
+   "id": "w_basculante",
+   "axis": "x",
+   "fixed": 6,
+   "s0": 10,
+   "s1": 10.8,
+   "y0": 4.6,
+   "y1": 5.3,
+   "exterior": true,
+   "inside": 1,
+   "small": true
+  },
+  {
+   "id": "w_jan_b1",
+   "axis": "x",
+   "fixed": 13,
+   "s0": 0.9,
+   "s1": 2.2,
+   "y0": 0.95,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": -1,
+   "curtains": true
+  },
+  {
+   "id": "w_jan_b2",
+   "axis": "x",
+   "fixed": 13,
+   "s0": 5.0,
+   "s1": 6.3,
+   "y0": 0.95,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": -1,
+   "curtains": true
+  },
+  {
+   "id": "w_jan_w",
+   "axis": "z",
+   "fixed": 0,
+   "s0": 10.8,
+   "s1": 12.2,
+   "y0": 0.95,
+   "y1": 2.25,
+   "exterior": true,
+   "inside": 1,
+   "curtains": true
+  },
+  {
+   "id": "w_desp",
+   "axis": "x",
+   "fixed": 13,
+   "s0": 8.4,
+   "s1": 9.2,
+   "y0": 1.5,
+   "y1": 2.1,
+   "exterior": true,
+   "inside": -1,
+   "small": true
+  }
+ ],
+ "YARD": {
+  "x0": -8.0,
+  "x1": 20.0,
+  "z0": -5.6,
+  "z1": 20.0
+ },
+ "YARD_RELIC_SPOTS": [
+  [
+   4.65,
+   -0.9,
+   -5.3
+  ],
+  [
+   15.2,
+   -0.9,
+   12.4
+  ],
+  [
+   2.0,
+   -0.9,
+   16.2
+  ],
+  [
+   -2.6,
+   -0.9,
+   13.0
+  ],
+  [
+   9.5,
+   -0.9,
+   15.2
+  ],
+  [
+   -3.0,
+   -0.9,
+   2.5
+  ],
+  [
+   14.0,
+   -0.9,
+   5.5
+  ]
+ ],
+ "SHADOW_NOOKS": [
+  {
+   "id": "quarto_armario",
+   "room": "quarto",
+   "p": [
+    4.3,
+    3.0,
+    5.25
+   ],
+   "peek": {
+    "p": [
+     4.05,
+     2.6,
+     5.14
+    ],
+    "yaw": 3.141592653589793,
+    "h": 1.75,
+    "side": "l",
+    "head": [
+     3.72,
+     4.6,
+     4.69
+    ],
+    "hand": [
+     3.81,
+     4.28,
+     4.77
+    ]
+   },
+   "exit": "f_quarto_s"
+  },
+  {
+   "id": "quarto_cama",
+   "room": "quarto",
+   "p": [
+    2.4,
+    3.0,
+    1.75
+   ],
+   "peek": {
+    "p": [
+     1.3,
+     3.0,
+     1.95
+    ],
+    "yaw": 0.0,
+    "h": 0.5,
+    "head": [
+     0.82,
+     3.5,
+     2.02
+    ],
+    "hands": [
+     [
+      0.55,
+      3.42,
+      2.18
+     ],
+     [
+      1.12,
+      3.42,
+      2.18
+     ]
+    ]
+   },
+   "exit": "f_quarto_bed",
+   "over": true
+  },
+  {
+   "id": "hosp_cama",
+   "room": "hospedes",
+   "p": [
+    2.4,
+    3.0,
+    9.25
+   ],
+   "peek": {
+    "p": [
+     1.3,
+     3.0,
+     9.0
+    ],
+    "yaw": 3.141592653589793,
+    "h": 0.6,
+    "head": [
+     1.3,
+     3.66,
+     8.86
+    ],
+    "hands": [
+     [
+      1.6,
+      3.57,
+      8.7
+     ],
+     [
+      1.0,
+      3.57,
+      8.7
+     ]
+    ]
+   },
+   "exit": "f_hosp_mid",
+   "over": true
+  },
+  {
+   "id": "banheiro_porta",
+   "room": "banheiro_cima",
+   "p": [
+    7.85,
+    3.0,
+    9.6
+   ],
+   "door": "d_banc",
+   "peek": {
+    "p": [
+     7.85,
+     3.0,
+     9.25
+    ],
+    "yaw": -1.5707963267948966,
+    "h": 1.75
+   },
+   "exit": "f_banc_mid"
+  },
+  {
+   "id": "sala_sofa",
+   "room": "sala",
+   "p": [
+    2.5,
+    0.0,
+    0.7
+   ],
+   "low": true,
+   "peek": {
+    "p": [
+     1.2,
+     0.0,
+     0.85
+    ],
+    "yaw": 0.4,
+    "h": 0.55
+   },
+   "exit": "g_sala_mid"
+  },
+  {
+   "id": "escada_vao",
+   "room": "hall",
+   "p": [
+    5.55,
+    0.0,
+    7.7
+   ],
+   "peek": {
+    "p": [
+     6.12,
+     0.0,
+     7.4
+    ],
+    "yaw": 1.5707963267948966,
+    "h": 1.65
+   },
+   "exit": "g_hall_kitchen"
+  },
+  {
+   "id": "escritorio_arquivo",
+   "room": "escritorio",
+   "p": [
+    4.65,
+    0.0,
+    5.6
+   ],
+   "peek": {
+    "p": [
+     4.83,
+     -0.89,
+     5.74
+    ],
+    "yaw": 0.0,
+    "h": 1.2,
+    "head": [
+     4.35,
+     1.22,
+     6.02
+    ],
+    "hand": [
+     4.58,
+     1.07,
+     6.03
+    ]
+   },
+   "exit": "g_esc_mid"
+  },
+  {
+   "id": "despensa",
+   "room": "despensa",
+   "p": [
+    9.7,
+    0.0,
+    12.7
+   ],
+   "peek": {
+    "p": [
+     8.65,
+     -0.4,
+     12.66
+    ],
+    "yaw": 3.141592653589793,
+    "h": 1.6,
+    "head": [
+     9.12,
+     1.6,
+     12.28
+    ]
+   },
+   "exit": "g_desp_mid"
+  },
+  {
+   "id": "lavanderia",
+   "room": "lavanderia",
+   "p": [
+    11.6,
+    -3.0,
+    1.2
+   ],
+   "peek": {
+    "p": [
+     11.75,
+     -3.5,
+     2.1
+    ],
+    "yaw": -1.5707963267948966,
+    "h": 1.5,
+    "head": [
+     11.37,
+     -1.52,
+     1.62
+    ]
+   },
+   "exit": "b_lav_mid"
+  },
+  {
+   "id": "porao_barril",
+   "room": "porao",
+   "p": [
+    0.35,
+    -3.0,
+    8.05
+   ],
+   "peek": {
+    "p": [
+     0.6,
+     -3.6,
+     9.22
+    ],
+    "yaw": 1.5707963267948966,
+    "h": 1.55,
+    "side": "l",
+    "head": [
+     1.03,
+     -1.45,
+     8.87
+    ]
+   },
+   "exit": "b_porao_mid"
+  }
+ ],
+ "ATTIC": {
+  "knee": 0.9,
+  "x0": 6.65,
+  "x1": 7.4,
+  "z_foot": 3.85,
+  "z_top": 0.45,
+  "steps": 16
+ }
+}

@@ -1,0 +1,3164 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: godot\scripts\actors\human_rig.gd:678
+msgid "Clips"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:684
+msgid "Mixer"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:694
+msgid "Pose"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:734
+msgid "Grip"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:796
+msgid "Bust"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:805
+msgid "Skirt"
+msgstr ""
+
+#: godot\scripts\actors\human_rig.gd:809
+msgid "Springs"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:384
+msgid "Hã...? O que eu tô fazendo aqui...?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:384
+msgid "Ai... {cat}? Eu tava sonâmbula?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:384
+msgid "Ai... {cat}? Eu tava sonâmbulo?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:384
+msgid "Que frio... como eu vim parar aqui?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "Ô, gato... são três da manhã."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "Shh. Dorme, bicho."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "Cara, de novo?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "{cat}... dorme, gato."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "Hmm... {cat}, são três da manhã..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:403
+msgid "Shhh... {cat}..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:405
+msgid "{cat}? Você também ouviu?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:405
+msgid "Tá aí, {cat}? Fica aqui comigo."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:409
+msgid "{cat}? O que foi?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:430
+msgid "Tô indo, tô indo."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:430
+msgid "O que foi agora?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:430
+msgid "Já vou, {cat}!"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:430
+msgid "Tô indo, {cat}..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:433
+msgid "Tá tudo bem aqui... acho."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:433
+msgid "Nada. Você me enganou, {cat}."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:433
+msgid "O que você queria me mostrar?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:457
+msgid "O que foi isso?!"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:457
+msgid "Tem alguém aí?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:459
+msgid "Hm? ...Gato idiota."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:459
+msgid "Que barulho foi esse? Vou ver."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:461
+msgid "{cat}! O que você derrubou?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:461
+msgid "Sério, {cat}?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:461
+msgid "Mas que barulho é esse..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:468
+msgid "Ninguém. Só o gato aprontando."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:468
+msgid "Nada aqui... estranho."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:475
+msgid "{cat}!! Era meu copo!"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:475
+msgid "Ah não... {cat}!"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:797
+msgid "Gato? ...Isso aí não tá certo."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:797
+msgid "Tem alguma coisa aqui, não tem?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:797
+msgid "Ô, {cat}... vem pra cá."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:799
+msgid "{cat}? Cadê você?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:799
+msgid "{cat}... vem cá..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:799
+msgid "{cat}? Você tá vendo isso?"
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:806
+msgid "Por favor... por favor..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:806
+msgid "Vai embora... vai embora..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:806
+msgid "{cat}... me ajuda..."
+msgstr ""
+
+#: godot\scripts\actors\owner.gd:806
+msgid "Isso não é real..."
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:49
+msgid "Espaço"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:53
+msgid "Shift"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:54
+msgid "Ctrl"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:55
+msgid "Tab"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:55
+msgid "Select"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:56
+msgid "Esc"
+msgstr ""
+
+#: godot\scripts\autoload\controls.gd:56
+msgid "Start"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:108
+msgid " %s=%s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:110
+msgid " spot=%s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:120
+msgid "phase=%s day=%d mode=%s t=%.1f hour=%.2f scale=%.1f"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:124
+msgid "%s#%d %s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:125
+msgid " || %s pos=%s yaw=%.2f pose=%s visible=%s step=%s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:126
+msgid " || cat pos=%s mode=%s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:131
+msgid "no task"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:133
+msgid "%s (at %d)"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:149
+msgid "OK phase=%s day=%d"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:179
+msgid "OK %s"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:232
+msgid "ERR unknown command "
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:241
+msgid "OK t=%.1f"
+msgstr ""
+
+#: godot\scripts\dev\devctl.gd:248
+msgid "%s after %.1f s (t=%.1f)"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1002
+msgid "Lâmpadas queimadas no momento: %d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1021
+msgid "Noite %d · %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1050
+msgid "{cat}! Fora do meu quarto. Banheiro, já."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1050
+msgid "{cat}! CHEGA! Banheiro, agora."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1068
+msgid "Você foi trancado no banheiro por uma hora. Arranhe a porta (segure %s)%s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1068
+msgid " ou fuja pela janela basculante."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1068
+msgid ". Da próxima vez, abra a basculante de manhã."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1078
+msgid "Tá... pode sair. Mas fica quieto, {cat}."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1085
+msgid "{cat}!! Para de arranhar essa porta!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:111
+msgid "Pintando as paredes"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1119
+msgid "O círculo está completo. Segure sobre ele para terminar o ritual."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1121
+msgid "Faltam as coisas de Dona Ivone. Leve-as ao círculo para terminar o ritual."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1144
+msgid "Quando os tentáculos se erguerem, [b]bufe[/b] (%s) para cancelar a onda."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1165
+msgid "No corredor, de madrugada, não tinha nada."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1166
+msgid "Ela, sentada no escuro da sala, às três da manhã."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1167
+msgid "A TV ligada, falando sozinha a noite inteira."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1168
+msgid "A torneira que ela esqueceu aberta."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1169
+msgid "E a porta do banheiro, trancada por dentro, por tempo demais."
+msgstr ""
+
+#: godot\scripts\game\game.gd:120
+msgid "Construindo a casa"
+msgstr ""
+
+#: godot\scripts\game\game.gd:122
+msgid "House"
+msgstr ""
+
+#: godot\scripts\game\game.gd:127
+msgid "Acordando o gato"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1321
+msgid "Dia %d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1321
+msgid "Manhã · a casa está vazia"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1326
+msgid "De manhã a casa é segura. Prepare-se para a noite: as tarefas ficam no canto da tela."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1329
+msgid "Procure de perto as [b]marcas[/b] que as assombrações deixaram."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1370
+msgid "Clara volta em %d:%02d · ou durma na caminha"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1370
+msgid "Preparo da manhã"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1378
+msgid "uma foto antiga"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1378
+msgid "uma coleira antiga"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1378
+msgid "uma chave pequena"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1380
+msgid "Dona Ivone, com um gato preto no colo. Atrás: “Sete anos juntos”."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1381
+msgid "Uma coleira vermelha com um sininho. No pingente: “Breu”."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1382
+msgid "Uma chave pequena e enferrujada. Abre o baú do sótão."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1384
+msgid "Você encontrou %s. %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:139
+msgid "Abrindo as janelas"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1411
+msgid "%s cochilou no sol da janela..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:150
+msgid "Chamando as assombrações"
+msgstr ""
+
+#: godot\scripts\game\game.gd:157
+msgid "a chave do cadeado"
+msgstr ""
+
+#: godot\scripts\game\game.gd:163
+msgid "As lâmpadas queimam sozinhas depois de 10–20 s. Pule no interruptor de novo para religar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:168
+msgid "Acendendo a casa"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1698
+msgid "Fim de tarde · a mudança"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1698
+msgid "Fim de tarde · Davi está chegando"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1699
+msgid "Fim de tarde · Clara chegou"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1703
+msgid "O [b]losango[/b] dourado mostra aonde ir. As tarefas ficam no canto da tela."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1705
+msgid "Ganhe a [b]Paciência[/b] de Clara para a noite: peça carinho, coma, brinque com o ratinho."
+msgstr ""
+
+#: godot\scripts\game\game.gd:173
+msgid "Apagando as luzes"
+msgstr ""
+
+#: godot\scripts\game\game.gd:175
+msgid "Pronto"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1787
+msgid "Clara quer que você coma com ela. Vá até a [b]tigela[/b] na cozinha e segure %s."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1821
+msgid "...Mais um \"não\" educado. Tá. Próximo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1823
+msgid "Casamento na novela? Hoje não. Próximo canal."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1825
+msgid "Vem, {cat}! Vem cá no colo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1828
+msgid "Pule no colo de Clara: o [b]círculo[/b] aparece quando você olha para ela."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1841
+msgid "Pronto. Sem TV hoje."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1853
+msgid "Alô? ...Ah. É você."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1855
+msgid "Não, Rafael. Eu tô bem. Tô ótima."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1857
+msgid "Não. Não vem. E para de bater na porta dos outros às duas da manhã. Três batidinhas. Eu conheço."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1859
+msgid "Tchau, Rafael."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1862
+msgid "...Tá tudo certo, {cat}. Tá tudo certo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1877
+msgid "Um diário? ...Faltam páginas. Alguém arrancou."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1897
+msgid "Quarenta anos sozinha aqui. Ninguém veio ver ela."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1900
+msgid "...É. Vou dormir cedo hoje."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1910
+msgid "Hoje a gente dorme de luz acesa, Davi."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1914
+msgid "Você ouviu isso?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:1917
+msgid "Davi... eu tô cansada. Muito."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1920
+msgid "Seja o que for... a gente passa por essa noite."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1922
+msgid "{cat}, fica de olho. Por favor."
+msgstr ""
+
+#: godot\scripts\game\game.gd:1944
+msgid "Pegue a [b]chave[/b] em cima da caixa da mudança, na sala, e leve para Clara no porão."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2057
+msgid "Vem, {cat}. Hora de dormir."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2084
+msgid "Pronto. Tudo trancado."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2087
+msgid "Hoje essa luz fica acesa."
+msgstr ""
+
+#: godot\scripts\game\game.gd:209
+msgid "Seu miado tirou %s do transe. Mas o problema continua lá."
+msgstr ""
+
+#: godot\scripts\game\game.gd:211
+msgid "Miar chama as pessoas até você. Use isso para tirá-las de perigo, mas elas andam pela casa escura."
+msgstr ""
+
+#: godot\scripts\game\game.gd:215
+msgid "Pouco [b]Foco[/b]: o bufo saiu fraco. Espere o Foco recarregar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2181
+msgid "Ai! Que susto!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2205
+msgid "Isso! Que gato bom."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2206
+msgid "No colo o [b]Foco[/b] recarrega como ronronando. Mexa-se para descer."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2228
+msgid "Vou tomar um banho quentinho..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2251
+msgid "Clara se trancou no banho. Arranhe a porta do banheiro."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2323
+msgid "{cat}, sai! Um minutinho de privacidade, por favor."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2342
+msgid "Tá aberta, {cat}. Pode entrar, chato."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2342
+msgid "{cat}? Pode entrar, tá aberta."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2346
+msgid "Algo se mexe na água. Tire Clara da banheira."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2366
+msgid "Tá bom, tá bom! Já saí, chato."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2370
+msgid "Brr... que água gelada de repente."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2388
+msgid "É ele!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2403
+msgid "O quarto de hóspedes é lá em cima, o da direita."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2410
+msgid "Guarda isso, Davi."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2412
+msgid "...Eu já tinha escolhido o nome, sabia? Deixa pra lá."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2414
+msgid "Obrigada por vir. A mãe que pediu, né?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2418
+msgid "Se ouvir barulho de noite, é a casa velha. Né?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2449
+msgid "Então é aqui a casa barata? Gostei, mana."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2452
+msgid "{cat}! Saudade, seu peludo. Ainda sou alérgico, mas tudo bem."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2480
+msgid "Quarto de hóspedes... cheio de caixa. Perfeito."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2484
+msgid "Ué... esse baú não é nosso."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2495
+msgid "Olha o que tinha aqui!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2516
+msgid "Que mãe? Eu vim porque quis. ...E porque ela pediu."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2554
+msgid "Cheguei! Trouxe pão de queijo. Quem tava no telefone?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2554
+msgid "Mana, olha isso. Tava no fundo daquele baú. É o diário da antiga dona."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2554
+msgid "Cheguei. Último dia dessa semana maluca."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2601
+msgid "Cano velho."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2605
+msgid "Eu sei, mana. Eu tô aqui."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2611
+msgid "Por isso eu vim, sabia?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2720
+msgid "Oi, {cat}! Tá me seguindo, é?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2720
+msgid "Que foi, {cat}? Quer atenção?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2720
+msgid "Você é o melhor gato do mundo, sabia?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2720
+msgid "Ei, coisinha. Tô aqui."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2741
+msgid "Clara foi deitar. Suba na cama e [b]deite com ela[/b] (%s): a noite começa quando você ronronar com ela."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2747
+msgid "...{cat}, sai daqui. Por favor."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2765
+msgid "Quem é o gato mais lindo dessa casa?"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2765
+msgid "Ownn, vem cá, {cat}."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2765
+msgid "Que carente você tá hoje!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:2794
+msgid "Pega! Pega o ratinho! Hahaha."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2883
+msgid "Já tá com sono, {cat}? Então vamos dormir."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2918
+msgid "Ah! {cat}... eu não conseguia me mexer..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2931
+msgid "Boa noite, {cat}..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:2935
+msgid "Ronronar acalma %s, mas você não está patrulhando. %s para levantar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3072
+msgid "Hmm... apaga isso, {cat}..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3309
+msgid "Limpa. Agora pode ir para o círculo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3422
+msgid " (%s)"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3430
+msgid "A foto"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3430
+msgid "A coleira"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3430
+msgid "A chave"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3432
+msgid "O ritual · %d/%d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3432
+msgid "Leve tudo ao círculo do porão e complete o ritual."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3435
+msgid "Objetos de Dona Ivone · %d/%d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3435
+msgid "Leve cada um ao círculo do porão. A noite só acaba quando todos estiverem lá."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3446
+msgid "A Sombra está escondida %s: acenda a luz"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3458
+msgid "Arranhe a porta do banheiro"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3460
+msgid " · ela desistiu"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3466
+msgid " (%d/3)"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3469
+msgid "Deite com a Clara na cama"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3469
+msgid "Quando ela for dormir, deite com ela"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3470
+msgid "Fim de tarde · dia %d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3470
+msgid "A tarde só acaba quando você deitar com ela. Paciência de Clara: %d%%"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3505
+msgid "Coma a ração"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3594
+msgid "Está coberta de lama. Lave numa torneira antes de deixar no círculo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3606
+msgid "O círculo recusou. O diário dizia a ordem: %s."
+msgstr ""
+
+#: godot\scripts\game\game.gd:361
+msgid "Ouça. As [b]orelhas[/b] do %s apontam para o perigo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:362
+msgid "Pule nos interruptores com %s. Acenda a luz do cômodo onde a Sombra está."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3746
+msgid "a caixa"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3751
+msgid "A caixa engoliu quem caçava você, mas ficou estragada. Não serve mais."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3786
+msgid "Parado e escondido, o cão não acha você. Ele fareja por perto e vai embora. Interagir para sair."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3825
+msgid "Que grito foi esse?!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3825
+msgid "{cat}?! O que foi isso?!"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3834
+msgid "Última vida"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3836
+msgid "O cão te pegou e levou uma das suas sete vidas. Esconda-se, suba em móveis ou fuja pelo duto da próxima vez."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3838
+msgid "Você perdeu uma das sete vidas. As vidas valem para a semana inteira; dá para rejogar uma noite no menu e recuperá-las."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3853
+msgid "[b]%s[/b] vem atrás de você! %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:386
+msgid "Ela vai voltar. Leve os objetos de Ivone ao porão para a noite acabar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3922
+msgid "a casa"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3925
+msgid "As sete vidas acabaram"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3926
+msgid "A última vida foi levada por %s."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3927
+msgid "Rejogue uma noite anterior no menu (Escolher noite) perdendo menos vidas: elas voltam para as noites seguintes."
+msgstr ""
+
+#: godot\scripts\game\game.gd:3928
+msgid "Esta noite começa com 1 vida"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3928
+msgid "Esta noite começa com %d vidas"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3945
+msgid "Dia %d · %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3945
+msgid "manhã"
+msgstr ""
+
+#: godot\scripts\game\game.gd:3945
+msgid "fim de tarde"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4064
+msgid "O gato está cansado: menos Foco e mais lento. Ronronar na cama recupera o sono."
+msgstr ""
+
+#: godot\scripts\game\game.gd:4145
+msgid "Sair do esconderijo"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4191
+msgid "Soltar %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4195
+msgid "Derrubar"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4295
+msgid "Manhã"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4297
+msgid "Fim de tarde"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4333
+msgid "%s → %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:4387
+msgid "in "
+msgstr ""
+
+#: godot\scripts\game\game.gd:4387
+msgid "the "
+msgstr ""
+
+#: godot\scripts\game\game.gd:547
+msgid "Noite %d"
+msgstr ""
+
+#: godot\scripts\game\game.gd:547
+msgid "Dia %d · manhã"
+msgstr ""
+
+#: godot\scripts\game\game.gd:794
+msgid "Proteja a Clara. Enquanto ela dorme, os fantasmas vêm atrás dela. Só você consegue vê-los."
+msgstr ""
+
+#: godot\scripts\game\game.gd:794
+msgid "Proteja a Clara dos fantasmas esta noite."
+msgstr ""
+
+#: godot\scripts\game\game.gd:796
+msgid "Esta noite só termina quando você levar [b]%d objetos de Dona Ivone[/b] ao círculo do porão. Chegue perto e eles se destacam no escuro. A lista no canto mostra quantos faltam."
+msgstr ""
+
+#: godot\scripts\game\game.gd:798
+msgid "Primeira noite na casa nova, {cat}. Boa noite..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:799
+msgid "Mova-se com %s e olhe com o mouse. %s corre."
+msgstr ""
+
+#: godot\scripts\game\game.gd:800
+msgid "Quando aparecer um [b]círculo[/b] no chão ou num móvel, %s pula até ele."
+msgstr ""
+
+#: godot\scripts\game\game.gd:802
+msgid "%s mia e [b]chama[/b] as pessoas até você. Também tira alguém de um transe, mas irrita quem dorme."
+msgstr ""
+
+#: godot\scripts\game\game.gd:803
+msgid "Derrubar coisas faz barulho: quem caça pelo som vai até lá. Use isso como isca."
+msgstr ""
+
+#: godot\scripts\game\game.gd:805
+msgid "%s bufa: espanta ou enfraquece o que estiver por perto. O botão aparece na tela quando adianta. Gasta Foco."
+msgstr ""
+
+#: godot\scripts\game\game.gd:807
+msgid "Segure %s para ver a hora. Mas a hora não salva ninguém: a noite só acaba com os objetos de Ivone no círculo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:808
+msgid "Agora são [b]dois[/b] para proteger. Cada ameaça escolhe um alvo."
+msgstr ""
+
+#: godot\scripts\game\game.gd:843
+msgid "Chega por hoje. Boa noite, casa velha."
+msgstr ""
+
+#: godot\scripts\game\game.gd:904
+msgid "Quando alguém tem medo, a casa perde a cor. Ouça o coração."
+msgstr ""
+
+#: godot\scripts\game\game.gd:906
+msgid "Deite com %s na cama (%s) e ronrone para acalmar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:908
+msgid "%s está perdendo a paciência. Se ficar irritado(a), vai te trancar no banheiro."
+msgstr ""
+
+#: godot\scripts\game\game.gd:916
+msgid "Que sede..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:925
+msgid "Hmm... banheiro..."
+msgstr ""
+
+#: godot\scripts\game\game.gd:948
+msgid "Bom dia, {cat}... que noite estranha."
+msgstr ""
+
+#: godot\scripts\game\game.gd:949
+msgid "Amanhecer"
+msgstr ""
+
+#: godot\scripts\game\game.gd:958
+msgid "Noite %d sobrevivida"
+msgstr ""
+
+#: godot\scripts\game\game.gd:959
+msgid "Clara e Davi sobreviveram"
+msgstr ""
+
+#: godot\scripts\game\game.gd:959
+msgid "Clara sobreviveu"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "%d (restam %d)"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "Assombrações afastadas"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "Medo máximo"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "Vezes trancado no banheiro"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "Vezes pego pelo cão"
+msgstr ""
+
+#: godot\scripts\game\game.gd:960
+msgid "Vidas perdidas"
+msgstr ""
+
+#: godot\scripts\game\game.gd:986
+msgid "%s não aguentou o medo"
+msgstr ""
+
+#: godot\scripts\game\game.gd:986
+msgid "O medo foi se acumulando sem parar, até não restar coragem."
+msgstr ""
+
+#: godot\scripts\game\game.gd:986
+msgid "Ronronar na cama acalma. Resolva as ameaças cedo, antes de o medo disparar."
+msgstr ""
+
+#: godot\scripts\game\game.gd:988
+msgid "%s foi levado(a) pelo medo"
+msgstr ""
+
+#: godot\scripts\game\game.gd:994
+msgid "Medo de %s: %d%%"
+msgstr ""
+
+#: godot\scripts\game\game.gd:994
+msgid "Você estava: %s"
+msgstr ""
+
+#: godot\scripts\game\game.gd:994
+msgid "Você estava fora de casa"
+msgstr ""
+
+#: godot\scripts\game\game.gd:996
+msgid "Também estavam ativas: %s"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:102
+msgid "%s a luz%s"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:102
+msgid "Apagar"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:102
+msgid "Acender"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:102
+msgid "A lâmpada não responde..."
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:122
+msgid "%s o abajur"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:122
+msgid "O abajur não acende..."
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:142
+msgid "Arranhar a porta"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:142
+msgid "Abrir a porta"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:160
+msgid "Puxar o fio: %s"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:175
+msgid "Fechar a torneira (%s)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:175
+msgid "Puxar a tampa do ralo"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:188
+msgid "Lavar %s na torneira"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:193
+msgid "Puxar o que caiu no ralo"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:201
+msgid "Puxar a carta da caixa de correio"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:216
+msgid "Guardar a boneca no baú"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:227
+msgid "Colocar %s no círculo"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:244
+msgid "Deixar %s no círculo"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:248
+msgid "Completar o ritual"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:252
+msgid "O círculo responde..."
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:260
+msgid "Entrar no duto (para a cozinha)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:260
+msgid "Entrar no duto (para a lavanderia)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:260
+msgid "Abrir a grade do duto"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:277
+msgid "Passar pela janela (varanda)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:277
+msgid "Abrir a janela basculante"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:290
+msgid "Pular pela janela (banheiro)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:300
+msgid "Sair pela portinhola (quintal)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:300
+msgid "Empurrar a portinhola emperrada"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:313
+msgid "Entrar pela portinhola (despensa)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:321
+msgid "Sair pela janela do porão (quintal)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:321
+msgid "Forçar a janela do porão"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:333
+msgid "Entrar pela janela do porão"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:339
+msgid "Descer pela árvore (quintal)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:343
+msgid "Subir na árvore (varanda)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:349
+msgid "Puxar o cordão do sótão"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:362
+msgid "Dormir até Clara chegar"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:375
+msgid "Deitar com %s"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:376
+msgid "Deitar no rosto de %s (acordar)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:376
+msgid "Deitar com %s e ronronar"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:376
+msgid "Levantar"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:386
+msgid "Esconder-se (%s)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:394
+msgid "Soltar a caixa"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:394
+msgid "Empurrar a caixa"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:403
+msgid "Entrar na caixa"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:410
+msgid "Pedir carinho"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:414
+msgid "Levar o ratinho para Clara"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:418
+msgid "Levar o novelo para Clara"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:422
+msgid "Miar para a Clara encher a água"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:426
+msgid "Cochilar no sol"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:432
+msgid "Dar a chave para Clara"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:436
+msgid "Comer"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:441
+msgid "Arranhar a porta do banheiro"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:446
+msgid "Tirar a Clara da banheira"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:464
+msgid "Arranhar a porta (entrar)"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:512
+msgid "Brincar com %s"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:514
+msgid "Fuçar atrás da máquina de lavar"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:516
+msgid "Fuçar na caixa aberta"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:518
+msgid "Pegar a boneca"
+msgstr ""
+
+#: godot\scripts\game\interactions.gd:519
+msgid "Pegar %s"
+msgstr ""
+
+#: godot\scripts\game\story.gd:10
+msgid "Só com você a Clara fica em silêncio."
+msgstr ""
+
+#: godot\scripts\game\story.gd:100
+msgid "uma carta nunca enviada"
+msgstr ""
+
+#: godot\scripts\game\story.gd:100
+msgid "“Breu, a casa é sua. Eu só cuidei dela enquanto você não voltava.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:106
+msgid "suja de lama: lave numa torneira"
+msgstr ""
+
+#: godot\scripts\game\story.gd:107
+msgid "caiu no ralo da pia do banheiro de baixo"
+msgstr ""
+
+#: godot\scripts\game\story.gd:108
+msgid "só aparece com a luz do cômodo apagada"
+msgstr ""
+
+#: godot\scripts\game\story.gd:109
+msgid "na caixa de correio, lá fora, na porteira"
+msgstr ""
+
+#: godot\scripts\game\story.gd:11
+msgid "À noite, você vê o que anda pelos corredores.\nProteja a Clara."
+msgstr ""
+
+#: godot\scripts\game\story.gd:113
+msgid "o diário, a fita, a aliança, o lenço e por último o bilhete"
+msgstr ""
+
+#: godot\scripts\game\story.gd:119
+msgid "Chegamos, {cat}! Casa nova!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:119
+msgid "Êêêêê! Acabou a mudança!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:119
+msgid "Primeira janta na casa nova. Vem comer comigo, {cat}."
+msgstr ""
+
+#: godot\scripts\game\story.gd:120
+msgid "{cat}! Vem comer!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:120
+msgid "Psss, psss... {cat}? A ração tá aqui."
+msgstr ""
+
+#: godot\scripts\game\story.gd:120
+msgid "Vem, {cat}, antes que esfrie. Brincadeira, é ração."
+msgstr ""
+
+#: godot\scripts\game\story.gd:121
+msgid "Isso! Come tudo, gatinho."
+msgstr ""
+
+#: godot\scripts\game\story.gd:121
+msgid "Ah, deixa. Você come depois."
+msgstr ""
+
+#: godot\scripts\game\story.gd:122
+msgid "{cat}, me traz a chave que ficou na caixa? Vou abrir o cadeado do porão."
+msgstr ""
+
+#: godot\scripts\game\story.gd:123
+msgid "Vou descer e ver esse porão de uma vez."
+msgstr ""
+
+#: godot\scripts\game\story.gd:124
+msgid "{cat}? A chave, lá na sala, em cima da caixa!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:124
+msgid "Cadê você, {cat}? Tô aqui embaixo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:124
+msgid "Traz a chave pra mim, {cat}?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:125
+msgid "Você trouxe! Que gato esperto."
+msgstr ""
+
+#: godot\scripts\game\story.gd:125
+msgid "Abriu! Só caixa velha da Dona Ivone... amanhã eu olho com calma."
+msgstr ""
+
+#: godot\scripts\game\story.gd:126
+msgid "Deixa pra lá. Amanhã eu acho essa chave."
+msgstr ""
+
+#: godot\scripts\game\story.gd:127
+msgid "Cheguei, {cat}! Mais uma entrevista. Foi ótima. Acho."
+msgstr ""
+
+#: godot\scripts\game\story.gd:127
+msgid "Sua ração, senhor gato. Pelo menos um de nós janta direito."
+msgstr ""
+
+#: godot\scripts\game\story.gd:128
+msgid "Oi, {cat}. Dormi mal de novo... mas tá tudo certo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:128
+msgid "Come. Eu preciso é de um banho bem quente."
+msgstr ""
+
+#: godot\scripts\game\story.gd:129
+msgid "Hoje chega o Davi, {cat}! Meu irmão. Se comporta."
+msgstr ""
+
+#: godot\scripts\game\story.gd:129
+msgid "Come antes que o Davi chegue e roube a sua atenção."
+msgstr ""
+
+#: godot\scripts\game\story.gd:130
+msgid "{cat}? Ah, tá aí. Essa casa tá cada dia mais fria."
+msgstr ""
+
+#: godot\scripts\game\story.gd:130
+msgid "Come. Eu tô sem fome nenhuma."
+msgstr ""
+
+#: godot\scripts\game\story.gd:131
+msgid "Cheguei... Ficou bem sozinho aqui, {cat}?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:131
+msgid "Aqui. Hoje fica pertinho de mim, tá?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:132
+msgid "Última noite da semana, {cat}. A gente consegue."
+msgstr ""
+
+#: godot\scripts\game\story.gd:132
+msgid "Come bem. A noite hoje vai ser longa."
+msgstr ""
+
+#: godot\scripts\game\story.gd:137
+msgid "Coma com a Clara"
+msgstr ""
+
+#: godot\scripts\game\story.gd:137
+msgid "Leve a chave para a Clara no porão"
+msgstr ""
+
+#: godot\scripts\game\story.gd:138
+msgid "Suba no colo da Clara"
+msgstr ""
+
+#: godot\scripts\game\story.gd:139
+msgid "Tire a Clara da banheira"
+msgstr ""
+
+#: godot\scripts\game\story.gd:140
+msgid "Receba o Davi com a Clara"
+msgstr ""
+
+#: godot\scripts\game\story.gd:141
+msgid "Fique com a Clara no telefonema"
+msgstr ""
+
+#: godot\scripts\game\story.gd:142
+msgid "Veja o que o Davi trouxe"
+msgstr ""
+
+#: godot\scripts\game\story.gd:143
+msgid "Fique de olho com eles na sala"
+msgstr ""
+
+#: godot\scripts\game\story.gd:148
+msgid "Peça carinho"
+msgstr ""
+
+#: godot\scripts\game\story.gd:150
+msgid "Leve o ratinho para a Clara"
+msgstr ""
+
+#: godot\scripts\game\story.gd:156
+msgid "Leve o novelo de lã (do sofá) para a Clara"
+msgstr ""
+
+#: godot\scripts\game\story.gd:157
+msgid "Mie na tigela de água vazia"
+msgstr ""
+
+#: godot\scripts\game\story.gd:158
+msgid "Tire um cochilo no sol da janela da sala"
+msgstr ""
+
+#: godot\scripts\game\story.gd:160
+msgid "Meu novelo! Você desfez tudo, né? Tudo bem, vem cá."
+msgstr ""
+
+#: godot\scripts\game\story.gd:160
+msgid "Ah, era isso que você queria? Brincar de novelo?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:161
+msgid "Acabou a sua água? Desculpa, {cat}. Já vou."
+msgstr ""
+
+#: godot\scripts\game\story.gd:161
+msgid "Tô indo, tô indo. Água fresquinha pro senhor."
+msgstr ""
+
+#: godot\scripts\game\story.gd:162
+msgid "Olha ele no solzinho... queria ser gato."
+msgstr ""
+
+#: godot\scripts\game\story.gd:162
+msgid "Isso, aproveita o sol, {cat}."
+msgstr ""
+
+#: godot\scripts\game\story.gd:165
+msgid "Vem, {cat}. Vem deitar comigo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:17
+msgid "A Sombra"
+msgstr ""
+
+#: godot\scripts\game\story.gd:17
+msgid "Ela não suporta luz e foge do seu olhar. Mas não encare onde ela se esconde."
+msgstr ""
+
+#: godot\scripts\game\story.gd:17
+msgid "Ela vem rápida demais: corra para um cômodo aceso!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:170
+msgid "Quem abriu a grade do duto? ...Foi você, {cat}?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:171
+msgid "Essa caixa não tava aí. Ou tava?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:172
+msgid "Outra caixa fora do lugar... {cat}, você anda empurrando as coisas?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:173
+msgid "A janelinha do banheiro aberta... foi o vento, né?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:174
+msgid "A portinhola da cozinha tá solta. Você que empurrou, né?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:175
+msgid "Ué, a luz noturna saiu da despensa?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:176
+msgid "O alçapão do sótão aberto... eu não mexi nisso."
+msgstr ""
+
+#: godot\scripts\game\story.gd:177
+msgid "Tá entrando um ventinho... a janela do porão tá aberta?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:18
+msgid "Olhe para ela e ela foge para um canto escuro. Acenda a luz desse cômodo: quando ela sair, a luz a bane. Não fique encarando o esconderijo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:182
+msgid "Pronto, trancado. Amanhã eu desfaço as caixas."
+msgstr ""
+
+#: godot\scripts\game\story.gd:183
+msgid "Porta trancada. Janela fechada. Tudo certo... né?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:184
+msgid "Ainda bem que o Davi chega amanhã. Não que eu precise. Mas é bom."
+msgstr ""
+
+#: godot\scripts\game\story.gd:185
+msgid "Trancado. Agora somos três nesta casa."
+msgstr ""
+
+#: godot\scripts\game\story.gd:186
+msgid "Conferi duas vezes. Tá tudo fechado."
+msgstr ""
+
+#: godot\scripts\game\story.gd:187
+msgid "Tranquei tudo. E deixei a chave na fechadura."
+msgstr ""
+
+#: godot\scripts\game\story.gd:188
+msgid "Tudo trancado. Seja o que for, já tá aqui dentro."
+msgstr ""
+
+#: godot\scripts\game\story.gd:19
+msgid "O Sussurrador"
+msgstr ""
+
+#: godot\scripts\game\story.gd:19
+msgid "Ele fala pelos aparelhos. Puxe o fio da tomada: puxe no verde. No vermelho a bola quase sempre sai."
+msgstr ""
+
+#: godot\scripts\game\story.gd:19
+msgid "Fique longe dos aparelhos ligados: a bola segue você pelos corredores e se apaga sozinha."
+msgstr ""
+
+#: godot\scripts\game\story.gd:193
+msgid "“Ele não dorme. Passa a noite inteira olhando para a porta do porão.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:194
+msgid "“Hoje o tranquei do lado de fora. Miou tanto... eu precisava de silêncio.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:195
+msgid "“Sem ele, a casa ficou fria. Aquilo mora no porão, embaixo do círculo. É de lá que sobe quando eu apago a luz.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:20
+msgid "Ache o aparelho que chia e puxe o fio com a luz verde. Se ele levar alguém em transe, mie para acordar."
+msgstr ""
+
+#: godot\scripts\game\story.gd:202
+msgid "O círculo se fechou com um som de vidro quebrando ao contrário."
+msgstr ""
+
+#: godot\scripts\game\story.gd:203
+msgid "Pela primeira vez em meses, Clara dormiu a noite inteira."
+msgstr ""
+
+#: godot\scripts\game\story.gd:204
+msgid "Nunca houve fantasmas. Só um gato que não saiu do lado dela."
+msgstr ""
+
+#: godot\scripts\game\story.gd:205
+msgid "Na cozinha, Davi disse que ia ficar mais umas semanas. Clara não discutiu."
+msgstr ""
+
+#: godot\scripts\game\story.gd:206
+msgid "\"Vou ligar praquela terapeuta que a mãe indicou. Só pra conversar.\" E encheu a tigela de {cat}."
+msgstr ""
+
+#: godot\scripts\game\story.gd:21
+msgid "A Afogadora"
+msgstr ""
+
+#: godot\scripts\game\story.gd:21
+msgid "Ela vem pela água. Feche a torneira que abriu sozinha."
+msgstr ""
+
+#: godot\scripts\game\story.gd:21
+msgid "Ela segue as suas pegadas molhadas. Corra até secarem ou seque as patas num tapete."
+msgstr ""
+
+#: godot\scripts\game\story.gd:210
+msgid "Sete vidas"
+msgstr ""
+
+#: godot\scripts\game\story.gd:212
+msgid "O círculo se fechou. A casa respirou aliviada."
+msgstr ""
+
+#: godot\scripts\game\story.gd:213
+msgid "Pela primeira vez em meses, Clara dormiu a noite inteira, com {cat} no peito."
+msgstr ""
+
+#: godot\scripts\game\story.gd:214
+msgid "Nunca houve fantasmas. Só um gato que não saiu do lado dela. Nem uma noite."
+msgstr ""
+
+#: godot\scripts\game\story.gd:215
+msgid "No telhado, à luz da manhã, um gato preto piscou devagar para {cat}. Depois de tantos anos, foi embora em paz."
+msgstr ""
+
+#: godot\scripts\game\story.gd:219
+msgid "A sétima vida"
+msgstr ""
+
+#: godot\scripts\game\story.gd:22
+msgid "Feche a torneira que abriu sozinha (segure). Pisou na água? Seque as patas num tapete."
+msgstr ""
+
+#: godot\scripts\game\story.gd:221
+msgid "A última vida de {cat} se apagou no escuro da casa."
+msgstr ""
+
+#: godot\scripts\game\story.gd:222
+msgid "Sem ninguém por perto à noite, Clara segurou as pontas sozinha. Até não segurar mais."
+msgstr ""
+
+#: godot\scripts\game\story.gd:223
+msgid "Os dias ficaram iguais. As cortinas, fechadas. Como na casa de Dona Ivone."
+msgstr ""
+
+#: godot\scripts\game\story.gd:224
+msgid "No telhado, agora são dois gatos olhando a janela, esperando alguém abrir."
+msgstr ""
+
+#: godot\scripts\game\story.gd:228
+msgid "Mudança"
+msgstr ""
+
+#: godot\scripts\game\story.gd:23
+msgid "A Boneca"
+msgstr ""
+
+#: godot\scripts\game\story.gd:23
+msgid "Só se move quando ninguém olha. Encare-a e leve-a de volta ao baú."
+msgstr ""
+
+#: godot\scripts\game\story.gd:230
+msgid "Clara e Davi passaram pelas sete noites."
+msgstr ""
+
+#: godot\scripts\game\story.gd:231
+msgid "Na semana seguinte, colocaram a casa à venda. Clara disse que tava tudo bem."
+msgstr ""
+
+#: godot\scripts\game\story.gd:232
+msgid "Levaram as caixas, os móveis e, sem perceber, todo o resto também."
+msgstr ""
+
+#: godot\scripts\game\story.gd:233
+msgid "No porão, alguma coisa continuava esperando."
+msgstr ""
+
+#: godot\scripts\game\story.gd:24
+msgid "Mantenha-a na tela, pegue-a na boca e guarde-a no baú do sótão."
+msgstr ""
+
+#: godot\scripts\game\story.gd:240
+msgid "Bom dia, {cat}. Dormi no sofá de novo? ...Quem acendeu a luz da sala?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:241
+msgid "Meu celular tava desligado no chão. Foi você que puxou o fio, né?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:242
+msgid "A torneira da cozinha tava aberta de madrugada. Ainda bem que você não deixou alagar."
+msgstr ""
+
+#: godot\scripts\game\story.gd:243
+msgid "Sonhei com aquela boneca. Que bobagem."
+msgstr ""
+
+#: godot\scripts\game\story.gd:244
+msgid "Alguém ligou às duas da manhã. Eu nem atendi. Melhor assim."
+msgstr ""
+
+#: godot\scripts\game\story.gd:245
+msgid "Dormi um pouco melhor. Acho que foi você, {cat}."
+msgstr ""
+
+#: godot\scripts\game\story.gd:25
+msgid "O Visitante"
+msgstr ""
+
+#: godot\scripts\game\story.gd:25
+msgid "Não é quem diz ser. Saia de casa, chegue perto dele e bufe."
+msgstr ""
+
+#: godot\scripts\game\story.gd:25
+msgid "Volte para dentro de casa!"
+msgstr ""
+
+#: godot\scripts\game\story.gd:251
+msgid "Cheiro de tinta nova. Gostou da casa, {cat}?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:251
+msgid "Amanhã eu monto a estante. Ou depois de amanhã."
+msgstr ""
+
+#: godot\scripts\game\story.gd:251
+msgid "Recomeço, {cat}. Casa nova, vida nova. Né?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:252
+msgid "Sabe o que é mandar trinta currículos, {cat}? Pois é."
+msgstr ""
+
+#: godot\scripts\game\story.gd:252
+msgid "Tô ótima. Sério. Para de me olhar assim."
+msgstr ""
+
+#: godot\scripts\game\story.gd:252
+msgid "Você nunca precisou de emprego. Sortudo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:253
+msgid "Acordei às três da manhã de novo. Fiquei olhando o teto."
+msgstr ""
+
+#: godot\scripts\game\story.gd:253
+msgid "Se eu ficar parada, eu penso. Então eu não fico parada."
+msgstr ""
+
+#: godot\scripts\game\story.gd:253
+msgid "Você é o único que não me pergunta se eu tô bem, {cat}. Obrigada."
+msgstr ""
+
+#: godot\scripts\game\story.gd:254
+msgid "O Davi vai rir da casa. Deixa ele."
+msgstr ""
+
+#: godot\scripts\game\story.gd:254
+msgid "Ele tem vinte e dois anos e ainda me liga pra perguntar como frita ovo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:255
+msgid "Ô, {cat}. Cuidando bem dela?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:255
+msgid "Atchim! Tudo bem, tudo bem. Vale a pena."
+msgstr ""
+
+#: godot\scripts\game\story.gd:256
+msgid "Se o telefone tocar à noite, a gente não atende. Combinado?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:256
+msgid "Eu não vou voltar, {cat}. Não vou."
+msgstr ""
+
+#: godot\scripts\game\story.gd:257
+msgid "Ela tá bem mesmo, {cat}? Pisca uma vez pra sim."
+msgstr ""
+
+#: godot\scripts\game\story.gd:257
+msgid "Ela acha que eu não percebo. Eu percebo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:258
+msgid "Essa Ivone... ninguém veio ver ela. Quarenta anos."
+msgstr ""
+
+#: godot\scripts\game\story.gd:258
+msgid "Ainda bem que você tá aqui, {cat}."
+msgstr ""
+
+#: godot\scripts\game\story.gd:259
+msgid "Você cuida dela, né, {cat}? Ela não deixa ninguém cuidar."
+msgstr ""
+
+#: godot\scripts\game\story.gd:259
+msgid "Amanhã é o último dia. Depois a gente vê."
+msgstr ""
+
+#: godot\scripts\game\story.gd:26
+msgid "Quando baterem, saia de casa e bufe para ele de perto: ele pode sumir ou perseguir você, cada vez mais rápido. Corra para dentro de casa e ele desiste."
+msgstr ""
+
+#: godot\scripts\game\story.gd:260
+msgid "Hoje eu deixo a luz do quarto acesa. Não ri."
+msgstr ""
+
+#: godot\scripts\game\story.gd:260
+msgid "Fica comigo hoje, {cat}?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:261
+msgid "Eu tô aqui, mana. Tô aqui."
+msgstr ""
+
+#: godot\scripts\game\story.gd:267
+msgid "Mana, a mãe mandou dizer que..."
+msgstr ""
+
+#: godot\scripts\game\story.gd:267
+msgid "Eu sei o que a mãe mandou dizer."
+msgstr ""
+
+#: godot\scripts\game\story.gd:267
+msgid "Ela mandou dizer que te ama. E que você tá magra."
+msgstr ""
+
+#: godot\scripts\game\story.gd:267
+msgid "...Fala pra ela que eu tô ótima."
+msgstr ""
+
+#: godot\scripts\game\story.gd:268
+msgid "Quem era no telefone?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:268
+msgid "Ninguém."
+msgstr ""
+
+#: godot\scripts\game\story.gd:268
+msgid "O Rafael."
+msgstr ""
+
+#: godot\scripts\game\story.gd:268
+msgid "Ninguém, Davi."
+msgstr ""
+
+#: godot\scripts\game\story.gd:268
+msgid "Tá. Quer pão de queijo? Comprei na estrada."
+msgstr ""
+
+#: godot\scripts\game\story.gd:269
+msgid "Ela trancou o gato do lado de fora pra ter silêncio. Dá pra acreditar?"
+msgstr ""
+
+#: godot\scripts\game\story.gd:269
+msgid "Dá. As pessoas fazem isso. Trancam tudo pra fora."
+msgstr ""
+
+#: godot\scripts\game\story.gd:269
+msgid "Eu não tranquei ninguém."
+msgstr ""
+
+#: godot\scripts\game\story.gd:269
+msgid "Não. Só não deixa ninguém entrar."
+msgstr ""
+
+#: godot\scripts\game\story.gd:27
+msgid "O Cão Fantasma"
+msgstr ""
+
+#: godot\scripts\game\story.gd:27
+msgid "Ele caça você, não eles. Esconda-se, suba em móveis ou fuja pelo duto."
+msgstr ""
+
+#: godot\scripts\game\story.gd:270
+msgid "Nada. Só... tô aqui."
+msgstr ""
+
+#: godot\scripts\game\story.gd:270
+msgid "Eu sei, Davi. Eu sei."
+msgstr ""
+
+#: godot\scripts\game\story.gd:274
+msgid "Sete Vidas"
+msgstr ""
+
+#: godot\scripts\game\story.gd:275
+msgid "Um jogo de terror sobre proteger quem você ama"
+msgstr ""
+
+#: godot\scripts\game\story.gd:276
+msgid "Se você está passando por algo parecido, fale com alguém."
+msgstr ""
+
+#: godot\scripts\game\story.gd:276
+msgid "CVV 188 (Brasil) · findahelpline.com"
+msgstr ""
+
+#: godot\scripts\game\story.gd:277
+msgid "Design, código, modelos 3D, texturas e áudio sintetizado"
+msgstr ""
+
+#: godot\scripts\game\story.gd:277
+msgid "feitos com Claude"
+msgstr ""
+
+#: godot\scripts\game\story.gd:278
+msgid "Motor"
+msgstr ""
+
+#: godot\scripts\game\story.gd:278
+msgid "Godot 4 + Blender"
+msgstr ""
+
+#: godot\scripts\game\story.gd:279
+msgid "Texturas, modelos e céus"
+msgstr ""
+
+#: godot\scripts\game\story.gd:279
+msgid "Poly Haven (CC0)"
+msgstr ""
+
+#: godot\scripts\game\story.gd:28
+msgid "Ele caça pelo som. Ande devagar, esconda-se e fique parado, ou suba num móvel até ele ir embora."
+msgstr ""
+
+#: godot\scripts\game\story.gd:280
+msgid "Pessoas"
+msgstr ""
+
+#: godot\scripts\game\story.gd:280
+msgid "VRoid Studio · fantasmas MakeHuman / MPFB (CC0)"
+msgstr ""
+
+#: godot\scripts\game\story.gd:281
+msgid "Animações"
+msgstr ""
+
+#: godot\scripts\game\story.gd:281
+msgid "Quaternius, Universal Animation Library (CC0)"
+msgstr ""
+
+#: godot\scripts\game\story.gd:282
+msgid "Obrigado por jogar."
+msgstr ""
+
+#: godot\scripts\game\story.gd:29
+msgid "A Coisa no Porão"
+msgstr ""
+
+#: godot\scripts\game\story.gd:29
+msgid "Ela acordou. Não ataca, mas a casa fica mais difícil: termine o ritual."
+msgstr ""
+
+#: godot\scripts\game\story.gd:30
+msgid "Leve a foto, a coleira, a chave e as coisas de Ivone ao círculo, depois segure sobre ele para completar o ritual. A Coisa não ataca: só deixa a casa mais difícil."
+msgstr ""
+
+#: godot\scripts\game\story.gd:36
+msgid "Investigue as marcas"
+msgstr ""
+
+#: godot\scripts\game\story.gd:37
+msgid "Abra a grade do duto na lavanderia"
+msgstr ""
+
+#: godot\scripts\game\story.gd:40
+msgid "Investigue as torneiras"
+msgstr ""
+
+#: godot\scripts\game\story.gd:41
+msgid "Empurre a caixa de papelão até um bom lugar (refúgio de uma vez só)"
+msgstr ""
+
+#: godot\scripts\game\story.gd:44
+msgid "Investigue o baú do sótão"
+msgstr ""
+
+#: godot\scripts\game\story.gd:45
+msgid "Abra a janela basculante do banheiro de cima"
+msgstr ""
+
+#: godot\scripts\game\story.gd:48
+msgid "Investigue a porta da frente"
+msgstr ""
+
+#: godot\scripts\game\story.gd:49
+msgid "Empurre a portinhola da cozinha para o quintal"
+msgstr ""
+
+#: godot\scripts\game\story.gd:52
+msgid "Leve a luz noturna para um cômodo escuro"
+msgstr ""
+
+#: godot\scripts\game\story.gd:53
+msgid "Empurre a segunda caixa de papelão até um bom lugar"
+msgstr ""
+
+#: godot\scripts\game\story.gd:56
+msgid "Puxe o cordão do sótão, no corredor"
+msgstr ""
+
+#: godot\scripts\game\story.gd:57
+msgid "Abra a janela do porão"
+msgstr ""
+
+#: godot\scripts\game\story.gd:64
+msgid "uma página do diário"
+msgstr ""
+
+#: godot\scripts\game\story.gd:64
+msgid "“Breu chegou numa noite de chuva. Miou na porta até eu abrir. Ficou.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:65
+msgid "“Ele dorme virado para a porta do porão. Quando apago a luz, ele rosna para o escuro.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:66
+msgid "“Hoje vi uma mancha no canto do corredor. Ela se mexeu quando acendi a luz.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:69
+msgid "uma fita cassete"
+msgstr ""
+
+#: godot\scripts\game\story.gd:69
+msgid "Na fita, a voz de Ivone: “Se alguém ouvir isto... não deixe o rádio ligado à noite.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:7
+msgid "Clara comprou a casa barata.\nDisse que era um recomeço."
+msgstr ""
+
+#: godot\scripts\game\story.gd:70
+msgid "Chiado. Depois, uma voz que imita a de Ivone, devagar demais: “...vem aqui...”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:71
+msgid "Ivone, cansada: “Breu puxa os fios com a boca. Acho que ele sabe de alguma coisa.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:74
+msgid "o anel de Ivone"
+msgstr ""
+
+#: godot\scripts\game\story.gd:74
+msgid "O anel de casamento. Ela o tirava para lavar a louça e o deixava ao lado da pia."
+msgstr ""
+
+#: godot\scripts\game\story.gd:75
+msgid "um grampo de cabelo"
+msgstr ""
+
+#: godot\scripts\game\story.gd:75
+msgid "Um grampo com uma florzinha. Ainda úmido, como se tivesse saído da água agora."
+msgstr ""
+
+#: godot\scripts\game\story.gd:76
+msgid "Outro grampo, preso num fio de cabelo branco e comprido."
+msgstr ""
+
+#: godot\scripts\game\story.gd:79
+msgid "um vestidinho da boneca"
+msgstr ""
+
+#: godot\scripts\game\story.gd:79
+msgid "Costurado à mão. Na barra, bordado: “Para a minha menina, que nunca veio.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:8
+msgid "Ela diz que está tudo bem.\nEla diz isso para todo mundo."
+msgstr ""
+
+#: godot\scripts\game\story.gd:80
+msgid "uma touca de renda"
+msgstr ""
+
+#: godot\scripts\game\story.gd:80
+msgid "Uma touca minúscula. Cheira a naftalina e a baú fechado."
+msgstr ""
+
+#: godot\scripts\game\story.gd:81
+msgid "um sapatinho"
+msgstr ""
+
+#: godot\scripts\game\story.gd:81
+msgid "Um sapatinho de pano. A sola está gasta, como se alguém tivesse andado muito com ele."
+msgstr ""
+
+#: godot\scripts\game\story.gd:82
+msgid "um laço de fita"
+msgstr ""
+
+#: godot\scripts\game\story.gd:82
+msgid "Um laço vermelho. Ivone escreveu no diário que a boneca não gostava de ficar sem ele."
+msgstr ""
+
+#: godot\scripts\game\story.gd:85
+msgid "uma carta fechada"
+msgstr ""
+
+#: godot\scripts\game\story.gd:85
+msgid "Da mãe de Ivone, de muitos anos atrás: “Filha, não abra a porta para ninguém depois que escurecer.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:86
+msgid "Sem remetente. Dentro, só uma linha: “É a mamãe. Abre.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:87
+msgid "Da prefeitura: aviso de que a casa estava abandonada havia dois anos."
+msgstr ""
+
+#: godot\scripts\game\story.gd:88
+msgid "De Ivone para ninguém: “Tranquei Breu do lado de fora. Me perdoa. Eu precisava de silêncio.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:9
+msgid "A antiga moradora, Dona Ivone, viveu ali sozinha por quarenta anos.\nUm dia, simplesmente sumiu."
+msgstr ""
+
+#: godot\scripts\game\story.gd:91
+msgid "a última página do diário"
+msgstr ""
+
+#: godot\scripts\game\story.gd:91
+msgid "“Sem ele, a casa ficou fria. Algo sobe a escada quando eu apago a luz.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:92
+msgid "a última fita"
+msgstr ""
+
+#: godot\scripts\game\story.gd:92
+msgid "Só água correndo. E, no fim, um miado longe, do lado de fora."
+msgstr ""
+
+#: godot\scripts\game\story.gd:93
+msgid "a aliança de Ivone"
+msgstr ""
+
+#: godot\scripts\game\story.gd:93
+msgid "A outra aliança, a do marido. Estava no ralo da banheira."
+msgstr ""
+
+#: godot\scripts\game\story.gd:94
+msgid "o lenço de Ivone"
+msgstr ""
+
+#: godot\scripts\game\story.gd:94
+msgid "O lenço que ela usa na foto. Tem pelos pretos de gato presos no tecido."
+msgstr ""
+
+#: godot\scripts\game\story.gd:95
+msgid "um bilhete na porta"
+msgstr ""
+
+#: godot\scripts\game\story.gd:95
+msgid "Com a letra tremida de Ivone: “Breu, se você voltar, eu deixo a janela aberta.”"
+msgstr ""
+
+#: godot\scripts\game\story.gd:99
+msgid "uma página solta do diário"
+msgstr ""
+
+#: godot\scripts\game\story.gd:99
+msgid "“Se alguém ler isto: o círculo não prende ninguém. Ele só lembra à casa quem mora nela.”"
+msgstr ""
+
+#: godot\scripts\threats\decay.gd:152
+msgid "Uma torneira começou a pingar sozinha. Feche antes que alague."
+msgstr ""
+
+#: godot\scripts\threats\decay.gd:156
+msgid "Um aparelho está esquentando sozinho. Puxe o fio."
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:341
+msgid "Ufa... que pesadelo."
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:341
+msgid "Hm? Tinha alguma coisa na cama...?"
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:375
+msgid "%s foi levado(a) pela Boneca"
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:376
+msgid "A Boneca andou pela casa sempre que ninguém olhava e apareceu na cama da pessoa."
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:377
+msgid "Encare-a (de perto ou num cômodo aceso) para congelá-la, pegue-a na boca e leve de volta ao baú do sótão. Carregá-la drena o Foco e você não pode bufar."
+msgstr ""
+
+#: godot\scripts\threats\doll.gd:42
+msgid "a boneca"
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:149
+msgid "Algo molhado saiu da água e está andando."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:385
+msgid "Patas secas no tapete: a trilha acabou."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:416
+msgid "A Afogadora ouviu o respingo e segue as suas pegadas molhadas. Corra até secarem ou seque as patas num tapete."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:474
+msgid "Ah! Tava tão gelado... mas passou."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:474
+msgid "Foi só um pesadelo... molhado."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:474
+msgid "{cat}... obrigada."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:474
+msgid "{cat}... valeu."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:537
+msgid "%s foi levado(a) pela Afogadora"
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:538
+msgid "A Afogadora saiu da poça, atravessou a casa deixando pegadas molhadas e agarrou a pessoa com mãos geladas."
+msgstr ""
+
+#: godot\scripts\threats\drowner.gd:539
+msgid "Feche a torneira que abre sozinha antes de a poça crescer. Se ela já saiu, faça barulho longe (derrube um copo) para atraí-la, ou bufe de perto: ela derrete ao andar."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1201
+msgid "Ah! A luz..."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1201
+msgid "Ufa... foi só um sonho..."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1201
+msgid "O que... o que era aquilo?"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1426
+msgid "no quarto de %s"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1426
+msgid "no escuro"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1428
+msgid "%s foi levado(a) pela Sombra"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1429
+msgid "A Sombra atravessou a casa e chegou %s. Ela só se aproxima onde não há luz."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:1430
+msgid "Olhe para ela: ela foge e se esconde. Acenda a luz do cômodo onde ela vai sair e ela some ao pisar na luz. Não encare o esconderijo: ela vem atrás de você."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:283
+msgid "Hmm... quem tá aí...?"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:283
+msgid "...{cat}? É você?"
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:283
+msgid "Que frio..."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:685
+msgid "A Sombra [b]foge do seu olhar[/b]... mas não encare onde ela se esconde."
+msgstr ""
+
+#: godot\scripts\threats\shadow.gd:950
+msgid "A Sombra [b]não se esconde mais[/b]. Só a luz a expulsa: acenda o cômodo onde ela está ou leve-a até um cômodo aceso."
+msgstr ""
+
+#: godot\scripts\threats\thing.gd:304
+msgid "O que... a casa tá tremendo!"
+msgstr ""
+
+#: godot\scripts\threats\thing.gd:305
+msgid "Algo acordou no porão. Leve tudo ao círculo e complete o ritual."
+msgstr ""
+
+#: godot\scripts\threats\thing.gd:347
+msgid "A casa não aguentou"
+msgstr ""
+
+#: godot\scripts\threats\thing.gd:348
+msgid "O medo das assombrações, com a Coisa acordada no porão, chegou ao limite antes de o ritual terminar."
+msgstr ""
+
+#: godot\scripts\threats\thing.gd:349
+msgid "Leve os cinco objetos ao círculo e segure o ritual. A Coisa não ataca: ela deixa a casa mais difícil, então não demore."
+msgstr ""
+
+#: godot\scripts\threats\threat.gd:249
+msgid "%s foi levado(a)"
+msgstr ""
+
+#: godot\scripts\threats\threat.gd:250
+msgid "%s chegou até %s."
+msgstr ""
+
+#: godot\scripts\threats\threat.gd:251
+msgid "Fique de olho nos sinais sonoros e resolva a ameaça antes que ela chegue."
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:214
+msgid "Já vai, mãe... só um segundo..."
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:271
+msgid "%s abriu a porta"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:272
+msgid "O Visitante imitou uma voz conhecida, %s foi atender e deixou entrar o que estava lá fora."
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:273
+msgid "Saia de casa e bufe para ele de perto. Se ele perseguir, corra para dentro de casa."
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:284
+msgid "Ele vem atrás de você! Corra para dentro de casa!"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:292
+msgid "...Foi embora? Mãe?"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:292
+msgid "Ninguém... não tem ninguém aí."
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:292
+msgid "{cat}, você bufou pra quem?"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:39
+msgid "a porta da frente"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:40
+msgid "a janela da sala"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:41
+msgid "a janela da cozinha"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:78
+msgid "“Clara... é a mamãe... abre %s...”"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:78
+msgid "a porta"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:78
+msgid "a janela"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:91
+msgid "Mãe? A essa hora?"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:91
+msgid "Quem é...? Mãe?"
+msgstr ""
+
+#: godot\scripts\threats\visitor.gd:91
+msgid "Já vai! Calma..."
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:242
+msgid "Ele pulou para %s!"
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:273
+msgid "Nem todo som é de verdade. O Sussurrador imita a casa."
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:329
+msgid "WHISPER unplugged on %s: chance %.2f"
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:554
+msgid "O que eu tô fazendo aqui...?"
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:554
+msgid "Ai... eu tava sonhando com uma voz..."
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:554
+msgid "{cat}? Por que a TV... deixa pra lá."
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:566
+msgid "%s foi levado(a) pelo Sussurrador"
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:567
+msgid "O Sussurrador chamou %s até %s e não largou mais."
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:567
+msgid "um aparelho"
+msgstr ""
+
+#: godot\scripts\threats\whisperer.gd:568
+msgid "Puxe o fio da tomada do aparelho que acendeu. Ele pode pular para outro aparelho: continue de olho. Sons falsos em outros cômodos são isca; as orelhas do gato também podem enganar."
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1013
+msgid "Medo · %s"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1014
+msgid "Paciência · %s"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1015
+msgid "Foco"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1017
+msgid "Sono"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:105
+msgid "Segure"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1062
+msgid "Bufar (pouco Foco)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1062
+msgid "Bufar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1230
+msgid "Preparando a casa"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1235
+msgid "Use fones de ouvido. Neste jogo, o som é metade do medo."
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1291
+msgid "Ela não vê o que anda pela casa. Você vê."
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1300
+msgid "Continuar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1301
+msgid "Novo jogo"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1306
+msgid "Escolher noite"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1331
+msgid "Opções"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1332
+msgid "Créditos"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1333
+msgid "Sair"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1336
+msgid "Fones de ouvido recomendados · v2.0 (Godot)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1350
+msgid "Pausado"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1356
+msgid "Recomeçar a noite"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1358
+msgid "Recomeçar o dia"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1360
+msgid "Passar a noite"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1360
+msgid "só para teste"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1362
+msgid "Menu principal"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1386
+msgid "[b][color=#e8b46a]COMO EVITAR[/color][/b]\n"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1392
+msgid "mantém o preparo"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1394
+msgid "volta para a manhã"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1394
+msgid "não há manhã antes da noite 1"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1436
+msgid "[right][color=#8d887f]Pular  [/color]%s[/right]"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:148
+msgid "%d m"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1528
+msgid "Voltar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1552
+msgid "As mudanças são salvas automaticamente"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1554
+msgid "Jogo"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1554
+msgid "Controles"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1554
+msgid "Vídeo"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1554
+msgid "Áudio"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1554
+msgid "Acessibilidade"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1578
+msgid "Restaurar padrões"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1676
+msgid "Idioma / Language"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1676
+msgid "Português (Brasil)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1676
+msgid "English"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1677
+msgid "Nome do gato"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1677
+msgid "Como Clara chama você"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1678
+msgid "Velocidade das noites"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1678
+msgid "Valores menores deixam as assombrações mais lentas"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1679
+msgid "Esgueirar alterna"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1679
+msgid "Desligado: segure o botão"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1680
+msgid "Tremor de câmera"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1687
+msgid "Ação"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1687
+msgid "Teclado"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1687
+msgid "Controle"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Mover"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Analógico esq."
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Câmera"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Mouse"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Analógico dir."
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1689
+msgid "Pular (aponte para o círculo)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1690
+msgid "Interagir / segurar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1690
+msgid "E · clique"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1690
+msgid "Miar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1691
+msgid "Correr"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1691
+msgid "Esgueirar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1691
+msgid "Ctrl · C"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1691
+msgid "Ver a hora"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1691
+msgid "Pausar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1696
+msgid "Sensibilidade do mouse"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1697
+msgid "Sensibilidade do controle"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1698
+msgid "Inverter eixo vertical"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Qualidade"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Baixa"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Média"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Alta"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Ultra"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1703
+msgid "Sombras, iluminação global, névoa volumétrica e reflexos"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1704
+msgid "Tela cheia"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1705
+msgid "Escala de resolução"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1705
+msgid "Abaixo de 100% usa FSR 2"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1706
+msgid "Campo de visão"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1707
+msgid "Brilho"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1707
+msgid "Ajuste até o gato quase sumir no escuro"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1708
+msgid "Brilho das luzes (bloom)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1709
+msgid "Granulado de filme"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1713
+msgid "Volume geral"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1714
+msgid "Música"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1715
+msgid "Efeitos"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1716
+msgid "Ambiente"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1720
+msgid "Modo assistido"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1720
+msgid "Mostra barras de Medo, Paciência e Foco, e uma seta para o perigo"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1721
+msgid "Legendas"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1722
+msgid "Tamanho das legendas"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1722
+msgid "Normal"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1722
+msgid "Grande"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1723
+msgid "Reduzir sustos e flashes"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:1723
+msgid "Sem clarões e com sustos mais suaves"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:451
+msgid "[bgcolor=#ffffff1f][color=#f6ecd9][font_size=12] %s [/font_size][/color][/bgcolor]"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:639
+msgid "Clique para continuar"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:702
+msgid "[font=res://assets/fonts/inter-latin-600-normal.woff2][font_size=%d][color=%s]%s[/color][/font_size][/font]  "
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:825
+msgid "PARA A PACIÊNCIA DELA (OPCIONAL)"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:828
+msgid "[color=#7fd88a]✓[/color]  [color=#8d887f]%s[/color]"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:830
+msgid "[color=#d9574a]●[/color]  [color=#ffb4a6]%s[/color]"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:832
+msgid "[color=#9a958c]◇[/color]  [color=#cfc6b8]%s[/color]"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:834
+msgid "[color=#e8b46a]○[/color]  %s"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:878
+msgid "[font_size=10][color=#7ff4ff]COMO VENCER · %s[/color][/font_size]\\n%s"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:878
+msgid "[font_size=10][color=#7ff4ff]COMO VENCER · %s[/color][/font_size]\n%s"
+msgstr ""
+
+#: godot\scripts\ui\ui.gd:948
+msgid "Gato"
+msgstr ""
+
+#: godot\scripts\world\house.gd:130
+msgid "Lights"
+msgstr ""
+
+#: godot\scripts\world\house.gd:137
+msgid "Props"
+msgstr ""
+
+#: godot\scripts\world\house.gd:234
+msgid "a TV"
+msgstr ""
+
+#: godot\scripts\world\house.gd:244
+msgid "o rádio"
+msgstr ""
+
+#: godot\scripts\world\house.gd:248
+msgid "o notebook"
+msgstr ""
+
+#: godot\scripts\world\house.gd:347
+msgid "a pia da cozinha"
+msgstr ""
+
+#: godot\scripts\world\house.gd:351
+msgid "a pia do banheiro"
+msgstr ""
+
+#: godot\scripts\world\house.gd:356
+msgid "a banheira"
+msgstr ""
+
+#: godot\scripts\world\house.gd:487
+msgid "Hour"
+msgstr ""
+
+#: godot\scripts\world\house.gd:562
+msgid "a foto antiga"
+msgstr ""
+
+#: godot\scripts\world\house.gd:563
+msgid "a coleira antiga"
+msgstr ""
+
+#: godot\scripts\world\house.gd:564
+msgid "a chave do baú"
+msgstr ""
+
+#: godot\scripts\world\house.gd:565
+msgid "o ratinho de brinquedo"
+msgstr ""
+
+#: godot\scripts\world\house.gd:566
+msgid "o novelo de lã"
+msgstr ""
+
+#: godot\scripts\world\house.gd:568
+msgid "a luz noturna"
+msgstr ""
+
+#: godot\scripts\world\house.gd:630
+msgid "Arranhões perto da tomada da TV. Algo aqui gosta de eletricidade."
+msgstr ""
+
+#: godot\scripts\world\house.gd:631
+msgid "Marcas ao redor da tomada do rádio. Um sussurro ficou preso nos fios."
+msgstr ""
+
+#: godot\scripts\world\house.gd:632
+msgid "O notebook cheira a queimado. Tomadas são a porta de entrada dele."
+msgstr ""
+
+#: godot\scripts\world\house.gd:633
+msgid "Mãos molhadas na parede da banheira. Ela vem pela água."
+msgstr ""
+
+#: godot\scripts\world\house.gd:634
+msgid "A torneira da cozinha está gelada. Alguém a abre de dentro."
+msgstr ""
+
+#: godot\scripts\world\house.gd:635
+msgid "Mãozinhas pequenas no baú, por dentro. Ela só anda quando ninguém olha."
+msgstr ""
+
+#: godot\scripts\world\house.gd:636
+msgid "Uma mão enorme do lado de dentro da porta da frente. Ele quer ser convidado."
+msgstr ""
+
+#: godot\scripts\world\house.gd:637
+msgid "Marcas fundas de garras no piso do hall. Algo grande rondou por aqui, e não foi atrás de Clara: foi atrás de você."
+msgstr ""
+
+#: godot\scripts\world\house.gd:638
+msgid "O chão do porão está riscado. A Sombra começa aqui, sempre."
+msgstr ""
+
+#: godot\scripts\world\house_builder.gd:24
+msgid "Shell"
+msgstr ""
+
+#: godot\scripts\world\house_builder.gd:42
+msgid "Furniture"
+msgstr ""
+
+#: godot\scripts\world\layout.gd:65
+msgid "fora de casa"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta da sala"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do escritório"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do banheiro"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta da frente"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do porão"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do quarto"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta dos hóspedes"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta da varanda"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta entre a sala e o escritório"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta entre os quartos"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do escritório para a sala de jantar"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta do hall para a sala de jantar"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta da despensa"
+msgstr ""
+
+#: layout.json DOORS
+msgid "porta dos fundos"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Porão"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Lavanderia"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Sala"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Escritório"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Hall"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Cozinha"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Banheiro de baixo"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Quarto da Clara"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Quarto de hóspedes"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Corredor"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Banheiro de cima"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Varanda"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Sótão"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Sala de jantar"
+msgstr ""
+
+#: layout.json ROOMS
+msgid "Despensa"
+msgstr ""
+

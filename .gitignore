@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+trailer/
+pacote de skill brag/
+.claude/
+godot/.godot/
+tools/backup/
+tools/captures/
+tools/review/
+tools/vendor/
+tools/cache/
+tools/previews/
+*.log

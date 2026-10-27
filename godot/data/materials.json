@@ -1,0 +1,1181 @@
+{
+ "_doc": "Surface materials shared by the Blender build (preview) and Godot (real shader). tex = Poly Haven folder in assets/textures (diff/nor/arm); albedo = override colour map; tile = metres per repeat; grime = world-space ageing amount. Clean painted look (MiSide-like): flatten pulls the texture towards its average or towards base (sRGB colour), leaving a ghost of the grain (Godot default 0.85); pattern = procedural low-contrast motif {kind: diamond|stripe|dot, color, scale in metres, amt}. Only the cellar, attic, laundry and guest room keep some grime.",
+ "floor_sala": {
+  "tex": "herringbone_parquet",
+  "tile": 1.6,
+  "grime": 0.0,
+  "rough": 0.7,
+  "base": [
+   0.788,
+   0.561,
+   0.333
+  ],
+  "flatten": 0.75,
+  "normal": 0.3
+ },
+ "floor_hall": {
+  "tex": "old_wooden_floor_02",
+  "tile": 2.0,
+  "grime": 0.0,
+  "rot": 90,
+  "base": [
+   0.769,
+   0.541,
+   0.314
+  ],
+  "flatten": 0.8,
+  "normal": 0.3
+ },
+ "floor_quarto": {
+  "tex": "old_wooden_floor_01",
+  "tile": 2.0,
+  "grime": 0.0,
+  "base": [
+   0.8,
+   0.584,
+   0.345
+  ],
+  "flatten": 0.8,
+  "normal": 0.3
+ },
+ "floor_hospedes": {
+  "tex": "old_wooden_floor_01",
+  "tile": 2.0,
+  "grime": 0.25,
+  "base": [
+   0.722,
+   0.533,
+   0.353
+  ],
+  "flatten": 0.75,
+  "normal": 0.3
+ },
+ "floor_corredor": {
+  "tex": "old_wooden_floor_02",
+  "tile": 2.0,
+  "grime": 0.0,
+  "rot": 90,
+  "base": [
+   0.769,
+   0.541,
+   0.314
+  ],
+  "flatten": 0.8,
+  "normal": 0.3
+ },
+ "floor_escritorio": {
+  "tex": "old_wood_floor",
+  "tile": 2.0,
+  "grime": 0.0,
+  "base": [
+   0.753,
+   0.525,
+   0.314
+  ],
+  "flatten": 0.8,
+  "normal": 0.3
+ },
+ "floor_varanda": {
+  "tex": "weathered_brown_planks",
+  "tile": 2.0,
+  "grime": 0.15,
+  "base": [
+   0.659,
+   0.478,
+   0.314
+  ],
+  "flatten": 0.75,
+  "normal": 0.35
+ },
+ "floor_cozinha": {
+  "tex": "checkered_pavement_tiles",
+  "tile": 2.4,
+  "grime": 0.0,
+  "rough": 0.85,
+  "flatten": 0.35,
+  "normal": 0.3,
+  "base": [
+   0.847,
+   0.769,
+   0.659
+  ]
+ },
+ "floor_banheiro": {
+  "tex": "square_tiles",
+  "tile": 1.0,
+  "grime": 0.0,
+  "rough": 0.75,
+  "flatten": 0.75,
+  "normal": 0.3,
+  "base": [
+   0.851,
+   0.812,
+   0.761
+  ]
+ },
+ "floor_banheiro_baixo": {
+  "tex": "dirty_tiles",
+  "tile": 1.4,
+  "grime": 0.1,
+  "rough": 0.75,
+  "flatten": 0.75,
+  "normal": 0.3,
+  "base": [
+   0.824,
+   0.776,
+   0.714
+  ]
+ },
+ "floor_porao": {
+  "tex": "damaged_concrete_floor",
+  "tile": 3.0,
+  "grime": 0.35,
+  "flatten": 0.6,
+  "normal": 0.5
+ },
+ "floor_lavanderia": {
+  "tex": "concrete_floor_worn_001",
+  "tile": 3.0,
+  "grime": 0.3,
+  "flatten": 0.75,
+  "normal": 0.4,
+  "base": [
+   0.557,
+   0.518,
+   0.471
+  ]
+ },
+ "floor_sotao": {
+  "tex": "old_planks_02",
+  "tile": 2.2,
+  "grime": 0.35,
+  "flatten": 0.6,
+  "normal": 0.5
+ },
+ "wall_sala": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.922,
+   0.827,
+   0.765
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0,
+  "pattern": {
+   "kind": "diamond",
+   "color": [
+    0.957,
+    0.886,
+    0.835
+   ],
+   "scale": 0.45,
+   "amt": 1.0
+  }
+ },
+ "wall_escritorio": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.769,
+   0.808,
+   0.776
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0
+ },
+ "wall_hall": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.933,
+   0.827,
+   0.722
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0,
+  "pattern": {
+   "kind": "stripe",
+   "color": [
+    0.961,
+    0.875,
+    0.784
+   ],
+   "scale": 0.25,
+   "amt": 1.0
+  }
+ },
+ "wall_corredor": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.933,
+   0.827,
+   0.722
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0,
+  "pattern": {
+   "kind": "stripe",
+   "color": [
+    0.961,
+    0.875,
+    0.784
+   ],
+   "scale": 0.25,
+   "amt": 1.0
+  }
+ },
+ "wall_quarto": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.922,
+   0.769,
+   0.745
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0,
+  "pattern": {
+   "kind": "dot",
+   "color": [
+    0.961,
+    0.847,
+    0.824
+   ],
+   "scale": 0.22,
+   "amt": 0.9
+  }
+ },
+ "wall_hospedes": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.8,
+   0.835,
+   0.741
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.2,
+  "pattern": {
+   "kind": "stripe",
+   "color": [
+    0.843,
+    0.875,
+    0.788
+   ],
+   "scale": 0.3,
+   "amt": 1.0
+  }
+ },
+ "wall_cozinha": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.937,
+   0.886,
+   0.761
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0
+ },
+ "wall_cozinha_tile": {
+  "tex": "rounded_square_tiled_wall",
+  "tile": 1.6,
+  "grime": 0.0,
+  "rough": 0.65,
+  "base": [
+   0.957,
+   0.933,
+   0.875
+  ],
+  "flatten": 0.55,
+  "normal": 0.4
+ },
+ "wall_banheiro": {
+  "tex": "long_white_tiles",
+  "tile": 1.2,
+  "grime": 0.0,
+  "rough": 0.6,
+  "base": [
+   0.937,
+   0.902,
+   0.855
+  ],
+  "flatten": 0.55,
+  "normal": 0.4
+ },
+ "wall_banheiro_upper": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.91,
+   0.863,
+   0.812
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0
+ },
+ "wall_lavanderia": {
+  "tex": "painted_concrete",
+  "tile": 2.5,
+  "grime": 0.3,
+  "flatten": 0.93,
+  "normal": 0.4,
+  "base": [
+   0.725,
+   0.749,
+   0.659
+  ]
+ },
+ "wall_brick": {
+  "tex": "brick_wall_001",
+  "tile": 2.0,
+  "grime": 0.3,
+  "flatten": 0.65,
+  "normal": 0.5
+ },
+ "wall_attic": {
+  "tex": "wood_planks_grey",
+  "tile": 2.0,
+  "grime": 0.35,
+  "tint": [
+   0.85,
+   0.8,
+   0.74
+  ],
+  "flatten": 0.6,
+  "normal": 0.5
+ },
+ "ceiling": {
+  "tex": "painted_plaster_wall",
+  "tile": 2.0,
+  "grime": 0.0,
+  "base": [
+   0.965,
+   0.929,
+   0.882
+  ],
+  "flatten": 0.96,
+  "normal": 0.1
+ },
+ "roof_under": {
+  "tex": "roof_planks",
+  "tile": 2.0,
+  "grime": 0.35,
+  "tint": [
+   0.7,
+   0.62,
+   0.55
+  ],
+  "flatten": 0.6
+ },
+ "trim": {
+  "tile": 1.0,
+  "rough": 0.6,
+  "tex": "coated_pine",
+  "base": [
+   0.851,
+   0.659,
+   0.424
+  ],
+  "flatten": 0.85,
+  "normal": 0.2,
+  "grime": 0.0
+ },
+ "trim_dark": {
+  "tex": "black_walnut_veneer_01",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.541,
+   0.353,
+   0.235
+  ],
+  "flatten": 0.85,
+  "normal": 0.2
+ },
+ "wainscot": {
+  "tex": "white_planks_clean",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.902,
+   0.824,
+   0.729
+  ],
+  "flatten": 0.92,
+  "normal": 0.15
+ },
+ "wainscot_blue": {
+  "tex": "white_planks_clean",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.663,
+   0.722,
+   0.769
+  ],
+  "flatten": 0.92,
+  "normal": 0.15
+ },
+ "exterior": {
+  "tex": "blue_painted_planks",
+  "tile": 2.2,
+  "grime": 0.15,
+  "flatten": 0.75,
+  "normal": 0.3
+ },
+ "exterior_trim": {
+  "tex": "distressed_painted_planks",
+  "tile": 1.5,
+  "tint": [
+   0.95,
+   0.9,
+   0.82
+  ],
+  "grime": 0.1,
+  "flatten": 0.85,
+  "normal": 0.2
+ },
+ "exterior_base": {
+  "tex": "stacked_stone_wall",
+  "tile": 1.6,
+  "grime": 0.15,
+  "flatten": 0.65,
+  "normal": 0.4
+ },
+ "roof": {
+  "tex": "roof_slates_02",
+  "tile": 2.0,
+  "grime": 0.15,
+  "flatten": 0.6,
+  "normal": 0.4
+ },
+ "grass": {
+  "tex": "leafy_grass",
+  "tile": 3.0,
+  "grime": 0.0,
+  "flatten": 0.6,
+  "normal": 0.4
+ },
+ "dirt": {
+  "tex": "forest_ground_04",
+  "tile": 2.5,
+  "grime": 0.0,
+  "flatten": 0.6,
+  "normal": 0.4
+ },
+ "asphalt": {
+  "tex": "asphalt_02",
+  "tile": 4.0,
+  "grime": 0.0,
+  "flatten": 0.65,
+  "normal": 0.3
+ },
+ "sidewalk": {
+  "tex": "concrete_pavement",
+  "tile": 2.0,
+  "grime": 0.05,
+  "flatten": 0.65,
+  "normal": 0.3
+ },
+ "bark": {
+  "tex": "bark_brown_02",
+  "tile": 1.0,
+  "grime": 0.0,
+  "flatten": 0.5,
+  "normal": 0.5
+ },
+ "porch_wood": {
+  "tex": "weathered_brown_planks",
+  "tile": 1.8,
+  "grime": 0.15,
+  "base": [
+   0.71,
+   0.541,
+   0.384
+  ],
+  "flatten": 0.75,
+  "normal": 0.35
+ },
+ "wood": {
+  "tex": "coated_pine",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.804,
+   0.604,
+   0.369
+  ],
+  "flatten": 0.8,
+  "normal": 0.2
+ },
+ "wood_dark": {
+  "tex": "black_walnut_veneer_01",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.541,
+   0.353,
+   0.235
+  ],
+  "flatten": 0.8,
+  "normal": 0.2
+ },
+ "wood_worn": {
+  "tex": "wood_cabinet_worn_long",
+  "tile": 1.0,
+  "grime": 0.1,
+  "base": [
+   0.769,
+   0.584,
+   0.416
+  ],
+  "flatten": 0.8,
+  "normal": 0.25
+ },
+ "wood_paint": {
+  "tex": "white_planks_clean",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.945,
+   0.902,
+   0.839
+  ],
+  "flatten": 0.95,
+  "normal": 0.1
+ },
+ "wood_paint_green": {
+  "tex": "white_planks_clean",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.663,
+   0.745,
+   0.612
+  ],
+  "flatten": 0.95,
+  "normal": 0.1
+ },
+ "wood_paint_blue": {
+  "tex": "white_planks_clean",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.639,
+   0.706,
+   0.776
+  ],
+  "flatten": 0.95,
+  "normal": 0.1
+ },
+ "stair_wood": {
+  "tex": "dark_planks",
+  "tile": 1.0,
+  "grime": 0.0,
+  "base": [
+   0.659,
+   0.447,
+   0.247
+  ],
+  "flatten": 0.8,
+  "normal": 0.3
+ },
+ "countertop": {
+  "tex": "marble_01",
+  "tile": 1.2,
+  "rough": 0.55,
+  "grime": 0.0,
+  "base": [
+   0.949,
+   0.925,
+   0.886
+  ],
+  "flatten": 0.7,
+  "normal": 0.2
+ },
+ "ceramic": {
+  "color": [
+   0.94,
+   0.91,
+   0.86
+  ],
+  "rough": 0.18,
+  "grime": 0.0
+ },
+ "enamel": {
+  "color": [
+   0.92,
+   0.89,
+   0.82
+  ],
+  "rough": 0.26,
+  "grime": 0.0
+ },
+ "enamel_cream": {
+  "color": [
+   0.86,
+   0.82,
+   0.7
+  ],
+  "rough": 0.25,
+  "grime": 0.0
+ },
+ "chrome": {
+  "color": [
+   0.9,
+   0.9,
+   0.92
+  ],
+  "rough": 0.2,
+  "metal": 1.0
+ },
+ "brass": {
+  "color": [
+   0.78,
+   0.6,
+   0.32
+  ],
+  "rough": 0.3,
+  "metal": 1.0
+ },
+ "iron": {
+  "tex": "rusty_metal_02",
+  "tile": 1.0,
+  "metal": 0.8,
+  "tint": [
+   0.5,
+   0.48,
+   0.46
+  ],
+  "flatten": 0.6,
+  "grime": 0.2
+ },
+ "metal_dark": {
+  "color": [
+   0.25,
+   0.23,
+   0.23
+  ],
+  "rough": 0.45,
+  "metal": 0.8
+ },
+ "metal_painted": {
+  "tex": "green_metal_rust",
+  "tile": 1.0,
+  "metal": 0.4,
+  "flatten": 0.6,
+  "grime": 0.2
+ },
+ "boiler": {
+  "tex": "green_metal_rust",
+  "tile": 1.2,
+  "metal": 0.5,
+  "flatten": 0.6,
+  "grime": 0.2
+ },
+ "plastic_white": {
+  "color": [
+   0.9,
+   0.87,
+   0.8
+  ],
+  "rough": 0.35
+ },
+ "plastic_beige": {
+  "color": [
+   0.82,
+   0.76,
+   0.64
+  ],
+  "rough": 0.45
+ },
+ "plastic_black": {
+  "color": [
+   0.1,
+   0.09,
+   0.09
+  ],
+  "rough": 0.4
+ },
+ "rubber": {
+  "color": [
+   0.08,
+   0.07,
+   0.07
+  ],
+  "rough": 0.9
+ },
+ "glass": {
+  "color": [
+   0.85,
+   0.9,
+   0.95
+  ],
+  "rough": 0.03,
+  "alpha": 0.18
+ },
+ "glass_dirty": {
+  "color": [
+   0.75,
+   0.78,
+   0.74
+  ],
+  "rough": 0.15,
+  "alpha": 0.3
+ },
+ "mirror": {
+  "color": [
+   0.9,
+   0.9,
+   0.9
+  ],
+  "rough": 0.03,
+  "metal": 1.0
+ },
+ "fabric_cream": {
+  "tex": "rough_linen",
+  "tile": 0.6,
+  "base": [
+   0.949,
+   0.902,
+   0.827
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "fabric_blue": {
+  "tex": "rough_linen",
+  "tile": 0.6,
+  "base": [
+   0.663,
+   0.725,
+   0.839
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "fabric_green": {
+  "tex": "velour_velvet",
+  "tile": 0.6,
+  "base": [
+   0.663,
+   0.769,
+   0.624
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "fabric_red": {
+  "tex": "velour_velvet",
+  "tile": 0.6,
+  "base": [
+   0.851,
+   0.549,
+   0.549
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "fabric_rose": {
+  "tex": "crepe_satin",
+  "tile": 0.6,
+  "base": [
+   0.941,
+   0.725,
+   0.706
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "curtain_cream": {
+  "tex": "crepe_satin",
+  "tile": 0.8,
+  "base": [
+   0.957,
+   0.918,
+   0.859
+  ],
+  "flatten": 0.92,
+  "normal": 0.3
+ },
+ "curtain_wine": {
+  "tex": "velour_velvet",
+  "tile": 0.8,
+  "base": [
+   0.788,
+   0.557,
+   0.573
+  ],
+  "flatten": 0.92,
+  "normal": 0.3
+ },
+ "curtain_green": {
+  "tex": "floral_jacquard",
+  "tile": 0.8,
+  "base": [
+   0.718,
+   0.804,
+   0.659
+  ],
+  "flatten": 0.92,
+  "normal": 0.3
+ },
+ "curtain_blue": {
+  "tex": "quatrefoil_jacquard_fabric",
+  "tile": 0.8,
+  "base": [
+   0.702,
+   0.745,
+   0.867
+  ],
+  "flatten": 0.92,
+  "normal": 0.3
+ },
+ "sheet": {
+  "tex": "cotton_jersey",
+  "tile": 0.8,
+  "base": [
+   0.984,
+   0.965,
+   0.933
+  ],
+  "flatten": 0.92,
+  "normal": 0.3
+ },
+ "dust_sheet": {
+  "tex": "rough_linen",
+  "tile": 0.8,
+  "grime": 0.2,
+  "base": [
+   0.937,
+   0.91,
+   0.855
+  ],
+  "flatten": 0.9,
+  "normal": 0.3
+ },
+ "towel": {
+  "tex": "terry_cloth",
+  "tile": 0.5,
+  "base": [
+   0.965,
+   0.827,
+   0.776
+  ],
+  "flatten": 0.85,
+  "normal": 0.3
+ },
+ "towel_blue": {
+  "tex": "terry_cloth",
+  "tile": 0.5,
+  "base": [
+   0.722,
+   0.796,
+   0.878
+  ],
+  "flatten": 0.85,
+  "normal": 0.3
+ },
+ "cat_bed": {
+  "tex": "curly_teddy_natural",
+  "tile": 0.4,
+  "base": [
+   0.91,
+   0.824,
+   0.714
+  ],
+  "flatten": 0.85,
+  "normal": 0.4
+ },
+ "hessian": {
+  "tex": "hessian_230",
+  "tile": 0.6,
+  "flatten": 0.7,
+  "normal": 0.3
+ },
+ "gingham": {
+  "tex": "gingham_check",
+  "tile": 0.4,
+  "tint": [
+   0.9,
+   0.75,
+   0.75
+  ],
+  "flatten": 0.3,
+  "normal": 0.2
+ },
+ "rug_red": {
+  "albedo": "gen/rug_red.jpg",
+  "normal_from": "dirty_carpet",
+  "arm_from": "dirty_carpet",
+  "tile": 1.0,
+  "uv": "unit",
+  "rough": 1.0,
+  "base": [
+   0.878,
+   0.643,
+   0.604
+  ],
+  "flatten": 1.0,
+  "normal": 0.3,
+  "pattern": {
+   "kind": "dot",
+   "color": [
+    0.925,
+    0.741,
+    0.706
+   ],
+   "scale": 0.12,
+   "amt": 0.9
+  }
+ },
+ "rug_blue": {
+  "albedo": "gen/rug_blue.jpg",
+  "normal_from": "dirty_carpet",
+  "arm_from": "dirty_carpet",
+  "tile": 1.0,
+  "uv": "unit",
+  "rough": 1.0,
+  "base": [
+   0.659,
+   0.714,
+   0.824
+  ],
+  "flatten": 1.0,
+  "normal": 0.3,
+  "pattern": {
+   "kind": "diamond",
+   "color": [
+    0.737,
+    0.784,
+    0.871
+   ],
+   "scale": 0.2,
+   "amt": 0.9
+  }
+ },
+ "rug_runner": {
+  "albedo": "gen/rug_runner.jpg",
+  "normal_from": "dirty_carpet",
+  "arm_from": "dirty_carpet",
+  "tile": 1.0,
+  "uv": "unit",
+  "rough": 1.0,
+  "base": [
+   0.812,
+   0.635,
+   0.494
+  ],
+  "flatten": 1.0,
+  "normal": 0.3,
+  "pattern": {
+   "kind": "stripe",
+   "color": [
+    0.867,
+    0.722,
+    0.588
+   ],
+   "scale": 0.2,
+   "amt": 0.9
+  }
+ },
+ "cardboard": {
+  "color": [
+   0.78,
+   0.604,
+   0.42
+  ],
+  "rough": 0.9,
+  "grime": 0.0
+ },
+ "paper": {
+  "color": [
+   0.94,
+   0.9,
+   0.8
+  ],
+  "rough": 0.9
+ },
+ "terracotta": {
+  "color": [
+   0.8,
+   0.478,
+   0.361
+  ],
+  "rough": 0.85
+ },
+ "soil": {
+  "color": [
+   0.12,
+   0.08,
+   0.05
+  ],
+  "rough": 1.0
+ },
+ "leaves": {
+  "color": [
+   0.431,
+   0.604,
+   0.353
+  ],
+  "rough": 0.7
+ },
+ "cat_food": {
+  "color": [
+   0.45,
+   0.25,
+   0.12
+  ],
+  "rough": 0.8
+ },
+ "water": {
+  "color": [
+   0.5,
+   0.6,
+   0.65
+  ],
+  "rough": 0.02,
+  "alpha": 0.5
+ },
+ "lampshade": {
+  "tex": "rough_linen",
+  "tile": 0.4,
+  "emit": [
+   1.0,
+   0.7,
+   0.4,
+   0.0
+  ],
+  "base": [
+   0.957,
+   0.878,
+   0.753
+  ],
+  "flatten": 0.92,
+  "normal": 0.2
+ },
+ "bulb": {
+  "color": [
+   1.0,
+   0.95,
+   0.85
+  ],
+  "rough": 0.1,
+  "emit": [
+   1.0,
+   0.8,
+   0.55,
+   0.0
+  ]
+ },
+ "black": {
+  "color": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "rough": 1.0
+ },
+ "road_paint": {
+  "color": [
+   0.85,
+   0.82,
+   0.7
+  ],
+  "rough": 0.8
+ },
+ "window_lit": {
+  "color": [
+   1.0,
+   0.72,
+   0.42
+  ],
+  "rough": 0.4,
+  "emit": [
+   1.0,
+   0.62,
+   0.32,
+   3.0
+  ]
+ },
+ "window_dark": {
+  "color": [
+   0.04,
+   0.05,
+   0.07
+  ],
+  "rough": 0.1,
+  "metal": 0.3
+ },
+ "floor_jantar": {
+  "tex": "herringbone_parquet",
+  "tile": 1.6,
+  "grime": 0.0,
+  "rough": 0.7,
+  "base": [
+   0.788,
+   0.561,
+   0.333
+  ],
+  "flatten": 0.75,
+  "normal": 0.3
+ },
+ "floor_despensa": {
+  "tex": "checkered_pavement_tiles",
+  "tile": 2.4,
+  "grime": 0.0,
+  "rough": 0.85,
+  "flatten": 0.35,
+  "normal": 0.3,
+  "base": [
+   0.847,
+   0.769,
+   0.659
+  ]
+ },
+ "wall_jantar": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.925,
+   0.835,
+   0.659
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0,
+  "pattern": {
+   "kind": "stripe",
+   "color": [
+    0.949,
+    0.871,
+    0.722
+   ],
+   "scale": 0.32,
+   "amt": 1.0
+  }
+ },
+ "wall_despensa": {
+  "tile": 2.0,
+  "tex": "painted_plaster_wall",
+  "base": [
+   0.918,
+   0.871,
+   0.765
+  ],
+  "flatten": 0.93,
+  "normal": 0.15,
+  "grime": 0.0
+ }
+}

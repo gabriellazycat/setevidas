@@ -1,0 +1,25 @@
+{
+ "_doc": "Single source of truth for the anime proportions of Clara and Davi (build_vroid.py and measure_vrm.py check against it, tolerance tol). Only pixel measurements taken by eye in the browser from the official MiSide Steam store media are recorded here; no image of the game is stored in the project.",
+ "tol": 0.03,
+ "sources": {
+  "body": "Steam store screenshot ss_b65b0017 (1920x1080): heroine walking, side-on, camera roughly at chest height. Head bowed over a phone, legs mid-stride.",
+  "face": "Steam store library_600x900 key art: heroine face, slight 3/4 turn."
+ },
+ "raw_px": {
+  "body": {"head_top": 172, "chin": 301, "crotch": 610, "sole_front": 920, "sole_back": 838},
+  "face": {"head_top_hair": 205, "chin": 668, "eye_near_w": 84, "eye_far_w": 64, "eye_h": 42, "eye_center_y": 513, "face_w_at_eyes": 260}
+ },
+ "notes": [
+  "height = head top to mean ground of the two soles (708 px), +4% for the stride: 736 px; head = 129 px -> 5.7 heads raw. The bob/bun hair volume is counted in the head (VRoid measures the same way: crown of the hair mesh to chin), so the target is rounded to 6.0.",
+  "inseam = crotch to front sole 310 px over 748 px = 0.414; legs are ~20 deg off vertical mid-stride (cos = 0.94) -> 0.44; rounded to 0.45.",
+  "eye width = mean of near and far eye (3/4 view) over face width at the eye line: 74 / 260 = 0.285.",
+  "eye height over head height (hair crown to chin): 42 / 463 = 0.091. Eye aspect h/w on the near eye: 0.5.",
+  "eye line = eye centre height above the chin over head height: 155 / 463 = 0.335.",
+  "Mita's in-game model was measured by a modder at ~1.78 m ('tall and slender'); Clara is set to 1.70 m and Davi to 1.80 m, keeping the same ratios."
+ ],
+ "targets": {
+  "clara": {"height_m": 1.70, "heads": 6.0, "inseam_over_height": 0.45, "eye_w_over_face_w": 0.285, "eye_h_over_head_h": 0.091, "eye_line_over_head_h": 0.335},
+  "davi": {"height_m": 1.80, "heads": 6.3, "inseam_over_height": 0.46, "eye_w_over_face_w": 0.25, "eye_h_over_head_h": 0.075, "eye_line_over_head_h": 0.34}
+ },
+ "davi_note": "Davi has no direct reference in the store media (no male lead shown full body); his targets are Clara's measured values shifted toward an adult male: +0.3 heads, slightly longer legs, eyes ~12% narrower and ~18% shorter."
+}

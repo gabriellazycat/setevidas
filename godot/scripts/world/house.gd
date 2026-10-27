@@ -18,6 +18,10 @@ var devices: Array = []
 var faucets: Array = []
 var marks: Array = []
 var carryables: Dictionary = {}
+var beam_root: Node3D           # dust in the sun / moon beams, one emitter per outside window (`aim_beams`)
+var _beams: Array = []          # [{p, shaft, c, n, side, w, h, floor}]
+var _beam_dir := Vector3.ZERO
+var haze: Array = []            # the fine dust floating in every room (`_build_dust`), denser in the beams
 
 var chest_pos := Vector3(3.1, 6, 9.0)
 var cat_bed := Vector3(4.25, 0, 4.6)
@@ -144,6 +148,7 @@ func build() -> void:
 	_build_marks()
 	_build_ritual()
 	_build_dust()
+	_build_beams()
 	_build_window_glows()
 
 
@@ -443,7 +448,8 @@ func _build_dynamic() -> void:
 	_hatch_col = _static_box(Vector3((H["x0"] + H["x1"]) / 2, 5.9, (H["z0"] + H["z1"]) / 2), Vector3(H["x1"] - H["x0"], 0.2, H["z1"] - H["z0"]))
 	# the attic stair works like the others: one straight flight and a plain ramp through the middle of the treads,
 	# on the world layer (the cat's floor probes must see it, or it slides off as if perched on a ledge). It only
-	# exists while the hatch is open. Cat-only walls along the open (west) side and around the hole in the attic.
+	# exists while the hatch is open. Cat-only walls along the handrail (not under the stair, which is open) and
+	# around the hole in the attic.
 	var A: Dictionary = Layout.data()["ATTIC"]
 	var x0: float = A["x0"]
 	var x1: float = A["x1"]
@@ -453,10 +459,20 @@ func _build_dynamic() -> void:
 	var z_open := zt + 0.65
 	_ladder_cols.append(_ramp_box((x0 + x1) / 2.0, x1 - x0, Vector3(0, 3.0, zf + run * 0.5), Vector3(0, 6.0, zt + run * 0.5), HouseBuilder.LAYER_WORLD))
 	_ladder_cols.append(_static_box(Vector3((x0 + x1) / 2.0, 5.95, zt + run * 0.25), Vector3(x1 - x0, 0.1, run * 0.5 + 0.02), Basis.IDENTITY, HouseBuilder.LAYER_WORLD))
+	# the open side: a slanted band along the handrail, from the treads up 1 m (the stair is open underneath)
+	var ya := 3.0
+	var za := zf + run * 0.5
+	var zb := z_open
+	var yb := 3.0 + (za - zb) / (za - (zt + run * 0.5)) * 3.0
+	var along := Vector3(0, yb - ya, zb - za)
+	var up := Vector3(0, -along.z, along.y).normalized()
+	if up.y < 0.0:
+		up = -up
+	var mid := Vector3(x0 - 0.02, (ya + yb) * 0.5, (za + zb) * 0.5) + up * 0.5
+	_ladder_cols.append(_static_box(mid, Vector3(0.06, 1.0, along.length()), Basis(Vector3.RIGHT, atan2(-along.y, along.z) if along.z > 0.0 else atan2(along.y, -along.z)), HouseBuilder.LAYER_CAT_BLOCK))
 	for g in [
-			[Vector3(x0 - 0.05, 3.0, H["z1"]), Vector3(x0 + 0.01, 5.8, zf)],        # open side, under the corridor ceiling
-			[Vector3(x0 - 0.05, 3.0, z_open), Vector3(x0 + 0.01, 7.0, H["z1"])],    # open side through the hole + attic railing
-			[Vector3(x0, 6.0, H["z1"] - 0.06), Vector3(x1, 7.0, H["z1"])]]:         # attic railing across the south end
+			[Vector3(x0 - 0.05, 5.95, z_open), Vector3(x0 + 0.01, 7.0, H["z1"])],   # attic railing along the hole
+			[Vector3(x0, 5.95, H["z1"] - 0.06), Vector3(x1, 7.0, H["z1"])]]:        # attic railing across the south end
 		var mn: Vector3 = g[0]
 		var mx: Vector3 = g[1]
 		_ladder_cols.append(_static_box((mn + mx) * 0.5, mx - mn, Basis.IDENTITY, HouseBuilder.LAYER_CAT_BLOCK))
@@ -774,9 +790,103 @@ func _build_dust() -> void:
 	for r in Layout.rooms():
 		if r["id"] == "varanda":
 			continue
-		var p := FX.dust_motes(Vector3(r["x1"] - r["x0"], r["h"], r["z1"] - r["z0"]), int((r["x1"] - r["x0"]) * (r["z1"] - r["z0"]) * 3))
+		# fine dust all over the house, lit by the room; the beams (`_build_beams`) are the dense part
+		var p := FX.dust_motes(Vector3(r["x1"] - r["x0"], r["h"], r["z1"] - r["z0"]), int((r["x1"] - r["x0"]) * (r["z1"] - r["z0"]) * 26.0))
+		(p.draw_pass_1 as QuadMesh).material = FX.haze_mat()
+		(p.draw_pass_1 as QuadMesh).size = Vector2(0.014, 0.014)
+		(p.process_material as ParticleProcessMaterial).color = Color(1.0, 0.97, 0.9, 1.0)
+		haze.append(p)
 		p.position = Vector3((r["x0"] + r["x1"]) / 2, r["y"] + r["h"] / 2, (r["z0"] + r["z1"]) / 2)
 		add_child(p)
+
+
+## one dust emitter behind each outside window, aimed along the light that comes in through it
+func _build_beams() -> void:
+	beam_root = Node3D.new()
+	beam_root.name = "Beams"
+	add_child(beam_root)
+	for w in Layout.data()["WINDOWS"]:
+		if not w.get("exterior", false):
+			continue
+		var along_x: bool = w["axis"] == "x"
+		var inside := float(w.get("inside", 1))
+		var s0 := float(w["s0"])
+		var s1 := float(w["s1"])
+		var y0 := float(w["y0"])
+		var y1 := float(w["y1"])
+		var f := float(w["fixed"])
+		var c := Vector3((s0 + s1) / 2.0, (y0 + y1) / 2.0, f) if along_x else Vector3(f, (y0 + y1) / 2.0, (s0 + s1) / 2.0)
+		var n := Vector3(0, 0, inside) if along_x else Vector3(inside, 0, 0)
+		var room := Layout.room_at(c + n * 0.4)
+		if room == "" or room == "varanda":
+			continue
+		var p := FX.beam_dust(int((s1 - s0) * (y1 - y0) * 4.0 * 22.0))
+		beam_root.add_child(p)
+		var shaft := MeshInstance3D.new()
+		shaft.material_override = FX.shaft_mat()
+		shaft.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		beam_root.add_child(shaft)
+		_beams.append({"p": p, "shaft": shaft, "c": c, "n": n, "side": Vector3(1, 0, 0) if along_x else Vector3(0, 0, 1),
+			"w": s1 - s0, "h": y1 - y0, "floor": Layout.floor_of(room)})
+
+
+## point every beam emitter along the light: `to_light` is the direction towards the sun / moon
+func aim_beams(to_light: Vector3) -> void:
+	var d := to_light.normalized()
+	if d.distance_to(_beam_dir) < 0.002:
+		return
+	_beam_dir = d
+	for b in _beams:
+		var p: GPUParticles3D = b["p"]
+		var shaft: MeshInstance3D = b["shaft"]
+		var n: Vector3 = b["n"]
+		if -d.dot(n) < 0.08 or d.y < 0.03:
+			p.visible = false
+			p.emitting = false
+			shaft.visible = false
+			continue
+		shaft.mesh = _shaft_mesh(b, -d)
+		shaft.visible = true
+		var c: Vector3 = b["c"]
+		# from the window down to the floor, at most 4.5 m into the room
+		var t := minf((c.y - float(b["floor"])) / d.y, 4.5 / maxf(0.05, Vector2(d.x, d.z).length()))
+		var axis := -d
+		var side: Vector3 = b["side"]
+		var up := axis.cross(side).normalized()
+		side = up.cross(axis).normalized()
+		p.transform = Transform3D(Basis(side, up, axis), c + axis * (t / 2.0))
+		(p.process_material as ParticleProcessMaterial).emission_box_extents = Vector3(float(b["w"]) / 2.0 + 0.15, float(b["h"]) / 2.0 + 0.15, t / 2.0)
+		p.visibility_aabb = AABB(-Vector3.ONE * (t / 2.0 + 1.0), Vector3.ONE * (t + 2.0))
+		p.visible = true
+		p.emitting = true
+
+
+## the prism of light from a window along `dir` (each corner runs until the floor, at most 4.5 m
+## into the room); its four sides, UV.x across each side, UV.y from the window (0) to the far end (1)
+func _shaft_mesh(b: Dictionary, dir: Vector3) -> ArrayMesh:
+	var c: Vector3 = b["c"]
+	var n: Vector3 = b["n"]
+	var side: Vector3 = b["side"]
+	var hw := float(b["w"]) / 2.0
+	var hh := float(b["h"]) / 2.0
+	var fl := float(b["floor"])
+	var tmax := 4.5 / maxf(0.05, Vector2(dir.x, dir.z).length())
+	var near: Array = []
+	var far: Array = []
+	for k in [Vector2(-1, -1), Vector2(1, -1), Vector2(1, 1), Vector2(-1, 1)]:
+		var v: Vector3 = c + n * 0.03 + side * hw * k.x + Vector3.UP * hh * k.y
+		near.append(v)
+		far.append(v + dir * minf((v.y - fl) / maxf(0.01, -dir.y), tmax))
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in 4:
+		var j := (i + 1) % 4
+		var nm: Vector3 = (far[i] - near[i]).cross(near[j] - near[i]).normalized()
+		for q in [[near[i], 0.0, 0.0], [near[j], 1.0, 0.0], [far[j], 1.0, 1.0], [near[i], 0.0, 0.0], [far[j], 1.0, 1.0], [far[i], 0.0, 1.0]]:
+			st.set_normal(nm)
+			st.set_uv(Vector2(q[1], q[2]))
+			st.add_vertex(q[0])
+	return st.commit()
 
 
 # ---------------------------------------------------------------------- physics queries

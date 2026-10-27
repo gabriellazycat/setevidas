@@ -21,6 +21,14 @@ const CAT_WALK := 2.1          # the cat's walking and running pace (Cat.tick): 
 const CAT_RUN := 4.4
 const RAMP_SECS := 14.0        # how long the chase takes to reach the cat's running pace
 const VANISH_ODDS := 0.4       # chance that a hiss makes him vanish instead of chase
+const BODY_R := 0.35           # the ball that has to get through for him to walk straight at the cat
+const BODY_LIFT := 0.75
+const RING_GAPS := [0.8, 3.0]  # his ways around the house: close to the walls (behind the woodpile) and wide
+
+var _ring: Array = []          # points around the house, for when it stands between him and the cat
+var _ring_sees: Array = []     # per point, the indices of the points he can walk to straight from it
+var _way: Array = []           # the detour he walks now (ring points), recomputed every _repath_t
+var _repath_t := 0.0
 
 var _listen_t := 0.0
 var _leave_t := -1.0
@@ -151,7 +159,24 @@ func _chase(dt: float) -> void:
 		return
 	# from the cat's walking pace up to its running pace
 	var speed := lerpf(CAT_WALK, CAT_RUN, clampf((hunt_t - 1.0) / RAMP_SECS, 0.0, 1.0))
-	var dir := Vector3(cp.x - fig_pos.x, 0, cp.z - fig_pos.z)
+	# straight at the cat when his body gets there without touching anything, else around the house
+	var space := w.house.space
+	var goal := Threat.push_out(space, cp, BODY_R, BODY_LIFT)
+	var clear := Threat.path_clear(space, fig_pos, goal, BODY_R, BODY_LIFT)
+	_repath_t -= dt
+	if clear:
+		_way = []
+	elif _repath_t <= 0.0 or _way.is_empty():
+		_repath_t = 0.4
+		_way = _detour(fig_pos, goal)
+	var aim := cp
+	while not clear and _way.size() > 0:
+		aim = _way[0]
+		if Vector2(aim.x - fig_pos.x, aim.z - fig_pos.z).length() > 0.45:
+			break
+		_way.pop_front()
+		aim = cp
+	var dir := Vector3(aim.x - fig_pos.x, 0, aim.z - fig_pos.z)
 	var dist := dir.length()
 	# startled: it turns and shrieks for a second before it runs, time for the cat to flee
 	var startled := hunt_t < 1.0
@@ -159,8 +184,10 @@ func _chase(dt: float) -> void:
 		fig_yaw = lerp_angle(fig_yaw, atan2(dir.x, dir.z), 1.0 - exp(-6.0 * dt))
 	if dist > 0.05 and not startled:
 		fig_pos += dir / dist * minf(dist, speed * dt)
+		# what the detour leaves out (the shed, the woodpile, a fence post) he slides along
+		fig_pos = Threat.push_out(space, fig_pos, BODY_R, BODY_LIFT)
 		fig_yaw = lerp_angle(fig_yaw, atan2(dir.x, dir.z), 1.0 - exp(-8.0 * dt))
-	var g := w.house.ground_height(fig_pos.x, fig_pos.z, cp.y + 1.0)
+	var g := w.house.ground_height(fig_pos.x, fig_pos.z, maxf(cp.y, fig_pos.y) + 1.0)
 	if g > -500:
 		fig_pos.y = g
 	fig.alpha = 0.95
@@ -175,6 +202,85 @@ func _chase(dt: float) -> void:
 		Sfx.human_step(fig_pos, false)
 	if not startled:
 		try_catch(fig_pos, 0.7)
+
+
+## rings of points RING_GAPS out from the ground floor's outline, each linked to the ones he can walk
+## to straight (built once, the first time the house stands between him and the cat). A point that
+## lands on top of something (the woodpile, the porch) is left out: the other ring goes around it.
+func _build_ring() -> void:
+	var space := w.house.space
+	var lawn := float(Layout.data()["TERRAIN_Y"])
+	var lo0 := Vector2(INF, INF)
+	var hi0 := Vector2(-INF, -INF)
+	for r in Layout.rooms():
+		if absf(float(r["y"])) > 0.5:
+			continue
+		lo0 = Vector2(minf(lo0.x, r["x0"]), minf(lo0.y, r["z0"]))
+		hi0 = Vector2(maxf(hi0.x, r["x1"]), maxf(hi0.y, r["z1"]))
+	_ring = []
+	for gap: float in RING_GAPS:
+		var lo := lo0 - Vector2.ONE * gap
+		var hi := hi0 + Vector2.ONE * gap
+		var corners := [Vector2(lo.x, lo.y), Vector2(hi.x, lo.y), Vector2(hi.x, hi.y), Vector2(lo.x, hi.y)]
+		for i in 4:
+			var a: Vector2 = corners[i]
+			var b: Vector2 = corners[(i + 1) % 4]
+			var n := maxi(1, ceili(a.distance_to(b) / 3.0))
+			for k in n:
+				var q := a.lerp(b, float(k) / n)
+				var g := w.house.ground_height(q.x, q.y, lawn + 2.5)
+				if g < -500 or g > lawn + 0.3:
+					continue
+				_ring.append(Threat.push_out(space, Vector3(q.x, g, q.y), BODY_R, BODY_LIFT))
+	_ring_sees = []
+	for i in _ring.size():
+		var sees := []
+		for j in _ring.size():
+			if i != j and Threat.path_clear(space, _ring[i], _ring[j], BODY_R, BODY_LIFT):
+				sees.append(j)
+		_ring_sees.append(sees)
+
+
+## the shortest way from a to b over the ring (Dijkstra); the ring points to walk, empty if none
+func _detour(a: Vector3, b: Vector3) -> Array:
+	if _ring.is_empty():
+		_build_ring()
+	var space := w.house.space
+	var n := _ring.size()
+	var cost := []
+	var prev := []
+	var to_b := []
+	for i in n:
+		var p: Vector3 = _ring[i]
+		cost.append(a.distance_to(p) if Threat.path_clear(space, a, p, BODY_R, BODY_LIFT) else INF)
+		prev.append(-1)
+		to_b.append(p.distance_to(b) if Threat.path_clear(space, p, b, BODY_R, BODY_LIFT) else INF)
+	var done := []
+	done.resize(n)
+	done.fill(false)
+	var best := INF
+	var last := -1
+	for _k in n:
+		var cur := -1
+		for i in n:
+			if not done[i] and (cur < 0 or cost[i] < cost[cur]):
+				cur = i
+		if cur < 0 or cost[cur] == INF:
+			break
+		done[cur] = true
+		if cost[cur] + to_b[cur] < best:
+			best = cost[cur] + to_b[cur]
+			last = cur
+		for j in _ring_sees[cur]:
+			var c: float = cost[cur] + (_ring[cur] as Vector3).distance_to(_ring[j])
+			if c < cost[j]:
+				cost[j] = c
+				prev[j] = cur
+	var way := []
+	while last >= 0:
+		way.push_front(_ring[last])
+		last = prev[last]
+	return way
 
 
 func tick(dt: float) -> void:

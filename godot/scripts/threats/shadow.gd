@@ -15,8 +15,8 @@ extends Threat
 ##   retreats away from it and looks again from there)
 ##                   hidden -> emerge -> walk (or banished in the light)
 ##
-## It gets bolder every time it is caught in the open (boldness; only being banished by the light
-## resets it): the second time it hides for half as long and keeps its place by the bed; from the
+## It gets bolder every time it is caught in the open (boldness; back to 0 whenever it leaves and
+## comes back): the second time it hides for half as long and keeps its place by the bed; from the
 ## third on it no longer hides at all ("stalk"): it backs off a couple of metres without leaving the
 ## frame, stands and stares at the cat heating up and charges after ~5 s. Walk away and it follows,
 ## slow at first and faster and faster (it never cools down); catching up is a charge. Only a lit
@@ -143,10 +143,19 @@ func setup(world: Game) -> void:
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--shadowbold="):
 			dev_bold = int(a.get_slice("=", 1))
-	# a slow, heavy walk: the zombie clips
-	body.rig.set_loco_anims("zombie_idle", "zombie_walk", "zombie_walk")
+	_set_gait()
 	route = [w.house.nav.get_node(SPAWNS[0]["node"])]
 	pos = route[0].p
+
+
+## a slow, heavy walk (the zombie clips); on nights 4-6 Clara's own walk, so the player takes it for her
+func _set_gait() -> void:
+	if body == null:
+		return
+	if w.night >= 4 and w.night <= 6:
+		body.rig.set_loco_anims("idle", "walk_formal", "jog")
+	else:
+		body.rig.set_loco_anims("zombie_idle", "zombie_walk", "zombie_walk")
 
 
 func _nav() -> NavGraph:
@@ -209,7 +218,10 @@ func reset() -> void:
 	mode = "walk"
 	nook = {}
 	_seen_t = 0.0
+	# every time it comes back it starts shy again: the sightings count only within one visit
+	boldness = dev_bold
 	_scare_t = -1.0
+	_set_gait()
 	_stalk = ""
 	_cpath = []
 	_stop_hum()

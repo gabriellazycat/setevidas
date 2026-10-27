@@ -696,8 +696,8 @@ msgid "Coma a ração"
 msgstr "Eat the kibble"
 
 #: godot\scripts\game\game.gd:3326
-msgid "Está coberta de lama. Lave numa torneira antes de deixar no círculo."
-msgstr "It's covered in mud. Wash it at a faucet before leaving it in the circle."
+msgid "Está coberta de lama. Lave na pia do banheiro antes de deixar no círculo."
+msgstr "It's covered in mud. Wash it in the bathroom sink before leaving it in the circle."
 
 #: godot\scripts\game\game.gd:3338
 msgid "O círculo recusou. O diário dizia a ordem: %s."
@@ -996,8 +996,11 @@ msgid "Fechar a torneira (%s)"
 msgstr "Close the faucet (%s)"
 
 #: godot\scripts\game\interactions.gd:186
-msgid "Lavar %s na torneira"
-msgstr "Wash %s at the faucet"
+msgid "Lavar %s na pia do banheiro"
+msgstr "Wash %s in the bathroom sink"
+
+msgid "Pegar %s suja de lama"
+msgstr "Pick up %s (covered in mud)"
 
 #: godot\scripts\game\interactions.gd:191
 msgid "Puxar o que caiu no ralo"
@@ -1183,8 +1186,8 @@ msgid "Só com você a Clara fica em silêncio."
 msgstr "Clara only goes quiet around you."
 
 #: godot\scripts\game\story.gd:101
-msgid "suja de lama: lave numa torneira"
-msgstr "covered in mud: wash it at a faucet"
+msgid "suja de lama: lave na pia do banheiro"
+msgstr "covered in mud: wash it in the bathroom sink"
 
 #: godot\scripts\game\story.gd:102
 msgid "caiu no ralo da pia do banheiro de baixo"
@@ -1910,8 +1913,8 @@ msgid "Investigue a porta da frente"
 msgstr "Investigate the front door"
 
 #: godot\scripts\game\story.gd:49
-msgid "Empurre a portinhola da cozinha para o quintal"
-msgstr "Push the kitchen pet flap out to the backyard"
+msgid "Empurre a portinhola da despensa para o quintal"
+msgstr "Push the pantry pet flap out to the backyard"
 
 #: godot\scripts\game\story.gd:52
 msgid "Leve a luz noturna para um cômodo escuro"
@@ -3123,3 +3126,19 @@ msgstr "The fear of the hauntings, with the Thing awake in the basement, hit its
 #: godot\scripts\threats\thing.gd
 msgid "Leve os cinco objetos ao círculo e segure o ritual. A Coisa não ataca: ela deixa a casa mais difícil, então não demore."
 msgstr "Bring the five objects to the circle and hold the ritual. The Thing doesn't attack: it makes the house harder, so don't take long."
+
+#: godot\scripts\ui\ui.gd
+msgid "Conversas"
+msgstr "Conversations"
+
+#: godot\scripts\ui\ui.gd
+msgid "Ameaças"
+msgstr "Threats"
+
+#: godot\scripts\ui\ui.gd
+msgid "Ninguém falou nada ainda."
+msgstr "Nobody has said anything yet."
+
+#: godot\scripts\ui\ui.gd
+msgid "NOVA ESTA NOITE"
+msgstr "NEW TONIGHT"

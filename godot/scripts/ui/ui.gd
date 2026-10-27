@@ -41,6 +41,8 @@ var _prompt_text: Label
 var _prompt_placed := false
 var _prompt_state := ""
 var _subs: VBoxContainer
+## every line said since the phase began, for the pause menu's "Conversas" tab: [speaker, text, kind]
+var _talk_log: Array = []
 var _hints: VBoxContainer
 var _title: VBoxContainer
 var _title_big: Label
@@ -686,6 +688,11 @@ func prompt(text, action := "interact", hold := 0.0, needs_hold := false) -> voi
 
 func say(speaker: String, text: String, dur: float, kind := "normal") -> void:
 	text = tr(text)
+	# logged even with subtitles off; the same line said twice in a row (a repeated hint) is kept once
+	if _talk_log.is_empty() or _talk_log[-1][0] != speaker or _talk_log[-1][1] != text:
+		_talk_log.append([speaker, text, kind])
+		if _talk_log.size() > 300:
+			_talk_log.pop_front()
 	if not Settings.g("subtitles") and kind != "narrator" and kind != "ghost":
 		return
 	var big: bool = Settings.g("subtitle_size") == "l"
@@ -1344,9 +1351,26 @@ func show_menu(o: Dictionary) -> void:
 # ---------------------------------------------------------------------- pause / fail / summary
 
 
+func clear_talk_log() -> void:
+	_talk_log.clear()
+
+
+## o: the buttons' callbacks, plus "threats" ([{name, howto, new}], night only): a side panel with the
+## lines said since the phase began and, at night, how to beat each ghost that may walk tonight
 func show_pause(o: Dictionary) -> void:
 	var v := _veil()
-	var p := _center_panel(v)
+	var cc := _full(CenterContainer.new())
+	v.add_child(cc)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 18)
+	cc.add_child(row)
+	var mp := PanelContainer.new()
+	mp.custom_minimum_size.x = 400
+	row.add_child(mp)
+	var p := VBoxContainer.new()
+	p.add_theme_constant_override("separation", 10)
+	mp.add_child(p)
+	row.add_child(_pause_side(o.get("threats", [])))
 	p.add_child(_label("Pausado", serif_m, 46))
 	p.add_child(_label(o["title"], sans, 13, C_MUTED))
 	var nav := VBoxContainer.new()
@@ -1362,6 +1386,86 @@ func show_pause(o: Dictionary) -> void:
 	nav.add_child(button("Menu principal", o["on_menu"], false, "", 26))
 	p.add_child(nav)
 	_set_overlay(v, o["on_resume"])
+
+
+func _pause_side(threats: Array) -> Control:
+	var sp := PanelContainer.new()
+	sp.custom_minimum_size = Vector2(560, 520)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 12)
+	sp.add_child(vb)
+	var tabs := HBoxContainer.new()
+	tabs.add_theme_constant_override("separation", 8)
+	vb.add_child(tabs)
+	var sc := ScrollContainer.new()
+	sc.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	sc.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vb.add_child(sc)
+	var body := VBoxContainer.new()
+	body.add_theme_constant_override("separation", 10)
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	sc.add_child(body)
+	var show_tab: Callable
+	show_tab = func(tab: String) -> void:
+		for c in tabs.get_children():
+			c.queue_free()
+		for c in body.get_children():
+			c.queue_free()
+		tabs.add_child(small_button("Conversas", func(): show_tab.call("talk"), tab == "talk"))
+		if not threats.is_empty():
+			tabs.add_child(small_button("Ameaças", func(): show_tab.call("threats"), tab == "threats"))
+		if tab == "threats":
+			_fill_threats(body, threats)
+		else:
+			_fill_talk(body)
+		# the newest line at the bottom, in view
+		await get_tree().process_frame
+		await get_tree().process_frame
+		if is_instance_valid(sc):
+			sc.scroll_vertical = int(sc.get_v_scroll_bar().max_value) if tab == "talk" else 0
+	show_tab.call("threats" if not threats.is_empty() else "talk")
+	return sp
+
+
+func _fill_talk(body: VBoxContainer) -> void:
+	if _talk_log.is_empty():
+		body.add_child(_label("Ninguém falou nada ainda.", serif_i, 18, C_MUTED))
+		return
+	for ln in _talk_log:
+		var speaker: String = ln[0]
+		var t: String = str(ln[1]).replace("[", "[lb]")
+		var bb := ""
+		if speaker != "":
+			var sc := "#ff9d8a" if ln[2] == "scared" else "#e8b46a"
+			bb += "[font=res://assets/fonts/inter-latin-600-normal.woff2][font_size=12][color=%s]%s[/color][/font_size][/font]  " % [sc, speaker.to_upper()]
+		match ln[2]:
+			"whisper":
+				bb += "[i][color=#cfc7b8]%s[/color][/i]" % t
+			"narrator":
+				bb += "[i][color=#d9d0c0]%s[/color][/i]" % t
+			"ghost":
+				bb += "[i][color=#7ff4ff]%s[/color][/i]" % t
+			_:
+				bb += t
+		var r := _rich(bb, 15)
+		r.add_theme_font_size_override("italics_font_size", 17)
+		body.add_child(r)
+
+
+func _fill_threats(body: VBoxContainer, threats: Array) -> void:
+	for th in threats:
+		var hb := HBoxContainer.new()
+		hb.add_theme_constant_override("separation", 10)
+		hb.add_child(_label(tr(th["name"]), serif_m, 24, C_AMBER if th["new"] else C_TEXT))
+		if th["new"]:
+			var tag := _label("NOVA ESTA NOITE", sans_m, 11, C_AMBER)
+			tag.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			hb.add_child(tag)
+		body.add_child(hb)
+		body.add_child(_rich(tr(th["howto"]).replace("[", "[lb]"), 15))
+		var sep := HSeparator.new()
+		sep.modulate.a = 0.35
+		body.add_child(sep)
 
 
 func show_fail(o: Dictionary) -> void:

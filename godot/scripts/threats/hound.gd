@@ -54,6 +54,7 @@ var _snarl_t := 0.0   # stands and snarls before running at the cat: time to rea
 var _speed := 0.0
 var _probe := ShapeCast3D.new()
 var _straight := false   # running straight at the cat (nothing solid in between) rather than by the route
+var _pitch := 0.0
 
 
 func setup(world: Game) -> void:
@@ -208,8 +209,8 @@ func _los() -> bool:
 func _cat_is_high() -> bool:
 	var cp := w.cat.global_position
 	var room := Layout.room_at(cp)
-	if room == "":
-		return false
+	if room == "" or Layout.on_stairs(cp):
+		return false   # on the steps it is above the floor, but the dog just climbs after it
 	return cp.y - Layout.floor_of(room) > 0.62
 
 
@@ -264,12 +265,43 @@ func _pick_patrol() -> void:
 	_go(pick.p)
 
 
+## where a route to p can end: on a flight of stairs both ends of it (the plain nearest node from the
+## middle of the steps is the floor under them or the landing beside them, across the stringer)
+func _ends_for(p: Vector3) -> Array:
+	var nav := w.house.nav
+	if Layout.on_stairs(p):
+		var bd := 0.6
+		var ends := []
+		for n: NavGraph.NavNode in nav.nodes.values():
+			for l in n.links:
+				var m: NavGraph.NavNode = l["to"]
+				if l["ghost"] or absf(m.p.y - n.p.y) < 1.0:
+					continue
+				var d := Geometry3D.get_closest_point_to_segment(p, n.p, m.p).distance_to(p)
+				if d < bd:
+					bd = d
+					ends = [n, m]
+		if ends.size() > 0:
+			return ends
+	return [nav.nearest(p)]
+
+
 func _go(dest: Vector3) -> void:
 	var nav := w.house.nav
-	var a := nav.nearest(pos)
-	var b := nav.nearest(dest)
 	var climb := _can_climb()
-	var nodes := nav.route(a, b, false, func(n: NavGraph.NavNode) -> float: return 400.0 if n.p.y > 2.5 and not climb else 0.0)
+	var extra := func(n: NavGraph.NavNode) -> float: return 400.0 if n.p.y > 2.5 and not climb else 0.0
+	var dest_stairs := Layout.on_stairs(dest)
+	# from where it stands (route_from knows a dog halfway up a flight), to the end that gets there sooner
+	var nodes := []
+	var best := INF
+	for b: NavGraph.NavNode in _ends_for(dest):
+		var r := nav.route_from(pos, b, false, extra)
+		var c := b.p.distance_to(dest)
+		for i in range(1, r.size()):
+			c += (r[i - 1] as NavGraph.NavNode).p.distance_to(r[i].p)
+		if c < best:
+			best = c
+			nodes = r
 	if not climb:
 		for i in nodes.size():
 			if (nodes[i] as NavGraph.NavNode).p.y > 2.5:
@@ -278,13 +310,14 @@ func _go(dest: Vector3) -> void:
 	_path = []
 	for n: NavGraph.NavNode in nodes:
 		_path.append(n.p)
-	if _path.size() > 0 and (_path[-1] as Vector3).distance_to(b.p) < 0.05 and dest.y - b.p.y < 1.5 and (climb or dest.y < 2.5):
-		_path.append(Vector3(dest.x, b.p.y, dest.z))
-	# skip a first node that lies behind us
+	if _path.size() > 0 and (dest_stairs or dest.y - (_path[-1] as Vector3).y < 1.5) and (climb or dest.y < 2.5):
+		var last: Vector3 = _path[-1]
+		_path.append(dest if dest_stairs else Vector3(dest.x, last.y, dest.z))
+	# skip a first node that lies behind us (also the foot or head of the flight it is already on)
 	if _path.size() > 1:
-		var d0 := pos.distance_to(_path[1])
-		var d01 := (_path[0] as Vector3).distance_to(_path[1])
-		if d0 < d01 and absf(pos.y - (_path[0] as Vector3).y) < 0.6:
+		var p0: Vector3 = _path[0]
+		var p1: Vector3 = _path[1]
+		if NavGraph.on_first_leg(pos, p0, p1) or (pos.distance_to(p1) < p0.distance_to(p1) and absf(pos.y - p0.y) < 0.6):
 			_path.pop_front()
 	_pi = 0
 	_seg_from = pos
@@ -464,11 +497,12 @@ func tick(dt: float) -> void:
 		S.RECOIL:
 			if _state_t > 2.4:
 				_set_state(S.SEARCHING)
-	# keep the dog on the floor under it
-	if state != S.ABSENT and state != S.TRACKING:
+	# keep the dog on the floor under it (the route only knows the two ends of a flight, not its steps)
+	if state != S.ABSENT:
 		var ground := w.house.ground_height(pos.x, pos.z, pos.y + 0.5)
 		if ground > -500 and absf(ground - pos.y) < 0.6:
-			pos.y = lerpf(pos.y, ground, 1.0 - exp(-14.0 * dt))
+			# on a flight _follow sets the height from the ends every frame: take the steps' own
+			pos.y = ground if Layout.on_stairs(pos) else lerpf(pos.y, ground, 1.0 - exp(-14.0 * dt))
 	var show_amt := 0.0
 	if state == S.TRACKING:
 		show_amt = 0.35 + _awareness * 0.5
@@ -619,7 +653,16 @@ func _update_visual(dt: float, amt: float) -> void:
 		body.visible = false
 		return
 	body.global_position = pos
-	body.rotation = Vector3(-0.15 if _lunge > 0 else 0.0, yaw, 0)
+	# on the steps the body follows the slope, chest up going up, down going down
+	var tilt := 0.0
+	if Layout.on_stairs(pos) or Layout.on_stairs(pos + Vector3(sin(yaw), 0, cos(yaw)) * 0.4) or Layout.on_stairs(pos - Vector3(sin(yaw), 0, cos(yaw)) * 0.4):
+		var fw := Vector3(sin(yaw), 0, cos(yaw)) * 0.35
+		var ga := w.house.ground_height(pos.x + fw.x, pos.z + fw.z, pos.y + 0.8)
+		var gb := w.house.ground_height(pos.x - fw.x, pos.z - fw.z, pos.y + 0.8)
+		if ga > -500 and gb > -500:
+			tilt = -clampf(atan2(ga - gb, 0.7), -0.7, 0.7)
+	_pitch = lerpf(_pitch, tilt, 1.0 - exp(-10.0 * dt))
+	body.rotation = Vector3(_pitch + (-0.15 if _lunge > 0 else 0.0), yaw, 0)
 	var crouch := 1.0 if _windup > 0 or state == S.RECOIL else 0.0
 	var sniff := 1.0 if state == S.SEARCHING and _pi >= _path.size() else 0.0
 	var snarl := 1.0 if state == S.CHASING or state == S.LURKING or _windup > 0 else (0.4 if state == S.HUNTING else 0.0)

@@ -39,7 +39,7 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   vermelha, vinheta com batimento); com 5 s dispara no gato (1 vida). 5 s sem ninguém encarar (ou
   20 s no total, `BORED_SECS`) ela sai rastejando de costas até a borda do móvel e só então levanta;
   sair num cômodo aceso a bane (escondida a luz não a bane). Encurralada com o gato a menos de 3 m
-  por 6 s (`CORNER_SECS`), esquenta igual e ataca. Ousadia (`boldness`, zera só banida pela luz):
+  por 6 s (`CORNER_SECS`), esquenta igual e ataca. Ousadia (`boldness`, zera toda vez que ela some e volta, `reset()`):
   no 2º flagra esconde por metade do tempo e não perde estágio; do 3º em diante não foge mais (modo
   `stalk`): recua 2–3 m sem sair da tela, encara esquentando e dispara em ~5 s; se o gato se afasta,
   segue acelerando de 0,8 a 6 m/s. Só cômodo aceso ou a caixa de papelão a tiram. Escondida, o painel
@@ -49,11 +49,11 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   chama de novo 6 s depois de deitar. Sussurrador: semáforo no aparelho e no fio (verde 0%, amarelo
   25%, vermelho 60% de bola ao puxar); a bola sai do aparelho com um rosto (`whisper_face.gdshader`),
   encara o gato 3 s e persegue de 0,6 até 3,6 m/s (nunca mais rápida que o gato correndo).
-  Cão: anda pela casa toda, escadas incluídas (não pisa no sótão); ronda a 0,8 m/s, ao ver o gato late 1 s e persegue a 2,1 m/s (o gato andando); no alto, late
+  Cão: anda pela casa toda, escadas incluídas (não pisa no sótão; no lance usa `route_from` e as duas pontas como destino, cola nos degraus e inclina o corpo); ronda a 0,8 m/s, ao ver o gato late 1 s e persegue a 2,1 m/s (o gato andando); no alto, late
   3 s e some numa fumaça, reaparece em outro lugar depois. Afogadora pelas pegadas molhadas, Visitante só lá fora (na
   janela fica parado, de braços baixos; só na porta bate. Só some se o gato sair e bufar de perto: 40%
   ele some, senão persegue o gato com passadas longas, do andar do gato (2,1) ao correr (4,4 m/s) em
-  14 s, até o gato entrar em casa, e some tocando o chapéu; com o gato a menos de 3,2 m da entrada ele
+  14 s, até o gato entrar em casa, e some tocando o chapéu; reto só com `Threat.path_clear`, senão contorna a casa por dois anéis de pontos a 0,8 e 3 m das paredes, `_detour`; com o gato a menos de 3,2 m da entrada ele
   para de bater, respira no vidro e olha para o gato). A Boneca
   anda (não teleporta) e não caça o gato; fora da tela ela apressa o passo e vira de frente para o
   gato (toda vez que você olha, ela já está te olhando) e às vezes ri quando você desvia o olhar. A Coisa (`thing.glb`) é uma massa de braços e tentáculos com
@@ -66,17 +66,24 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   "Segure" sob o anel. HUD fixo: silhuetas no canto de baixo à esquerda à noite (Clara e Davi vermelhas, esvaziam com o medo; o gato verde, esvazia com o cansaço `cat.sleep`; `UI.vitals`), painel de tarefas sempre visível (TAB só o relógio), marcador de
   objetivo (`game.objective_target()`: losango na tela, seta na borda), cartão "como vencer"
   (`THREAT_INFO.howto`) que aparece quando a ameaça nova da noite surge e fica até o amanhecer (nunca
-  em outras noites). Não há mais fileira de ameaças no canto. Dicas vistas ficam no save (`tips`).
+  em outras noites). Não há mais fileira de ameaças no canto. Dicas vistas ficam no save (`tips`). A pausa (ESC) tem um painel ao lado: "Conversas" (toda fala
+  da fase atual, mesmo com legenda desligada; `UI._talk_log`, zera no início de cada fase) e, à noite,
+  "Ameaças" (o "como vencer" de todas as da noite e do Cão, a nova em cima; `Game._night_threat_list`),
+  que abre primeiro.
 - Colisão: o gato tem cápsula no comprimento do tronco + esfera da cabeça (`col_yaw`, giro só se
   couber), pulo varrido ao longo do arco e colisão no voo; janelas e corrimão do 1º andar têm paredes
   invisíveis só para o gato (`HouseBuilder.LAYER_CAT_BLOCK`). Fora da cerca/abaixo do chão ele volta ao
   último ponto. Lá fora, "Arranhar a porta" (frente/fundos) leva para dentro. Rotas das pessoas e
   fantasmas conferidas com `godot --headless --path godot res://scenes/navcheck.tscn` (deve dar
   `NAVCHECK CLEAN`; `-- --cattest` testa o gato). Não há mais cobertor.
+- **Partículas e luz** (detalhes em `docs/ESTILO_VISUAL.md`): poeira fina na casa toda (`House.haze`, `FX.haze_mat`) e uma nuvem densa nos feixes de sol/lua por janela
+  (`FX.beam_dust`, `House.aim_beams`) com o feixe desenhado (`light_shaft.gdshader`, `House._shaft_mesh`)
+  e uma neblina interna `fog_in` (tudo desligado no low), folhas, vaga-lumes no
+  entardecer e sereno no poste à noite, puf de poeira do gato ao pousar e vapor da banheira.
 - **A noite só acaba com a missão**: levar os objetos de Dona Ivone (`Story.RELICS`) ao círculo do
-  porão. Cada noite tem uma regra (`rule`): N2 fita suja (lavar numa torneira), N3 anel no ralo da pia
+  porão. Cada noite tem uma regra (`rule`): N2 fita suja (lavar na pia do banheiro de baixo, do chão ou em cima dela), N3 anel no ralo da pia
   de baixo, N4 peça que só aparece com a luz apagada, N5 carta na caixa de correio da porteira, N6
-  ordem do diário (`Story.RELIC_ORDER_HINT`). As manhãs liberam rotas (duto, basculante, portinhola, janela do porão, árvore), a caixa de
+  ordem do diário (`Story.RELIC_ORDER_HINT`). A portinhola da despensa está liberada desde o dia 1; as manhãs liberam as outras rotas (duto, basculante, janela do porão, árvore), a caixa de
   papelão (refúgio de um uso) e a luz noturna (`Story.MORNING_TASKS`). A luz noturna mantém o
   cômodo aceso contra a Sombra, mas é um aparelho (`House.Device` "nightlight") onde o Sussurrador
   pode entrar; tirá-la da tomada apaga a proteção até ele religar.
@@ -94,7 +101,7 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   "Leve a chave para a Clara no porão", chave carregável sobre a caixa, `give_key`); dia 2 TV "Amor de Porteira" e o colo (alvo de
   pulo, `cat.mode = "lap"`); dia 3 banho (porta fechada, espuma, toalha `clara_bath` e turbante); dia 4 chegada do Davi (mala,
   lençol de poeira, boneca da caixa de Ivone); dia 5 telefone; dia 6 o diário vem do Davi (ela espera no hall, `DIARY_WAIT`, lê no sofá ao lado dele e passa o livro para ele); dia 7
-  tremor do porão e a luz do quarto acesa até ~01:00. Pessoas nunca usam a escada do sótão. O sótão tem paredes baixas de 0,9 m (`ATTIC.knee` no `layout.json`) sob o telhado, para ninguém bater a cabeça. A escada do sótão é um lance reto como as outras (16 espelhos de 0,1875 m, ~41°), encostado na parede da varanda na ponta da frente do corredor (x 6,65–7,4, pé em z 3,85 junto ao guarda-corpo da escada principal, topo rente ao piso do sótão em z 0,45; `ATTIC`/`HATCH` no layout, `attic_stair` em `house_furnish.py`; a porta da varanda fica em z 4,6–5,5). O cordão (corredor, x 6,97 z 2,75) abre a folha única do alçapão (`HATCH_W`, deita no piso do sótão) e a escada (`LADDER`) aparece com a rampa na camada do mundo (a sondagem de chão do gato ignora a camada 32: rampa ali o fazia deslizar) e paredes invisíveis só do gato no lado aberto e no guarda-corpo do buraco (`House._ramp_box`). Os itens do sótão são conferidos com `godot --headless --path godot res://scenes/navcheck.tscn -- --atticcheck [--atticgap=0.35]` (sobreposição, telhado, `ATTICCHECK DONE 0` a menos de itens duplicados). Falas de Clara e Davi nunca se sobrepõem (`Owner._other_talking`, respiro de 0,12–0,55 s). Davi não segura mais o diário.
+  tremor do porão e a luz do quarto acesa até ~01:00. Pessoas nunca usam a escada do sótão. O sótão tem paredes baixas de 0,9 m (`ATTIC.knee` no `layout.json`) sob o telhado, para ninguém bater a cabeça. A escada do sótão é um lance reto como as outras (16 espelhos de 0,1875 m, ~41°), encostado na parede da varanda na ponta da frente do corredor (x 6,65–7,4, pé em z 3,85 junto ao guarda-corpo da escada principal, topo rente ao piso do sótão em z 0,45; `ATTIC`/`HATCH` no layout, `attic_stair` em `house_furnish.py`; a porta da varanda fica em z 4,6–5,5). O cordão (corredor, x 6,97 z 2,75) abre a folha única do alçapão (`HATCH_W`, deita no piso do sótão) e a escada (`LADDER`) aparece com a rampa na camada do mundo (a sondagem de chão do gato ignora a camada 32: rampa ali o fazia deslizar) e paredes invisíveis só do gato ao longo do corrimão (só acima dos degraus: a escada é vazada e o gato passa por baixo) e no guarda-corpo do buraco (`House._ramp_box`). Os itens do sótão são conferidos com `godot --headless --path godot res://scenes/navcheck.tscn -- --atticcheck [--atticgap=0.35]` (sobreposição, telhado, `ATTICCHECK DONE 0` a menos de itens duplicados). Falas de Clara e Davi nunca se sobrepõem (`Owner._other_talking`, respiro de 0,12–0,55 s). Davi não segura mais o diário.
 - **Controlador ao vivo** (preferir a reabrir o jogo a cada teste): `godot --path godot -- --devctl [--phase=afternoon --day=6]`
   (em segundo plano) e `python tools/dev/devctl.py --wait "cmd" ...` (`godot/scripts/dev/devctl.gd`): `state`,
   `steps clara`, `ff idx('clara') >= 42` (avança rápido até a condição), `jump`, `phase night 6`, `wait`,

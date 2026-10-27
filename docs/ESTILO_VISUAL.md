@@ -15,7 +15,7 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
 3. **A noite continua assustadora.** O passe quente vale para cômodos com luz acesa. Com as luzes
    apagadas a casa fica escura e azulada; não "clarear tudo".
 4. **Fantasmas não são anime.** Ivone, Visitante e Sombra seguem MPFB + shader espectral (Sombra e
-   Visitante com clipes de mocap: andar de zumbi, `walk_formal`; o resto procedural). A Sombra é menos
+   Visitante com clipes de mocap: andar de zumbi (nas noites 4–6 a Sombra anda com o `walk_formal` da Clara, `ShadowThreat._set_gait`), `walk_formal`; o resto procedural). A Sombra é menos
    transparente que os outros (`dissolve` 0,12) e troca de corpo: correndo, `shadow_run.glb` (membros,
    pescoço e dedos longos) de costas como aranha; escondida, `shadow_peek.glb` (só cabeça e duas mãos
    de dedos curvos), cada peça posta por pontos (`head`, `hand`, `side`, `yaw`, `tilt`, `hands` no
@@ -154,6 +154,27 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
   armação (`lights.gd`). Luz dos banheiros quente (`#fff1de` em `layout.json`); só a lavanderia
   mantém luz fria.
 - `godot/shaders/post.gdshader`: `warm_grade` 0,3.
+- Luz que entra pelas janelas: nuvem densa de poeira dentro do feixe de sol/lua (`FX.beam_dust` +
+  `beam_dust.gdshader`: sem luz ambiente, acende só pelo sol/lua através da sombra, muito mais forte
+  olhando contra a luz (`fwd` 5), lâmpadas fracas; 4× grãos de 1,6 cm, `dust` em `LOOKS` 5× o antigo).
+  Um emissor por janela externa (`House._build_beams`), apontado ao longo
+  da luz por `House.aim_beams(dir)` (chamado em `Env.apply` e `set_daylight`); some no preset low. O
+  resto da casa tem poeira fina em todo cômodo (`dust_motes`, `House.haze`, ~26 grãos/m² de piso, 1,4 cm, translúcida: `opacity` 0,6, `core` 0 e some a menos de 1,5 m da câmera, `near_fade`)
+  com o mesmo shader em `FX.haze_mat` (sol/lua a 0,6 do feixe, lâmpadas 0,4, brilho próprio `haze` em
+  `LOOKS`: 4 de dia, 0,1 à noite para a casa continuar escura); no feixe as duas somam. Afinar ao vivo
+  no devctl com `eval dust(...)` e `eval haze(...)`. O feixe é desenhado: um
+  prisma da janela até o chão (no máximo 4,5 m para dentro, `House._shaft_mesh`) com o
+  `light_shaft.gdshader` (aditivo, aceso só pelo sol/lua através da sombra, então árvore lá fora ou
+  sol do outro lado o apagam; some perto da câmera, nas bordas e onde encosta em chão e móveis; força
+  `shaft` em `LOOKS`: fraca de dia, forte à noite para a faixa de lua). Por baixo, uma neblina
+  volumétrica fraca em cada cômodo (`FogVolume`, densidade `fog_in`; o sol entra nela com `sun_fog`, e
+  o `volumetric_fog_gi_inject` é 0,08 para a névoa não ficar leitosa). A casa sai da neblina do
+  quintal pelo buraco `hole_min`/`hole_max` do `ground_fog.gdshader` (no lugar do antigo volume
+  negativo `carve`).
+- Puf de poeira quando o gato pousa (`FX.dust_puff`, `Env.dust_puff`): fraco em qualquer piso, forte
+  no sótão, porão e lavanderia. Vapor da banheira no banho (`steam_at`), além das torneiras quentes.
+- Tarde: o sol começa mais baixo (sombras de janela compridas no chão) e passa por uma hora dourada
+  antes de avermelhar e escurecer (`set_daylight`).
 - Madeira clara some sob AgX + luz rosada das paredes: use bases de madeira mais escuras/saturadas do
   que parecem no seletor (`#C98F55` sai mel; `#D9A86C` saía bege).
 
@@ -168,6 +189,9 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
 - Quintal: galpão (esconderijo), varal, horta, pilha de lenha (esconderijo), casinha de cachorro vazia,
   escada dos fundos e uma pedra sob a portinhola da despensa. À noite só o poste da porteira acende
   (luz 13, nó `street_lamp_head`); o resto fica escuro e azulado.
+- Quintal vivo: folhas secas caindo e rolando com o vento (`FX.leaves`; somem ao tocar a casa),
+  vaga-lumes só no entardecer (`FX.fireflies`, `set_daylight` com k < 0,4; nunca à noite) e sereno
+  sob o poste só à noite (`FX.mist`). Sem chaminé.
 
 ## Como verificar uma mudança visual
 

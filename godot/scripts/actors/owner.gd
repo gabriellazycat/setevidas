@@ -346,7 +346,13 @@ func side_trip(steps: Array) -> void:
 		return
 	var st: Array = task["steps"]
 	var i: int = task["idx"]
-	task["steps"] = st.slice(0, i) + steps + st.slice(i)
+	# caught after arriving somewhere (about to sit on the sofa, waiting at the sink...): walk back
+	# there after the errand, or the next step (sit) happens wherever the errand left her
+	var back: Array = []
+	if i > 0 and str(st[i]["t"]) not in ["walk", "spot"] and str(st[i - 1]["t"]) in ["walk", "spot"]:
+		back = [st[i - 1].duplicate()]
+	task["steps"] = st.slice(0, i) + steps + back + st.slice(i)
+	task.erase("seat_p")
 	task["started"] = false
 	task["timer"] = 0.0
 	_path = []
@@ -600,6 +606,8 @@ func tick(dt: float) -> void:
 						# a seat (the next step sits down): stop on the floor in front of it, back to it,
 						# and let the sit-down clip take the hips back onto the seat
 						var sp3 := Layout.v3(st["spot"]["p"])
+						task.erase("seat_p")
+						model.seat_back = false
 						var nxt: Dictionary = task["steps"][task["idx"] + 1] if task["idx"] + 1 < task["steps"].size() else {}
 						task["seat"] = model.has_clips and str(nxt.get("t", "")) == "pose" and str(nxt.get("pose", "")) in ["sit", "read", "sit_talk"]
 						if task["seat"]:

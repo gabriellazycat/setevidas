@@ -193,6 +193,7 @@ func _wire_events() -> void:
 	cat.jumped.connect(func(_big): Sfx.paw_step(cat.global_position, true, false))
 	cat.landed.connect(func(imp):
 		Sfx.thud(cat.global_position, clampf(imp / 14.0, 0.05, 0.25), 120)
+		env.dust_puff(cat.global_position, imp, Layout.room_at(cat.global_position + Vector3(0, 0.2, 0)))
 		if imp > 7 and phase == "night":
 			emit_noise(cat.global_position, 0.2, "thud"))
 	cat.meowed.connect(func():
@@ -728,6 +729,7 @@ func _reset_world() -> void:
 func start_night(d: int, snap = null) -> void:
 	_epoch += 1
 	ui.close_overlay()
+	ui.clear_talk_log()
 	day = d
 	night = d
 	phase = "night"
@@ -1286,6 +1288,7 @@ func _ending(kind: String, remembered := false) -> void:
 func start_morning(d: int) -> void:
 	_epoch += 1
 	ui.close_overlay()
+	ui.clear_talk_log()
 	day = d
 	ui.lives(SaveGame.lives_at(save, d))
 	_setup_relics(0)
@@ -1629,6 +1632,7 @@ func _clear_props() -> void:
 func start_afternoon() -> void:
 	_epoch += 1
 	ui.close_overlay()
+	ui.clear_talk_log()
 	var d := day
 	phase = "afternoon"
 	mode = "play"
@@ -3076,14 +3080,15 @@ func on_light_toggled(index: int, on: bool) -> void:
 
 ## the pantry cat flap swings when the cat goes through
 func swing_flap() -> void:
-	var f = house.find_child("CAT_FLAP", true, false)
 	Sfx.click(Vector3(10.78, 0.2, 12.9), 0.35)
-	if f is Node3D:
-		var n := f as Node3D
-		var tw := create_tween()
-		tw.tween_property(n, "rotation:x", -1.1, 0.12)
-		tw.tween_property(n, "rotation:x", 0.35, 0.25)
-		tw.tween_property(n, "rotation:x", 0.0, 0.35)
+	for nm in ["CAT_FLAP", "CAT_FLAP_out"]:
+		var f = house.find_child(nm, true, false)
+		if f is Node3D:
+			var n := f as Node3D
+			var tw := create_tween()
+			tw.tween_property(n, "rotation:x", -1.1, 0.12)
+			tw.tween_property(n, "rotation:x", 0.35, 0.25)
+			tw.tween_property(n, "rotation:x", 0.0, 0.35)
 
 
 func passage(to: Vector3, yaw: float, kind: String) -> void:
@@ -3305,7 +3310,18 @@ func wash_carried(f: House.Faucet) -> void:
 	r["dirty"] = false
 	_relic_mud(r["c"], false)
 	Sfx.drip(f.spout)
-	Sfx.play("loop_water", f.spout, 0.4, 1.0, 1.2)
+	# a short run of the tap: the water loop through Sfx.play never stops (the loop_ streams loop),
+	# so it gets its own handle, and the stream shows while it runs (unless the Drowner opened it)
+	var snd := Sfx.loop("water", f.spout, 1.2)
+	snd.set_level(0.4)
+	var ours := f.running <= 0.04
+	if ours:
+		f.running = 0.5
+	# a plain timer, not _later: the sound must stop even if the night ends meanwhile
+	get_tree().create_timer(1.8).timeout.connect(func():
+		snd.stop(0.4)
+		if ours and is_equal_approx(f.running, 0.5):
+			f.running = 0.0)
 	hint("Limpa. Agora pode ir para o círculo.", 3.0)
 	refresh_night_tasks()
 
@@ -3591,7 +3607,7 @@ func deliver_relic() -> void:
 		return
 	var rr := relic_of(c)
 	if rr.get("dirty", false):
-		hint("Está coberta de lama. Lave numa torneira antes de deixar no círculo.", 3.5)
+		hint("Está coberta de lama. Lave na pia do banheiro antes de deixar no círculo.", 3.5)
 		return
 	if day == Story.RELIC_ORDER_NIGHT:
 		# the circle wants them in the diary's order
@@ -3945,6 +3961,7 @@ func pause() -> void:
 	var t := tr("Noite %d · %s") % [day, _fmt_clock(hour)] if is_night else tr("Dia %d · %s") % [day, "manhã" if phase == "morning" else "fim de tarde"]
 	ui.show_pause({
 		"title": t,
+		"threats": _night_threat_list() if is_night else [],
 		"on_resume": resume,
 		"on_restart_night": (func(): start_night(day, save["night"])) if is_night and save["night"] else null,
 		"on_restart_day": (func(): _begin_snapshot(save["morning"])) if day > 1 and save["morning"] else null,
@@ -3960,6 +3977,23 @@ func pause() -> void:
 			pause()),
 		"on_menu": to_menu,
 	})
+
+
+## every ghost that may walk tonight (and the hound), the new one first, for the pause menu
+func _night_threat_list() -> Array:
+	var ids: Array = Config.NIGHT_THREATS.get(night, []).duplicate()
+	if night >= Config.HOUND_FROM:
+		ids.append("hound")
+	var out := []
+	for id in ids:
+		var info: Dictionary = Story.THREAT_INFO.get(id, {})
+		if info.has("howto"):
+			var item := {"name": info["name"], "howto": info["howto"], "new": Config.is_new_on(id, night)}
+			if item["new"]:
+				out.push_front(item)
+			else:
+				out.append(item)
+	return out
 
 
 func resume() -> void:
@@ -4119,6 +4153,9 @@ func _env_fx(dt: float) -> void:
 	for f: House.Faucet in house.faucets:
 		if f.running > 0.2 and f.id != "coz":
 			steam.append(f.spout)
+	# the hot bath steams while Clara is in the tub
+	if phase == "afternoon" and (aft.get("bathing", false) or aft.get("bath_wait", false)):
+		steam.append(Layout.spot_pos("bathTubIn") + Vector3(0, 0.4, 0))
 	env.steam_at(steam)
 	if phase == "night":
 		var cf := -cam.global_basis.z

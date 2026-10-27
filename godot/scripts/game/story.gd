@@ -46,7 +46,7 @@ const MORNING_TASKS := {
 	],
 	5: [
 		{"id": "mark5", "text": "Investigue a porta da frente"},
-		{"id": "flap", "text": "Empurre a portinhola da cozinha para o quintal"},
+		{"id": "flap", "text": "Empurre a portinhola da despensa para o quintal"},
 	],
 	6: [
 		{"id": "nightlight", "text": "Leve a luz noturna para um cômodo escuro"},
@@ -103,7 +103,7 @@ const RELICS := {
 
 ## what each rule asks of the cat (shown after the object's name in the night list)
 const RELIC_RULES := {
-	"wash": "suja de lama: lave numa torneira",
+	"wash": "suja de lama: lave na pia do banheiro",
 	"drain": "caiu no ralo da pia do banheiro de baixo",
 	"dark": "só aparece com a luz do cômodo apagada",
 	"mailbox": "na caixa de correio, lá fora, na porteira",

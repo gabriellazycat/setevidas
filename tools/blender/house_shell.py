@@ -602,11 +602,31 @@ class Shell:
         L = self.L
         ty = L["TERRAIN_Y"]
         g = self.ext
-        # house base band of stone where the basement meets the ground
-        g.box(-0.16, ty - 0.05, -0.16, 12.16, -0.18, -0.1, "exterior_base")
-        g.box(-0.16, ty - 0.05, 10.1, 12.16, -0.18, 10.16, "exterior_base")
-        g.box(-0.16, ty - 0.05, -0.1, -0.1, -0.18, 10.1, "exterior_base")
-        g.box(12.1, ty - 0.05, -0.1, 12.16, -0.18, 10.1, "exterior_base")
+        # house base band of stone where the basement meets the ground, open around the little
+        # basement windows (they sit inside its height: a solid band hid them from the yard)
+        def band(axis, fixed, n0, n1, a, b):
+            low = [w for w in L["WINDOWS"] if w["axis"] == axis and abs(w["fixed"] - fixed) < 0.01 and w["y1"] < -0.18]
+            cuts = sorted((w["s0"] - 0.12, w["s1"] + 0.12, w["y0"] - 0.06, w["y1"] + 0.1) for w in low)
+
+            def put(s0, y0, s1, y1):
+                if s1 - s0 > 1e-3 and y1 - y0 > 1e-3:
+                    if axis == "x":
+                        g.box(s0, y0, n0, s1, y1, n1, "exterior_base")
+                    else:
+                        g.box(n0, y0, s0, n1, y1, s1, "exterior_base")
+
+            s = a
+            for c0, c1, cy0, cy1 in cuts:
+                put(s, ty - 0.05, c0, -0.18)
+                put(c0, ty - 0.05, c1, cy0)
+                put(c0, cy1, c1, -0.18)
+                s = c1
+            put(s, ty - 0.05, b, -0.18)
+
+        band("x", 0, -0.16, -0.1, -0.16, 12.16)
+        band("x", 10, 10.1, 10.16, -0.16, 12.16)
+        band("z", 0, -0.16, -0.1, -0.1, 10.1)
+        band("z", 12, 12.1, 12.16, -0.1, 10.1)
         # skirting board above the stone
         self.trim.box(-0.17, -0.2, -0.17, 12.17, -0.1, -0.1, "exterior_trim")
         # back steps under the back door of the dining room (d_back, x 6.5..7.35)

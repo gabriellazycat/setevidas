@@ -74,6 +74,8 @@ func _who(nm: String):
 		"clara": return g.clara
 		"davi": return g.davi
 		"cat": return g.cat
+		"hound": return g.director.hound.body
+		"visitor": return g.director.visitor.fig
 	return null
 
 
@@ -94,6 +96,55 @@ func _expr(src: String):
 func idx(who: String) -> int:
 	var o = _who(who)
 	return int(o.task["idx"]) if o is Owner and o.task != null else -1
+
+
+## for expressions: retune the window-beam dust live (gain of the shader, grains per beam × k,
+## grain size in m, forward-scatter boost); returns the beams that are lit
+func dust(gain: float, k: float, size: float, fwd: float = 1.4) -> int:
+	var m := FX.beam_dust_mat()
+	m.set_shader_parameter("gain", gain)
+	m.set_shader_parameter("fwd", fwd)
+	var lit := 0
+	for b in g.house._beams:
+		var p: GPUParticles3D = b["p"]
+		if not b.has("n0"):
+			b["n0"] = p.amount
+		p.amount = clampi(int(b["n0"] * k), 8, 2000)
+		(p.draw_pass_1 as QuadMesh).size = Vector2(size, size)
+		if p.visible:
+			lit += 1
+	return lit
+
+
+## for expressions: retune the fine dust of every room live (own glow, sun / moon gain, lamp gain,
+## grains × k, grain size in m)
+## for expressions: set any parameter of the house dust shader (core, opacity, near_fade...)
+func hazep(param: String, value: float) -> float:
+	FX.haze_mat().set_shader_parameter(param, value)
+	return value
+
+
+func haze(amb: float, gain: float, lamp: float, k: float, size: float) -> int:
+	var m := FX.haze_mat()
+	m.set_shader_parameter("amb", amb)
+	m.set_shader_parameter("gain", gain)
+	m.set_shader_parameter("lamp_gain", lamp)
+	for p in g.house.haze:
+		var q := (p as GPUParticles3D).draw_pass_1 as QuadMesh
+		q.size = Vector2(size, size)
+		if not p.has_meta("n0"):
+			p.set_meta("n0", p.amount)
+		p.amount = clampi(int(p.get_meta("n0") * k), 8, 2000)
+	return g.house.haze.size()
+
+
+## for expressions: "x,z,nx,nz" of each lit beam's window
+func beams() -> String:
+	var out := []
+	for b in g.house._beams:
+		if (b["p"] as GPUParticles3D).visible:
+			out.append("%.1f,%.1f,%.1f,%.1f,%s" % [b["c"].x, b["c"].z, b["n"].x, b["n"].z, Layout.room_at(b["c"] + b["n"] * 0.4)])
+	return " ; ".join(out)
 
 
 func task(who: String) -> String:

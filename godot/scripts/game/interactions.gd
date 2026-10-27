@@ -180,13 +180,14 @@ func register(g: Game) -> void:
 				if f.id == "tub":
 					f.level = minf(f.level, 0.6)})
 
-	# ---- night relics with a rule: washed under a tap, fished out of the drain, out of the mailbox
+	# ---- night relics with a rule: washed in the bathroom sink (from the floor or up on it), fished
+	# out of the drain, out of the mailbox
 	for f: House.Faucet in h.faucets:
 		if f.id == "tub":
 			continue
-		add({"id": "wash_" + f.id, "pos": Vector3(f.handle.x, f.floor_y, f.handle.z), "radius": 0.9, "above": 1.4, "below": 0.6, "omni": true, "priority": 4,
-			"prompt": func(): return tr("Lavar %s na torneira") % tr(cat.carrying.name),
-			"enabled": func(): return g.phase == "night" and cat.carrying != null and g.carrying_dirty(),
+		add({"id": "wash_" + f.id, "pos": Vector3(f.handle.x, f.floor_y, f.handle.z), "radius": 0.9, "above": 1.4, "below": 1.3, "omni": true, "priority": 4,
+			"prompt": func(): return tr("Lavar %s na pia do banheiro") % tr(cat.carrying.name),
+			"enabled": func(): return f.id == "banb" and g.phase == "night" and cat.carrying != null and g.carrying_dirty(),
 			"hold": 2.0, "pose": "busy",
 			"on_interact": func(): g.wash_carried(f)})
 		add({"id": "drain_" + f.id, "pos": Vector3(f.handle.x, f.floor_y, f.handle.z), "radius": 0.9, "above": 1.4, "below": 0.6, "omni": true, "priority": 4,
@@ -291,14 +292,14 @@ func register(g: Game) -> void:
 		"enabled": func(): return h.basculante_target > 0.5,
 		"on_interact": func(): g.passage(Vector3(10.4, 3.9, 6.32), 0.0, "window")})
 
-	# ---- ways out to the yard: the pantry cat flap (morning 5), the basement window (morning 7) and
+	# ---- ways out to the yard: the pantry cat flap (from day 1), the basement window (morning 7) and
 	# the old tree by the balcony (from day 4). The hunters cannot follow through them.
 	var routes: Dictionary = Layout.data().get("ROUTES", {})
 	if routes.has("flap"):
 		var fl: Dictionary = routes["flap"]
 		add({"id": "flap_in", "pos": Layout.v3(fl["inside"]), "radius": 0.7, "above": 0.6, "below": 0.4, "omni": true, "priority": 2,
 			"prompt": func(): return "Sair pela portinhola (quintal)" if g.flags.get("flap_open", false) else "Empurrar a portinhola emperrada",
-			"enabled": func(): return g.flags.get("flap_open", false) or g.phase == "morning",
+			"enabled": func(): return true,
 			"hold": func(): return 0.0 if g.flags.get("flap_open", false) else 1.4,
 			"pose": "scratch",
 			"on_interact": func():
@@ -516,6 +517,8 @@ func _add_pick(g: Game, id: String, pickup: Callable) -> void:
 				return "Fuçar na caixa aberta"
 			if id == "doll":
 				return "Pegar a boneca"
+			if g.relic_of(c).get("dirty", false):
+				return tr("Pegar %s suja de lama") % tr(c.name)
 			return tr("Pegar %s") % tr(c.name),
 		"enabled": func(): return c.enabled and not c.carried and cat.carrying == null and c.node.visible and not g.ritual_placed(id) and not (id == "nightlight" and g.phase == "night"),
 		"hold": func():

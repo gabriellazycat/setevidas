@@ -7,6 +7,9 @@ uniform vec3 albedo : source_color = vec3(0.55, 0.6, 0.72);
 uniform float height_falloff = 1.0;
 uniform sampler3D noise3d;
 uniform float speed = 0.06;
+// no fog inside this box (the house's ground floor); an empty box (min > max) cuts nothing
+uniform vec3 hole_min = vec3(1.0);
+uniform vec3 hole_max = vec3(-1.0);
 
 void fog() {
 	vec3 p = WORLD_POSITION;
@@ -16,5 +19,7 @@ void fog() {
 	float h = clamp(1.0 - UVW.y, 0.0, 1.0);
 	float edge = smoothstep(0.0, 0.12, UVW.x) * smoothstep(1.0, 0.88, UVW.x) * smoothstep(0.0, 0.12, UVW.z) * smoothstep(1.0, 0.88, UVW.z);
 	DENSITY = density * pow(h, height_falloff) * smoothstep(0.35, 0.75, n * 0.7 + n2 * 0.5) * edge;
+	vec3 ins = step(hole_min, p) * step(p, hole_max);
+	DENSITY *= 1.0 - ins.x * ins.y * ins.z;
 	ALBEDO = albedo;
 }

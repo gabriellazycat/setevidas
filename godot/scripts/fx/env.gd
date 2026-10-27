@@ -25,22 +25,22 @@ const CLEAR_DAY := {"wind": 0.18, "rain": 0.0, "bolts": 0.0}
 const LOOKS := {
 	"night": {"sky": "night", "sky_e": 0.22, "sun": Color("#9cb4ff"), "sun_e": 0.6, "sun_dir": Vector3(-0.42, 0.6, -0.68), "amb_e": 0.085,
 		"fog": 0.02, "fog_alb": Color(0.62, 0.68, 0.8), "fog_emit": Color(0.002, 0.003, 0.006), "exposure": 1.3,
-		"tint": Vector3(0.97, 0.99, 1.05), "lift": Vector3(0.006, 0.008, 0.016), "sat": 0.95, "ground_fog": 0.55, "adj_sat": 1.02, "adj_con": 1.04, "edge": 0.85},
+		"tint": Vector3(0.97, 0.99, 1.05), "lift": Vector3(0.006, 0.008, 0.016), "sat": 0.95, "ground_fog": 0.55, "adj_sat": 1.02, "adj_con": 1.04, "edge": 0.85, "fog_in": 0.014, "dust": 13, "haze": 0.1, "sun_fog": 6.0, "shaft": 0.9},
 	"menu": {"sky": "night_overcast", "sky_e": 0.16, "sun": Color("#9cb4ff"), "sun_e": 0.32, "sun_dir": Vector3(-0.42, 0.6, -0.68), "amb_e": 0.1,
 		"fog": 0.018, "fog_alb": Color(0.62, 0.68, 0.8), "fog_emit": Color(0.002, 0.003, 0.006), "exposure": 1.25,
-		"tint": Vector3(0.95, 0.98, 1.06), "lift": Vector3(0.005, 0.008, 0.017), "sat": 0.92, "ground_fog": 0.8, "adj_sat": 1.01, "adj_con": 1.03, "edge": 0.0},
+		"tint": Vector3(0.95, 0.98, 1.06), "lift": Vector3(0.005, 0.008, 0.017), "sat": 0.92, "ground_fog": 0.8, "adj_sat": 1.01, "adj_con": 1.03, "edge": 0.0, "fog_in": 0.01, "dust": 10, "haze": 0.1, "sun_fog": 4.0, "shaft": 0.8},
 	"morning": {"sky": "morning", "sky_e": 1.0, "sun": Color("#ffefd6"), "sun_e": 2.4, "sun_dir": Vector3(0.62, 0.6, -0.5), "amb_e": 0.9,
 		"fog": 0.005, "fog_alb": Color(0.85, 0.88, 0.9), "fog_emit": Color(0, 0, 0), "exposure": 1.0,
 		"tint": Vector3(1.05, 1.0, 0.93), "lift": Vector3(0.008, 0.006, 0.004), "sat": 1.04, "ground_fog": 0.08, "adj_sat": 1.12, "adj_con": 1.05,
-		"amb_col": Color("#ffe6cc"), "amb_sky": 0.45},
-	"afternoon": {"sky": "afternoon", "sky_e": 0.9, "sun": Color("#ffb070"), "sun_e": 2.0, "sun_dir": Vector3(-0.82, 0.3, -0.48), "amb_e": 0.72,
+		"amb_col": Color("#ffe6cc"), "amb_sky": 0.45, "fog_in": 0.012, "dust": 4.5, "haze": 4.0, "sun_fog": 5.0, "shaft": 0.1},
+	"afternoon": {"sky": "afternoon", "sky_e": 0.9, "sun": Color("#ffb070"), "sun_e": 2.0, "sun_dir": Vector3(-0.82, 0.24, -0.48), "amb_e": 0.72,
 		"fog": 0.008, "fog_alb": Color(0.9, 0.78, 0.7), "fog_emit": Color(0.004, 0.002, 0.001), "exposure": 1.0,
 		"tint": Vector3(1.09, 0.99, 0.89), "lift": Vector3(0.01, 0.005, 0.003), "sat": 1.05, "ground_fog": 0.12, "adj_sat": 1.12, "adj_con": 1.05,
-		"amb_col": Color("#ffd9b8"), "amb_sky": 0.45},
+		"amb_col": Color("#ffd9b8"), "amb_sky": 0.45, "fog_in": 0.012, "dust": 5, "haze": 4.0, "sun_fog": 5.5, "shaft": 0.12},
 	"dawn": {"sky": "dawn", "sky_e": 0.7, "sun": Color("#ffc0a0"), "sun_e": 1.1, "sun_dir": Vector3(0.7, 0.18, -0.6), "amb_e": 0.6,
 		"fog": 0.012, "fog_alb": Color(0.8, 0.72, 0.75), "fog_emit": Color(0.003, 0.002, 0.003), "exposure": 1.05,
 		"tint": Vector3(1.06, 0.98, 0.95), "lift": Vector3(0.008, 0.005, 0.005), "sat": 1.0, "ground_fog": 0.35, "adj_sat": 1.06, "adj_con": 1.04,
-		"amb_col": Color("#f2d6c8"), "amb_sky": 0.6},
+		"amb_col": Color("#f2d6c8"), "amb_sky": 0.6, "fog_in": 0.012, "dust": 5.5, "haze": 4.0, "sun_fog": 5.0, "shaft": 0.15},
 }
 
 var we: WorldEnvironment
@@ -65,6 +65,12 @@ var look: Dictionary = LOOKS["night"]
 var weather: Dictionary = CLEAR_DAY
 var fog_vols: Array = []
 var moths: GPUParticles3D
+var fog_in: Array = []          # interior haze per room: the sun / moon beams show in it
+var leaves: Array = []          # [falling, rolling]
+var fireflies: GPUParticles3D
+var mist: GPUParticles3D
+var puff: GPUParticles3D
+var _house: House
 var steam: Array = []
 var breath: GPUParticles3D
 var _breath_t := 0.0
@@ -78,6 +84,7 @@ signal flashed(power)
 
 
 func build(house: House) -> void:
+	_house = house
 	for k in ["night", "night_overcast", "morning", "afternoon", "dawn"]:
 		_skies[k] = load("res://assets/sky/%s.hdr" % k)
 	we = WorldEnvironment.new()
@@ -116,7 +123,8 @@ func build(house: House) -> void:
 	env.volumetric_fog_anisotropy = 0.55
 	env.volumetric_fog_length = 48.0
 	env.volumetric_fog_detail_spread = 1.6
-	env.volumetric_fog_gi_inject = 0.6
+	# little bounce light in the fog: the haze indoors stays clear and only the beams light it
+	env.volumetric_fog_gi_inject = 0.08
 	env.volumetric_fog_ambient_inject = 0.05
 	env.volumetric_fog_sky_affect = 0.15
 	env.volumetric_fog_temporal_reprojection_enabled = true
@@ -131,7 +139,7 @@ func build(house: House) -> void:
 	sun.shadow_normal_bias = 1.0
 	sun.shadow_blur = 1.5
 	sun.light_angular_distance = 0.6
-	sun.light_volumetric_fog_energy = 2.5
+	sun.light_volumetric_fog_energy = 5.0
 	sun.light_bake_mode = Light3D.BAKE_DYNAMIC
 	add_child(sun)
 	vgi = VoxelGI.new()
@@ -142,6 +150,9 @@ func build(house: House) -> void:
 	_build_rain()
 	_build_fog()
 	_build_moths(house)
+	_build_yard()
+	puff = FX.dust_puff()
+	add_child(puff)
 	breath = FX.breath_puff()
 	add_child(breath)
 	# full-screen grade under the UI
@@ -198,6 +209,8 @@ func apply_quality() -> void:
 	RenderingServer.environment_set_volumetric_fog_volume_size(64 if q == "medium" else (128 if ultra else 96), 64 if q == "medium" else (128 if ultra else 96))
 	for f in fog_vols:
 		(f as FogVolume).visible = not low
+	if _house and _house.beam_root:
+		_house.beam_root.visible = not low
 	if rain_p:
 		rain_p.amount_ratio = 0.5 if low else 1.0
 	post_mat.set_shader_parameter("grain", 1.0 if Settings.g("grain") else 0.0)
@@ -257,17 +270,28 @@ func _build_fog() -> void:
 		m.set_shader_parameter("albedo", d[2])
 		m.set_shader_parameter("density", d[3])
 		m.set_shader_parameter("height_falloff", 1.6 if not d[4] else 1.0)
+		if not d[4]:
+			# the house's ground floor (and the back wing) stays clear of the yard fog
+			m.set_shader_parameter("hole_min", Vector3(-0.2, -1.5, -0.2))
+			m.set_shader_parameter("hole_max", Vector3(12.2, 0.8, 13.2))
 		fv.material = m
 		add_child(fv)
 		fog_vols.append(fv)
-	var carve := FogVolume.new()
-	carve.position = Vector3(6, -0.2, 5)
-	carve.size = Vector3(12.4, 2.0, 10.4)
-	var cm := FogMaterial.new()
-	cm.density = -2.0
-	carve.material = cm
-	add_child(carve)
-	fog_vols.append(carve)
+	# a thin haze inside every room: the sun / moon draw their beams in it
+	for r in Layout.rooms():
+		if r["id"] == "varanda":
+			continue
+		var fv := FogVolume.new()
+		fv.position = Vector3((r["x0"] + r["x1"]) / 2.0, r["y"] + r["h"] / 2.0, (r["z0"] + r["z1"]) / 2.0)
+		fv.size = Vector3(r["x1"] - r["x0"], r["h"], r["z1"] - r["z0"])
+		fv.shape = RenderingServer.FOG_VOLUME_SHAPE_BOX
+		var fm := FogMaterial.new()
+		fm.albedo = Color(1, 1, 1)
+		fm.edge_fade = 0.05
+		fv.material = fm
+		add_child(fv)
+		fog_vols.append(fv)
+		fog_in.append(fv)
 
 
 func _build_moths(house: House) -> void:
@@ -308,9 +332,67 @@ func _build_moths(house: House) -> void:
 	add_child(at)
 
 
+## dry leaves over the yard (falling and rolling with the wind; they vanish on the house), fireflies
+## at dusk and the night drizzle under the gate lamp
+func _build_yard() -> void:
+	var y: Dictionary = Layout.data()["YARD"]
+	var ty := float(Layout.data()["TERRAIN_Y"])
+	var size := Vector3(float(y["x1"]) - float(y["x0"]), 0, float(y["z1"]) - float(y["z0"]))
+	var mid := Vector3((float(y["x0"]) + float(y["x1"])) / 2.0, ty, (float(y["z0"]) + float(y["z1"])) / 2.0)
+	var fall := FX.leaves(Vector3(size.x, 3.0, size.z))
+	fall.position = mid + Vector3(0, 5.5, 0)
+	var roll := FX.leaves(Vector3(size.x, 0.05, size.z))
+	roll.amount = 140
+	roll.position = mid + Vector3(0, 0.04, 0)
+	var rm := roll.process_material as ParticleProcessMaterial
+	rm.gravity = Vector3.ZERO
+	rm.turbulence_influence_max = 0.08
+	rm.spread = 25.0
+	rm.flatness = 1.0
+	rm.angular_velocity_min = -320
+	rm.angular_velocity_max = 320
+	for p in [fall, roll]:
+		var pm := (p as GPUParticles3D).process_material as ParticleProcessMaterial
+		pm.collision_mode = ParticleProcessMaterial.COLLISION_HIDE_ON_CONTACT
+		add_child(p)
+		leaves.append(p)
+	var house_box := GPUParticlesCollisionBox3D.new()
+	house_box.position = Vector3(6, 3.5, 6.5)
+	house_box.size = Vector3(12.6, 13, 13.6)
+	add_child(house_box)
+	var ground := GPUParticlesCollisionBox3D.new()
+	ground.position = mid + Vector3(0, -0.5, 0)
+	ground.size = Vector3(size.x + 20, 1.0, size.z + 20)
+	add_child(ground)
+	fireflies = FX.fireflies(Vector3(size.x, 1.2, size.z))
+	fireflies.position = mid + Vector3(0, 0.9, 0)
+	add_child(fireflies)
+	mist = FX.mist(1.3, 4.0)
+	mist.position = moths.position + Vector3(0, -0.2, 0)
+	add_child(mist)
+
+
+## a puff of dust where the cat lands: weak anywhere, thick in the dusty rooms
+func dust_puff(pos: Vector3, impact: float, room: String) -> void:
+	var dusty := room in ["sotao", "porao", "lavanderia"]
+	var k := clampf((impact - 2.5) / 6.0, 0.0, 1.0) * (1.0 if dusty else 0.35)
+	if k < 0.08:
+		return
+	puff.global_position = pos + Vector3(0, 0.02, 0)
+	puff.amount_ratio = clampf(0.3 + k, 0.0, 1.0)
+	var m := (puff.draw_pass_1 as QuadMesh).material as StandardMaterial3D
+	m.albedo_color.a = 0.2 + 0.5 * k
+	puff.restart()
+
+
+func _aim_light(d: Vector3) -> void:
+	if _house:
+		_house.aim_beams(d)
+
+
 func steam_at(points: Array) -> void:
 	while steam.size() < points.size():
-		var s := FX.wisps(Color(0.85, 0.9, 0.95, 0.12), 0.5, 0.12, 16, false, 0.3)
+		var s := FX.wisps(Color(0.9, 0.93, 0.97, 0.22), 0.6, 0.18, 24, false, 0.38)
 		add_child(s)
 		steam.append(s)
 	for i in steam.size():
@@ -355,6 +437,16 @@ func apply(kind: String, night := 1) -> void:
 	_edge_base = look.get("edge", 1.0)
 	set_edge(1.0)
 	moths.emitting = kind == "night" or kind == "menu" or kind == "afternoon"
+	for fv in fog_in:
+		((fv as FogVolume).material as FogMaterial).density = look.get("fog_in", 0.0)
+	FX.beam_dust_mat().set_shader_parameter("gain", look.get("dust", 1.0))
+	FX.haze_mat().set_shader_parameter("gain", look.get("dust", 1.0) * 0.6)
+	FX.haze_mat().set_shader_parameter("amb", look.get("haze", 0.3))
+	sun.light_volumetric_fog_energy = look.get("sun_fog", 5.0)
+	FX.shaft_mat().set_shader_parameter("gain", look.get("shaft", 0.3))
+	_aim_light(d)
+	fireflies.emitting = false
+	mist.emitting = kind == "night"
 	if kind == "night":
 		set_weather(WEATHER.get(night, WEATHER[1]))
 	elif kind == "menu":
@@ -370,12 +462,17 @@ func set_daylight(k: float) -> void:
 		return
 	k = clampf(k, 0.0, 1.0)
 	sun.light_energy = _sun_base * lerpf(0.25, 1.0, k)
-	sun.light_color = (look["sun"] as Color).lerp(Color("#ff7a52"), (1.0 - k) * 0.7)
+	# golden hour midway, then red at dusk
+	var c: Color = (look["sun"] as Color).lerp(Color("#ffc24a"), clampf((1.0 - k) * 2.0, 0.0, 1.0) * 0.55)
+	sun.light_color = c.lerp(Color("#ff7a52"), clampf((0.5 - k) * 2.0, 0.0, 1.0) * 0.75)
+	fireflies.emitting = k < 0.4
+	fireflies.amount_ratio = clampf((0.4 - k) / 0.25, 0.15, 1.0)
 	sky_mat.energy_multiplier = _sky_base * lerpf(0.45, 1.0, k)
 	var d: Vector3 = (look["sun_dir"] as Vector3)
 	d.y = lerpf(0.12, d.y, k)
 	d = d.normalized()
 	sun.look_at_from_position(Vector3(6, 1, 5) + d * 40.0, Vector3(6, 1, 5), Vector3.UP)
+	_aim_light(d)
 	env.ambient_light_energy = look["amb_e"] * lerpf(0.55, 1.0, k)
 
 
@@ -402,6 +499,10 @@ func tick(dt: float, cam: Camera3D, indoors: bool, cat_pos: Vector3, hunted: flo
 	rain_mat.set_shader_parameter("amount", rain)
 	rain_mat.set_shader_parameter("wind", wind_level)
 	(rain_p.process_material as ParticleProcessMaterial).direction = Vector3(wind_level * 0.15, -1, 0).normalized()
+	for p in leaves:
+		var lm := (p as GPUParticles3D).process_material as ParticleProcessMaterial
+		lm.initial_velocity_min = 0.1 + wind_level * 0.6
+		lm.initial_velocity_max = 0.4 + wind_level * 1.6
 	if rain_loop:
 		rain_loop.set_level(rain * (0.3 if indoors else 0.75))
 	Sfx.set_rain_indoor(1.0 if indoors else 0.0)

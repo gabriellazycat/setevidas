@@ -161,11 +161,14 @@ def furnish(L, coll):
     ph(coll, "steel_frame_shelves_01", (8.55, 0, 12.66), PI, fit=(1.2, 1.9, 0.45), col="box", name="shelf_desp_b")
     ph(coll, "wooden_crate_01", (10.0, 0, 10.45), 0.2, fit=(0.6, None, None), col="box", name="crate_desp")
     boxes(coll, 11.45, 12.6, 0, [(0.5, 0.4, 0.45), (0.42, 0.3, 0.4)], 41, "box_desp")
-    ph(coll, "jug_01", (11.6, 0.73, 11.0), 0.3, fit=(0.2, None, None), name="jug_desp")
-    ph(coll, "wine_bottles_01", (8.4, 0.73, 12.66), 0.0, parts=["wine_bottles_01_bordeaux"], name="wine_desp")
+    ph(coll, "jug_01", (11.6, 0.885, 11.0), 0.3, fit=(0.2, None, None), name="jug_desp")
+    ph(coll, "wine_bottles_01", (8.4, 0.885, 12.66), 0.0, parts=["wine_bottles_01_bordeaux"], name="wine_desp")
     # the cat flap: a small swinging panel low in the back door of the pantry wall
     C.rbox("CAT_FLAP_frame", coll, 10.78, 0.18, 12.9, 0.4, 0.36, 0.03, "exterior_trim", 0.004, 1)
     flap = C.rbox("CAT_FLAP", coll, 10.78, 0.17, 12.88, 0.32, 0.3, 0.012, "plastic_beige", 0.003, 1)
+    # and its outer face, seen from the yard (the wall's outside face is z 13.1)
+    C.rbox("CAT_FLAP_frame_out", coll, 10.78, 0.18, 13.1, 0.4, 0.36, 0.03, "exterior_trim", 0.004, 1)
+    C.rbox("CAT_FLAP_out", coll, 10.78, 0.17, 13.121, 0.32, 0.3, 0.012, "plastic_beige", 0.003, 1)
     REG.nodes["cat_flap"] = [10.78, 0.32, 12.88]
 
     # ================================================================== BANHEIRO DE BAIXO
@@ -296,8 +299,6 @@ def furnish(L, coll):
     boxes(coll, 2.0, 2.2, a, [(0.6, 0.45, 0.5), (0.5, 0.35, 0.45)], 51, "box_sotao_a")   # the chest key sits on top (house.gd)
     boxes(coll, 5.0, 8.7, a, [(0.6, 0.45, 0.55)], 52, "box_sotao_b")
     boxes(coll, 1.0, 5.6, a, [(0.5, 0.4, 0.5)], 53, "box_sotao_c")
-    covered(coll, "covered_sotao_a", "GreenChair_01", (2.3, a, 4.4), -0.5, 0.8)
-    covered(coll, "covered_sotao_b", "ornate_mirror_01", (5.0, a, 6.0), 0.0, 0.55, upright=1.4)
     C.mannequin(coll, 4.6, a, 2.9)
     C.rocking_horse(coll, 3.3, a, 2.0, 0.4)
     _, _, (_cmn, chest_mx) = ph(coll, "treasure_chest", (3.1, a, 9.0), PI, fit=(1.0, None, 0.62), col="box", name="CHEST")

@@ -791,7 +791,7 @@ func _build_dust() -> void:
 		if r["id"] == "varanda":
 			continue
 		# fine dust all over the house, lit by the room; the beams (`_build_beams`) are the dense part
-		var p := FX.dust_motes(Vector3(r["x1"] - r["x0"], r["h"], r["z1"] - r["z0"]), int((r["x1"] - r["x0"]) * (r["z1"] - r["z0"]) * 26.0))
+		var p := FX.dust_motes(Vector3(r["x1"] - r["x0"], r["h"], r["z1"] - r["z0"]), int((r["x1"] - r["x0"]) * (r["z1"] - r["z0"]) * 17.0))
 		(p.draw_pass_1 as QuadMesh).material = FX.haze_mat()
 		(p.draw_pass_1 as QuadMesh).size = Vector2(0.014, 0.014)
 		(p.process_material as ParticleProcessMaterial).color = Color(1.0, 0.97, 0.9, 1.0)

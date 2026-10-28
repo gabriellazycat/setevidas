@@ -299,7 +299,7 @@ static func shaft_mat() -> ShaderMaterial:
 ## only takes the sun / moon through its shadow), so the grains show inside the beam alone
 static func beam_dust(amount: int) -> GPUParticles3D:
 	var p := GPUParticles3D.new()
-	p.amount = clampi(amount * 4, 96, 880)
+	p.amount = clampi(int(amount * 2.64), 64, 580)
 	p.lifetime = 16.0
 	p.preprocess = 16.0
 	p.randomness = 1.0

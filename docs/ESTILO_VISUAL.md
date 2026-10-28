@@ -159,7 +159,7 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
   olhando contra a luz (`fwd` 5), lâmpadas fracas; 4× grãos de 1,6 cm, `dust` em `LOOKS` 5× o antigo).
   Um emissor por janela externa (`House._build_beams`), apontado ao longo
   da luz por `House.aim_beams(dir)` (chamado em `Env.apply` e `set_daylight`); some no preset low. O
-  resto da casa tem poeira fina em todo cômodo (`dust_motes`, `House.haze`, ~26 grãos/m² de piso, 1,4 cm, translúcida: `opacity` 0,6, `core` 0 e some a menos de 1,5 m da câmera, `near_fade`)
+  resto da casa tem poeira fina em todo cômodo (`dust_motes`, `House.haze`, ~17 grãos/m² de piso, 1,4 cm, translúcida: `opacity` 0,6, `core` 0 e some a menos de 1,5 m da câmera, `near_fade`)
   com o mesmo shader em `FX.haze_mat` (sol/lua a 0,6 do feixe, lâmpadas 0,4, brilho próprio `haze` em
   `LOOKS`: 4 de dia, 0,1 à noite para a casa continuar escura); no feixe as duas somam. Afinar ao vivo
   no devctl com `eval dust(...)` e `eval haze(...)`. O feixe é desenhado: um

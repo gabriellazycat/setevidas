@@ -280,7 +280,7 @@ func tick(dt: float) -> void:
 	hands.alpha = 0.55 * hands_vis
 	if hands_vis > 0.02:
 		var base_y: float = src.bottom_y if src.id == "tub" else src.floor_y
-		var c: Vector3 = src.puddle_center if src.id != "tub" else Vector3(10.9, 0, 9.55)
+		var c: Vector3 = src.puddle_center if src.id != "tub" else Vector3(10.84, 0, 9.49)
 		hands.global_position = Vector3(c.x, base_y - 1.62 + hands_vis * 0.45 + sin(Time.get_ticks_msec() * 0.002) * 0.03, c.z)
 		hands.rig.pose = "arms_up"
 		hands.tick(dt)

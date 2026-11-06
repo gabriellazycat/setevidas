@@ -30,12 +30,20 @@ func _ready() -> void:
 	house.set_hatch(true, true)
 	for i in 3:
 		await get_tree().physics_frame
+	if OS.get_cmdline_user_args().has("--doorcheck"):
+		door_check()
+		get_tree().quit()
+		return
 	if OS.get_cmdline_user_args().has("--atticcheck"):
 		attic_check()
 		get_tree().quit()
 		return
 	if args.has("cattest") or OS.get_cmdline_user_args().has("--cattest"):
 		await cat_test()
+		get_tree().quit()
+		return
+	if args.has("catbump") or OS.get_cmdline_user_args().has("--catbump"):
+		await cat_bump(str(args.get("catbump", "")), float(args.get("bumpdepth", "0.03")))
 		get_tree().quit()
 		return
 	var exclude: Array[RID] = []
@@ -62,6 +70,64 @@ func _ready() -> void:
 		print("NAVCHECK CLEAN %d edges" % L["NAV_EDGES"].size())
 	print("NAVCHECK DONE %d" % hits)
 	get_tree().quit()
+
+
+## Each door leaf, swung open, against every other mesh in the house (world boxes, leaf shrunk 2 cm).
+##   godot --headless --path godot res://scenes/navcheck.tscn -- --doorcheck
+## Prints "DOORHIT <door> <state> hits <node>" and "DOORCHECK DONE <hits>".
+func door_check() -> void:
+	var bad := 0
+	for d: Door in house.doors.values():
+		if d.leaf == null:
+			continue
+		var hits := _door_hits(d)
+		if hits.is_empty():
+			continue
+		var best := -1.0
+		var a := d.angle
+		while a >= 1.0:
+			d.angle = a
+			d._apply()
+			if _door_hits(d).is_empty():
+				best = a
+				break
+			a -= 0.05
+		d.angle = d.target
+		d._apply()
+		for k in hits:
+			bad += 1
+			print("DOORHIT %s open %.2f hits %s | clean angle %.2f" % [d.id, d.target, k, best])
+	print("DOORCHECK DONE %d" % bad)
+
+
+## names of everything (but the shell, terrain, wall-mounted switches and frames) the leaf's box overlaps
+func _door_hits(d: Door) -> Dictionary:
+	var lt := d.leaf.global_transform
+	var lb := AABB()
+	var first := true
+	for m in d.leaf.find_children("*", "MeshInstance3D", true, false):
+		var mm := m as MeshInstance3D
+		var bb := (lt.affine_inverse() * mm.global_transform) * mm.get_aabb()
+		lb = bb if first else lb.merge(bb)
+		first = false
+	var hits := {}
+	if first:
+		return hits
+	var core := lb.grow(-0.02)
+	for mi in house.find_children("*", "MeshInstance3D", true, false):
+		var m := mi as MeshInstance3D
+		if m.mesh == null or not m.is_visible_in_tree() or d.leaf.is_ancestor_of(m):
+			continue
+		var n: Node = m
+		while n.get_parent() != null and n.get_parent() != house and n.get_parent().name not in ["Furniture", "Shell", "Props", "Kit"] and not str(n.get_parent().name).begins_with("house"):
+			n = n.get_parent()
+		var nm := str(n.name)
+		if nm.begins_with("house_") or nm == "fence" or nm.begins_with("hill") or nm.begins_with("SW") or nm.begins_with("paint_"):
+			continue
+		var bb := (lt.affine_inverse() * m.global_transform) * m.get_aabb()
+		if bb.intersects(core):
+			hits[nm] = true
+	return hits
 
 
 ## Attic furniture: one box per item (all its meshes), listing the pairs that overlap or sit closer than
@@ -169,7 +235,10 @@ func cat_test() -> void:
 	var cases := [
 		# name, start, facing yaw, move dir (yaw, or null), seconds, jump at (s, or -1), check
 		["door_sala", Vector3(3.6, 0, 2.2), PI / 2, PI / 2, 2.0, -1.0, func(p: Vector3): return p.x > 5.4],
-		["kitchen_table", Vector3(8.1, 0, 6.7), PI / 2, PI / 2, 1.0, -1.0, func(p: Vector3): return p.x > 9.0],
+		# under the round table, beside its pedestal (straight at the pedestal it stops)
+		["kitchen_table", Vector3(8.1, 0, 6.25), PI / 2, PI / 2, 1.0, -1.0, func(p: Vector3): return p.x > 9.5 and p.y < 0.1],
+		["kitchen_pedestal", Vector3(8.1, 0, 6.7), PI / 2, PI / 2, 1.0, -1.0, func(p: Vector3): return p.x < 9.0],
+		["sofa_arm", Vector3(3.0, 0.46, 1.5), PI / 2, PI / 2, 1.0, -1.0, func(p: Vector3): return p.x < 3.5],
 		["stairs_up", Vector3(5.55, 0, 3.5), 0.0, 0.0, 4.5, -1.0, func(p: Vector3): return p.y > 2.9],
 		["stairs_down", Vector3(5.55, 3, 8.9), PI, PI, 4.5, -1.0, func(p: Vector3): return p.y < 0.2],
 		["base_stairs_down", Vector3(11.5, 0, 9.5), PI, PI, 4.5, -1.0, func(p: Vector3): return p.y < -2.8],
@@ -242,3 +311,262 @@ func drive(start: Vector3, yaw: float, move_yaw, secs: float, jump_at: float) ->
 	Input.action_release("move_forward")
 	Input.action_release("jump")
 	return [cat.global_position, absf(wrapf(cat.yaw - cat.col_yaw, -PI, PI)), stuck, flew]
+
+
+# ---------------------------------------------------------------------- cat bump
+
+## The cat walks into every piece of furniture and object of the house from all sides (and, from the
+## tops it can stand on, across them), at walking and running speed. Each item's own visible meshes
+## are turned into a test-only trimesh (layer 128, nothing collides with it); every frame the cat's
+## collision shapes, shrunk by --bumpdepth, are checked against it. Also checks the hide spots (the
+## cat slides straight there) along the line from the exit to the spot.
+##   godot --headless --fixed-fps 60 --path godot res://scenes/navcheck.tscn -- --catbump[=name,name] [--bumpdepth=0.03] [--bumpall]
+## Prints "BUMPHIT <item> frames <n> drives <k>/<total> at <pos> dir <deg> [run]" per item crossed,
+## "BUMPHIDE <spot> ..." per hide spot inside something and "CATBUMP DONE <hits> of <items>".
+const BUMP_LAYER := 128
+const BUMP_SKIP := ["house_", "fence", "hill", "SW", "paint_", "rafter", "collar", "ridge", "Shell", "HATCH", "LADDER", "_"]
+## what the cat is meant to pass through: brush and the vegetable bed (one hide spot is inside a shrub),
+## the duct it crawls along, its own bed and bowls, things it carries, the devices' cords on the floor; props it knocks over are skipped too
+const BUMP_PASS := ["shrub_", "weed_", "veg_", "tree_", "DUCT_", "duct_sleeve", "CARRY_", "catbed_", "bowl_food", "bowl_water", "dog_bowl", "NIGHTLIGHT", "lamp_shade", "PLUG_", "CORD_"]
+var _bump_bodies := {}      # item -> StaticBody3D (layer 128)
+var _bump_aabb := {}        # item -> AABB
+var _bump_shapes := []      # [shrunk shape, the cat's CollisionShape3D it stands for]
+
+
+func cat_bump(only: String, depth: float) -> void:
+	cat = Cat.new()
+	cat.house = house
+	add_child(cat)
+	await get_tree().physics_frame
+	_collect_items(only.split(",", false) if only != "" else PackedStringArray())
+	for cs in cat.get_children():
+		if not (cs is CollisionShape3D) or (cs as CollisionShape3D).disabled:
+			continue
+		var s := (cs as CollisionShape3D).shape
+		var sh: Shape3D
+		if s is SphereShape3D:
+			sh = SphereShape3D.new()
+			sh.radius = maxf(0.01, s.radius - depth)
+		elif s is CapsuleShape3D:
+			sh = CapsuleShape3D.new()
+			sh.radius = maxf(0.01, s.radius - depth)
+			sh.height = maxf(sh.radius * 2.0 + 0.01, s.height - depth * 2.0)
+		else:
+			continue
+		_bump_shapes.append([sh, cs])
+	for i in 2:
+		await get_tree().physics_frame
+	var names := _bump_bodies.keys()
+	names.sort()
+	print("CATBUMP %d items" % names.size())
+	var bad := 0
+	for nm in names:
+		var r := await _bump_item(nm)
+		if r["hits"] > 0:
+			bad += 1
+			print("BUMPHIT %s frames %d drives %d/%d at %s dir %d%s  aabb %s" % [nm, r["frames"], r["hits"], r["total"], r["at"], r["dir"], " run" if r["run"] else "", _bump_aabb[nm]])
+		elif OS.get_cmdline_user_args().has("--bumpall"):
+			print("BUMPOK %s drives %d" % [nm, r["total"]])
+	bad += _bump_hide_spots()
+	print("CATBUMP DONE %d of %d" % [bad, names.size()])
+
+
+## items = the first node below Furniture / Shell / Props (as in the door check); each gets one
+## trimesh of all its meshes on the test layer
+func _collect_items(only: PackedStringArray) -> void:
+	var faces := {}
+	for mi in house.find_children("*", "MeshInstance3D", true, false):
+		var m := mi as MeshInstance3D
+		if m.mesh == null or not m.is_visible_in_tree():
+			continue
+		var n: Node = m
+		while n.get_parent() != null and n.get_parent() != house and n.get_parent().name not in ["Furniture", "Shell", "Props", "Kit"] and not str(n.get_parent().name).begins_with("house"):
+			n = n.get_parent()
+		var nm := str(n.name)
+		var skip := false
+		for p in BUMP_SKIP:
+			if nm.begins_with(p):
+				skip = true
+		for p in BUMP_PASS:
+			if nm.begins_with(p):
+				skip = true
+		if n is RigidBody3D:
+			skip = true
+		if skip or (not only.is_empty() and nm not in only):
+			continue
+		var bb := m.global_transform * m.get_aabb()
+		if bb.size.y < 0.015:
+			continue    # rugs, flat decals: the cat walks on them
+		var f := m.mesh.get_faces()
+		if f.is_empty():
+			continue
+		var xf := m.global_transform
+		for i in f.size():
+			f[i] = xf * f[i]
+		if not faces.has(nm):
+			faces[nm] = PackedVector3Array()
+			_bump_aabb[nm] = bb
+		faces[nm].append_array(f)
+		_bump_aabb[nm] = (_bump_aabb[nm] as AABB).merge(bb)
+	for nm in faces:
+		var b := StaticBody3D.new()
+		b.name = "BUMP_" + nm
+		b.collision_layer = BUMP_LAYER
+		b.collision_mask = 0
+		var cs := CollisionShape3D.new()
+		var cps := ConcavePolygonShape3D.new()
+		cps.backface_collision = true
+		cps.set_faces(faces[nm])
+		cs.shape = cps
+		b.add_child(cs)
+		add_child(b)
+		_bump_bodies[nm] = b
+
+
+## does the shrunk cat overlap this item's trimesh now
+func _bump_overlap(item_rid: RID) -> bool:
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.collision_mask = BUMP_LAYER
+	for e in _bump_shapes:
+		q.shape = e[0]
+		q.transform = cat.global_transform * (e[1] as CollisionShape3D).transform
+		for h in house.space.intersect_shape(q, 8):
+			if h["rid"] == item_rid:
+				return true
+	return false
+
+
+## the cat's real shapes clear of the world at p (a fair place to start a drive)
+func _cat_fits(p: Vector3, yaw: float) -> bool:
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.collision_mask = cat.collision_mask
+	for cs in cat.get_children():
+		if not (cs is CollisionShape3D) or (cs as CollisionShape3D).disabled:
+			continue
+		q.shape = (cs as CollisionShape3D).shape
+		q.transform = Transform3D(Basis(Vector3.UP, yaw), p + Vector3(0, 0.03, 0)) * (cs as CollisionShape3D).transform
+		if not house.space.intersect_shape(q, 1).is_empty():
+			return false
+	return true
+
+
+func _floor_below(p: Vector3, down: float) -> Variant:
+	var q := PhysicsRayQueryParameters3D.create(p, p - Vector3(0, down, 0), HouseBuilder.LAYER_WORLD)
+	var h := house.space.intersect_ray(q)
+	if h.is_empty() or (h["normal"] as Vector3).y < 0.7:
+		return null
+	return h["position"]
+
+
+func _bump_item(nm: String) -> Dictionary:
+	var bb: AABB = _bump_aabb[nm]
+	var rid := (_bump_bodies[nm] as StaticBody3D).get_rid()
+	var c := bb.get_center()
+	var rad := maxf(bb.size.x, bb.size.z) * 0.5
+	var starts := []   # [pos, move yaw]
+	# around it, on whatever it stands on, walking in toward the centre
+	for k in 12:
+		var a := TAU * k / 12.0
+		var d := Vector3(sin(a), 0, cos(a))
+		for dist in [rad + 0.45, rad + 0.3]:
+			var top: Vector3 = Vector3(c.x, bb.position.y + 0.45, c.z) + d * float(dist)
+			var f = _floor_below(top, 0.9)
+			if f == null or absf((f as Vector3).y - bb.position.y) > 0.5:
+				continue
+			var mv := atan2(-d.x, -d.z)
+			if _cat_fits(f, mv):
+				starts.append([f, mv])
+				break
+	# the tops the cat can stand on in and around it (seats, table tops, beds), walking across
+	var g := 0.2
+	var tops := []
+	var x := bb.position.x - 0.3
+	while x <= bb.end.x + 0.3:
+		var z := bb.position.z - 0.3
+		while z <= bb.end.z + 0.3:
+			var f = _floor_below(Vector3(x, bb.end.y + 0.4, z), bb.size.y + 0.4)
+			if f != null and (f as Vector3).y > bb.position.y + 0.12 and (f as Vector3).y < bb.end.y + 0.05:
+				tops.append(f)
+			z += g
+		x += g
+	# points of the 20 cm grid spread over the tops: the same drives every run
+	var used := 0
+	var step := maxi(1, tops.size() / 6)   # ~6 points spread over the whole top
+	for ti in range(0, tops.size(), step):
+		var f = tops[ti]
+		if used >= 16:
+			break
+		for k in 4:
+			var mv := TAU * k / 4.0
+			if _cat_fits(f, mv):
+				starts.append([f, mv])
+				used += 1
+	var res := {"hits": 0, "frames": 0, "total": 0, "at": Vector3.ZERO, "dir": 0, "run": false}
+	for s in starts:
+		for run in [false, true]:
+			var fr: Array = await _bump_drive(s[0], s[1], run, rad * 2.0 + 0.9, rid)
+			res["total"] += 1
+			if fr[0] > 0:
+				res["hits"] += 1
+				if fr[0] > res["frames"]:
+					res["frames"] = fr[0]
+					res["at"] = fr[1]
+					res["dir"] = int(rad_to_deg(s[1]))
+					res["run"] = run
+	# a couple of frames of grazing at the very edge are the shrink margin, not a pass-through
+	if res["frames"] < 3:
+		res["hits"] = 0
+	return res
+
+
+## [frames overlapping, first place it overlapped]
+func _bump_drive(start: Vector3, yaw: float, run: bool, dist: float, rid: RID) -> Array:
+	cat.teleport(start + Vector3(0, 0.03, 0), yaw)
+	for i in 6:
+		await get_tree().physics_frame
+		cat.tick(1.0 / 60.0, yaw, true)
+	Input.action_press("move_forward")
+	if run:
+		Input.action_press("run")
+	var secs := dist / (4.4 if run else 2.1) + 0.5
+	var t := 0.0
+	var frames := 0
+	var at := Vector3.ZERO
+	while t < secs:
+		await get_tree().physics_frame
+		cat.tick(1.0 / 60.0, yaw, true)
+		if _bump_overlap(rid):
+			if frames == 0:
+				at = cat.global_position
+			frames += 1
+		t += 1.0 / 60.0
+	Input.action_release("move_forward")
+	Input.action_release("run")
+	return [frames, at]
+
+
+## the cat slides straight to the hide spot (Cat mode "hidden"): its shrunk shapes at the spot and
+## along the line from the spot's exit must be clear of every item and of the world
+func _bump_hide_spots() -> int:
+	var bad := 0
+	var L := Layout.data()
+	var q := PhysicsShapeQueryParameters3D.new()
+	q.collision_mask = BUMP_LAYER | HouseBuilder.LAYER_WORLD
+	for sp in L.get("HIDE_SPOTS", []):
+		var p := Layout.v3(sp["p"])
+		var ex := Layout.v3(sp.get("exit", sp["p"]))
+		var hit := {}
+		for k in 11:
+			var at := ex.lerp(p, k / 10.0)
+			var xf := Transform3D(Basis(Vector3.UP, float(sp.get("yaw", 0.0))), at + Vector3(0, 0.03, 0))
+			for e in _bump_shapes:
+				q.shape = e[0]
+				q.transform = xf * (e[1] as CollisionShape3D).transform
+				for h in house.space.intersect_shape(q, 8):
+					var co := h["collider"] as Node
+					var nm := str(co.name).trim_prefix("BUMP_") if str(co.name).begins_with("BUMP_") else describe(h["collider"], int(h["shape"]))
+					hit[nm] = "%.1f" % (k / 10.0)
+		if not hit.is_empty():
+			bad += 1
+			print("BUMPHIDE %s %s: %s" % [sp["id"], p, hit])
+	return bad

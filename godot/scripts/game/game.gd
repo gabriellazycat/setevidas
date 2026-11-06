@@ -991,7 +991,7 @@ func _fail(who: Owner) -> void:
 	var others := []
 	for th: Threat in director.all:
 		if th.enabled and th.stage >= 2 and th != killer:
-			others.append(th.display_name)
+			others.append(tr(th.display_name))
 	var cat_room := Layout.room_at(cat.global_position)
 	var facts := [tr("Medo de %s: %d%%") % [who.display_name, roundi(who.fear)], tr("Você estava: %s") % Layout.room_name(cat_room) if cat_room != "" else "Você estava fora de casa"]
 	if others.size() > 0:
@@ -1067,7 +1067,7 @@ func _lock_cat(who: Owner) -> void:
 		fx["fade_target"] = 0.0
 		controls = true
 		Sfx.set_muffle(0.15)
-		ui.hint(tr("Você foi trancado no banheiro por uma hora. Arranhe a porta (segure %s)%s") % [ui.kbd("interact"), " ou fuja pela janela basculante." if flags["basculante_open"] else ". Da próxima vez, abra a basculante de manhã."], 8))
+		ui.hint(tr("Você foi trancado no banheiro por uma hora. Arranhe a porta (segure %s)%s") % [ui.kbd("interact"), tr(" ou fuja pela janela basculante.") if flags["basculante_open"] else tr(". Da próxima vez, abra a basculante de manhã.")], 8))
 
 
 func _release_lock() -> void:
@@ -1586,6 +1586,30 @@ func _prop(kind: String) -> Node3D:
 	return pivot
 
 
+## a carried prop put down for good (the moving box): one box collider around its meshes, solid for
+## the cat and the camera and a top it can jump onto
+func _solid_prop(pivot: Node3D) -> void:
+	var ab := AABB()
+	var first := true
+	for v in pivot.get_children():
+		if v is Node3D:
+			var b := _node_aabb(v)   # already in the pivot's space
+			ab = b if first else ab.merge(b)
+			first = false
+	if first:
+		return
+	var body := StaticBody3D.new()
+	body.collision_layer = HouseBuilder.LAYER_WORLD | HouseBuilder.LAYER_SURFACE | HouseBuilder.LAYER_CAMERA
+	body.collision_mask = 0
+	var cs := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = ab.size
+	cs.shape = box
+	cs.position = ab.get_center()
+	body.add_child(cs)
+	pivot.add_child(body)
+
+
 func _node_aabb(n: Node3D) -> AABB:
 	var out := AABB()
 	var first := true
@@ -1756,6 +1780,7 @@ func _arrival_steps(d: int) -> Array:
 					o.model.remove_child(b)
 					add_child(b)
 					b.global_transform = Transform3D(Basis(Vector3.UP, 0.3), Vector3(4.15, 0.21, 1.15))
+					_solid_prop(b)
 				Sfx.thud(Vector3(4.15, 0.1, 1.15), 0.4, 90)},
 			{"t": "pose", "pose": "stand", "dur": 0.6},
 			# done with the boxes: a look at the cat, arms up, a big smile and a cheer
@@ -2789,6 +2814,8 @@ func pet_owner() -> void:
 
 
 func play_with_owner() -> void:
+	if refuse_from_bed():
+		return
 	var o := clara
 	aft["played"] = true
 	var toy: PropSystem.Carryable = cat.carrying
@@ -3530,7 +3557,20 @@ func aft_has(id: String) -> bool:
 	return false
 
 
+## lying down for the night she no longer plays: the toy stays in the cat's mouth
+func refuse_from_bed() -> bool:
+	if not clara.in_bed:
+		return false
+	var now := Time.get_ticks_msec()
+	if now >= aft.get("bed_refused_at", 0) + 2500:
+		aft["bed_refused_at"] = now
+		clara.say("Agora não dá, vamos dormir.", 2.2)
+	return true
+
+
 func give_yarn() -> void:
+	if refuse_from_bed():
+		return
 	var o := clara
 	aft["yarned"] = true
 	var ball: PropSystem.Carryable = cat.carrying
@@ -3793,8 +3833,21 @@ func hide_at(spot: Dictionary) -> void:
 	var c := cat
 	if c.carrying:
 		drop_carried()
+	# "hidden" slides the cat straight to the spot: from the far side of a table, a chair or the desk's
+	# drawers it would pass through them, so then it slips in from the spot's exit (that line is clear,
+	# navcheck --catbump)
+	var to := Layout.v3(spot["p"])
+	var q := PhysicsShapeQueryParameters3D.new()
+	var sph := SphereShape3D.new()
+	sph.radius = 0.08
+	q.shape = sph
+	q.collision_mask = HouseBuilder.LAYER_WORLD
+	q.transform = Transform3D(Basis.IDENTITY, c.global_position + Vector3(0, 0.16, 0))
+	q.motion = to - c.global_position
+	if house.space.cast_motion(q)[0] < 1.0 and spot.has("exit"):
+		c.teleport(Layout.v3(spot["exit"]), c.yaw)
 	c.mode = "hidden"
-	c.mode_target = Layout.v3(spot["p"])
+	c.mode_target = to
 	c.mode_yaw = spot["yaw"]
 	c.vel = Vector3.ZERO
 	_hide_spot = spot
@@ -3866,7 +3919,7 @@ func cat_hunted(th: Threat) -> void:
 	shake(0.35)
 	var info: Dictionary = Story.THREAT_INFO.get(th.threat_id, {})
 	if info.has("escape"):
-		hint_once("hunt_" + th.threat_id, tr("[b]%s[/b] vem atrás de você! %s") % [info["name"], info["escape"]], 6)
+		hint_once("hunt_" + th.threat_id, tr("[b]%s[/b] vem atrás de você! %s") % [tr(info["name"]), tr(info["escape"])], 6)
 
 
 ## a sudden scare at night: the cat jumps up arched toward `from` (a point; null does nothing). Only
@@ -3935,7 +3988,7 @@ func _lives_out(source: String) -> void:
 			lines.append(tr(l).replace("{cat}", Settings.cat_name))
 		ui.show_ending(e["title"], lines, func():
 			Music.set_mode("none")
-			var who: String = Story.THREAT_INFO[source]["name"] if Story.THREAT_INFO.has(source) else "a casa"
+			var who: String = tr(Story.THREAT_INFO[source]["name"]) if Story.THREAT_INFO.has(source) else tr("a casa")
 			var start := maxi(1, SaveGame.lives_at(save, day))
 			ui.show_fail({
 				"title": "As sete vidas acabaram", "sub": tr("Noite %d · %s") % [day, _fmt_clock(hour)],
@@ -3958,7 +4011,7 @@ func pause() -> void:
 	Controls.capture(false)
 	Sfx.set_muffle(0.7)
 	var is_night := phase == "night"
-	var t := tr("Noite %d · %s") % [day, _fmt_clock(hour)] if is_night else tr("Dia %d · %s") % [day, "manhã" if phase == "morning" else "fim de tarde"]
+	var t := tr("Noite %d · %s") % [day, _fmt_clock(hour)] if is_night else tr("Dia %d · %s") % [day, tr("manhã") if phase == "morning" else tr("fim de tarde")]
 	ui.show_pause({
 		"title": t,
 		"threats": _night_threat_list() if is_night else [],
@@ -4074,7 +4127,7 @@ func _simulate(dt: float) -> void:
 			for f: House.Faucet in house.faucets:
 				if f.id == "tub":
 					tub_y = f.bottom_y
-			hands.global_position = Vector3(10.42, tub_y - 1.62 + k * 0.5 + sin(phase_t * 1.3) * 0.03, 9.57)
+			hands.global_position = Vector3(10.36, tub_y - 1.62 + k * 0.5 + sin(phase_t * 1.3) * 0.03, 9.51)
 			hands.rotation.y = PI / 2
 			hands.alpha = 0.55 * k
 			hands.rig.pose = "arms_up"
@@ -4362,7 +4415,7 @@ func _hud_update() -> void:
 			if th.enabled and th.stage >= 4 and th.threat_id != "thing" and (att == null or th.stage > att.stage):
 				att = th
 		if att:
-			ui.alert(tr("%s → %s") % [att.display_name, att.target.display_name], Story.THREAT_INFO[att.threat_id]["hint"])
+			ui.alert(tr("%s → %s") % [tr(att.display_name), att.target.display_name], tr(Story.THREAT_INFO[att.threat_id]["hint"]))
 		else:
 			ui.alert(null)
 		var can := controls and cat.mode == "free" and director.can_hiss_at(cat.global_position)

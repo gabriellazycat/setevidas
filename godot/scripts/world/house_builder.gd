@@ -34,10 +34,6 @@ static func build(parent: Node3D) -> Dictionary:
 			n.queue_free()
 	Surfaces.apply_to(shell)
 	_shadow_setup(shell)
-	# the old tree by the balcony pokes its branches through the east wall of the ground floor
-	var tree := shell.find_child("tree_balcony", true, false) as MeshInstance3D
-	if tree:
-		_cut_triangles(tree, AABB(Vector3(-2.0, -3.0, -0.4), Vector3(14.45, 6.35, 10.8)))
 	var furn := Node3D.new()
 	furn.name = "Furniture"
 	parent.add_child(furn)
@@ -161,33 +157,6 @@ static func instance_parts(id: String, parts: Array, height: float, lay := false
 
 
 ## drop every triangle of a mesh that touches `region` (world space)
-static func _cut_triangles(mi: MeshInstance3D, region: AABB) -> void:
-	var src := mi.mesh as ArrayMesh
-	if src == null:
-		return
-	var xf := mi.global_transform
-	var out := ArrayMesh.new()
-	for s in src.get_surface_count():
-		var arr := src.surface_get_arrays(s)
-		var verts: PackedVector3Array = arr[Mesh.ARRAY_VERTEX]
-		var idx = arr[Mesh.ARRAY_INDEX]
-		if idx == null:
-			idx = PackedInt32Array(range(verts.size()))
-		var kept := PackedInt32Array()
-		for i in range(0, idx.size() - 2, 3):
-			if region.has_point(xf * verts[idx[i]]) or region.has_point(xf * verts[idx[i + 1]]) or region.has_point(xf * verts[idx[i + 2]]):
-				continue
-			kept.append(idx[i])
-			kept.append(idx[i + 1])
-			kept.append(idx[i + 2])
-		if kept.is_empty():
-			continue
-		arr[Mesh.ARRAY_INDEX] = kept
-		out.add_surface_from_arrays(src.surface_get_primitive_type(s), arr)
-		out.surface_set_material(out.get_surface_count() - 1, src.surface_get_material(s))
-	mi.mesh = out
-
-
 static func _rel_xform(n: Node3D, root: Node3D) -> Transform3D:
 	var t := Transform3D.IDENTITY
 	var p: Node = n

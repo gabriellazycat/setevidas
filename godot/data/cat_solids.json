@@ -1,0 +1,20 @@
+{
+ "_doc": "Items whose Blender colliders (house_data.json) leave parts the cat walked through (navcheck --catbump). solid: a trimesh of the item's own meshes on LAYER_WORLD (big furniture: the cat stands on it, people and ghosts see it). block: one convex hull around the item on LAYER_CAT_BLOCK (small things on tables and counters, pots: only the cat bumps into them). Names are the item nodes (first node below Furniture / Shell); a trailing * matches every name it starts.",
+ "solid": [
+  "sofa", "armchair", "ROCKING_CHAIR", "kitchen_table", "dining_table", "coffee_table", "chair_coz_a", "chair_coz_b",
+  "chair_jan_*", "desk_chair", "bench", "newel_bottom",
+  "ib_leg-1_001", "ib_leg-1b_001", "ib_leg1_001", "ib_leg1b_001", "line_post", "line_post_001",
+  "washer_a_ring", "washer_b_ring", "toilet_c_lid", "open_box_flap0", "open_box_flap1", "suitcase_attic",
+  "shed", "shed_bench", "outdoor_set", "fallen_log", "log_1_*", "pile_stake_*",
+  "gate", "gate_post_5_6", "gate_post_7_3",
+  "stone_-3_10", "stone_-3_65", "stone_-4_20", "stone_-4_75", "stone_-5_30"
+ ],
+ "block": [
+  "fruit_bowl", "apple_a", "apple_b", "lemon_001", "LAPTOP", "desk_lamp", "teapot", "teapot_jan", "kettle",
+  "jug", "duck", "wine_a", "phone_base", "phone_cup-1", "phone_cup1", "phone_handset_001", "alarm_clock", "frame_quarto",
+  "mirror_quarto", "frame_jan", "lantern", "bust", "bleach_top", "cleaner_top", "plunger", "hatchet",
+  "shed_hatchet", "shed_oil", "sink_faucet_neck_001", "sink_banb_faucet_neck_001", "sink_banc_faucet_neck_001",
+  "tub_faucet_neck_001", "pipe_boiler_001", "GNOME", "plant_sala", "plant_jan", "plant_var_a", "plant_var_b",
+  "GUEST_DUST_001"
+ ]
+}

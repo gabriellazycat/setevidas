@@ -1435,7 +1435,7 @@ func urgency() -> float:
 
 
 func describe_death() -> Dictionary:
-	var where := tr("no quarto de %s") % target.display_name if target.in_bed else "no escuro"
+	var where := tr("no quarto de %s") % target.display_name if target.in_bed else tr("no escuro")
 	return {
 		"title": tr("%s foi levado(a) pela Sombra") % target.display_name,
 		"why": tr("A Sombra atravessou a casa e chegou %s. Ela só se aproxima onde não há luz.") % where,

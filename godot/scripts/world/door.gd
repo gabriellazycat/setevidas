@@ -20,6 +20,7 @@ var state := "closed"
 var locked := false
 var body: StaticBody3D
 var shape: CollisionShape3D
+var leaf_shape: CollisionShape3D   # the leaf while it is open (cat only)
 var _dir_s := 1.0
 var _flat := false
 var _open_angle := FLAT_OPEN
@@ -58,6 +59,27 @@ func _init(d: Dictionary, leaf_node: Node3D, parent: Node3D) -> void:
 	shape.shape = box
 	body.add_child(shape)
 	parent.add_child(body)
+	# the swung leaf itself, for the cat only (the doorway box above goes off once it opens): without it
+	# the cat walked through the open leaf lying against the wall
+	if leaf:
+		var lb := AABB()
+		var first := true
+		for m in [leaf] + leaf.find_children("*", "MeshInstance3D", true, false):
+			if m is MeshInstance3D and (m as MeshInstance3D).mesh:
+				var bb := (leaf.global_transform.affine_inverse() * (m as MeshInstance3D).global_transform) * (m as MeshInstance3D).get_aabb()
+				lb = bb if first else lb.merge(bb)
+				first = false
+		if not first:
+			var lbody := StaticBody3D.new()
+			lbody.collision_layer = HouseBuilder.LAYER_CAT_BLOCK
+			lbody.collision_mask = 0
+			leaf_shape = CollisionShape3D.new()
+			var lbox := BoxShape3D.new()
+			lbox.size = lb.size.max(Vector3(0.03, 0.03, 0.03))
+			leaf_shape.shape = lbox
+			leaf_shape.position = lb.get_center()
+			lbody.add_child(leaf_shape)
+			leaf.add_child(lbody)
 	angle = _angle_for(state)
 	target = angle
 	_apply()
@@ -128,6 +150,8 @@ func _apply() -> void:
 			var k := clampf(angle / 1.62, 0.0, 1.0)
 			leaf.position = _pos0 + _n * WALL_OFFSET * k + _slide * k
 	shape.disabled = angle >= 0.22
+	if leaf_shape:
+		leaf_shape.disabled = not shape.disabled
 
 
 func set_state(s: String, instant := false) -> void:

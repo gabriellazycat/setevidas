@@ -607,6 +607,9 @@ msgstr "Get it! Get the mousie! Hahaha."
 msgid "Já tá com sono, {cat}? Então vamos dormir."
 msgstr "Sleepy already, {cat}? Then let's sleep."
 
+msgid "Agora não dá, vamos dormir."
+msgstr "Not now, let's go to sleep."
+
 #: godot\scripts\game\game.gd:2824
 msgid "Ah! {cat}... eu não conseguia me mexer..."
 msgstr "Ah! {cat}... I couldn't move..."
@@ -1830,7 +1833,7 @@ msgstr "If you're going through something similar, talk to someone."
 
 #: godot\scripts\game\story.gd:271
 msgid "CVV 188 (Brasil) · findahelpline.com"
-msgstr "CVV 188 (Brasil) · findahelpline.com"
+msgstr "CVV 188 (Brazil) · findahelpline.com"
 
 #: godot\scripts\game\story.gd:272
 msgid "Design, código, modelos 3D, texturas e áudio sintetizado"
@@ -3142,3 +3145,39 @@ msgstr "Nobody has said anything yet."
 #: godot\scripts\ui\ui.gd
 msgid "NOVA ESTA NOITE"
 msgstr "NEW TONIGHT"
+
+#: godot\scripts\ui\ui.gd
+msgid "COMO EVITAR"
+msgstr "HOW TO AVOID"
+
+#: layout.json HIDE_SPOTS
+msgid "atrás do sofá"
+msgstr "behind the sofa"
+
+#: layout.json HIDE_SPOTS
+msgid "sob a mesa da cozinha"
+msgstr "under the kitchen table"
+
+#: layout.json HIDE_SPOTS
+msgid "sob a escrivaninha"
+msgstr "under the desk"
+
+#: layout.json HIDE_SPOTS
+msgid "entre as caixas"
+msgstr "between the boxes"
+
+#: layout.json HIDE_SPOTS
+msgid "sob a tábua de passar"
+msgstr "under the ironing board"
+
+#: layout.json HIDE_SPOTS
+msgid "dentro do galpão"
+msgstr "inside the shed"
+
+#: layout.json HIDE_SPOTS
+msgid "atrás da pilha de lenha"
+msgstr "behind the woodpile"
+
+#: layout.json HIDE_SPOTS
+msgid "no meio do arbusto"
+msgstr "in the middle of the bush"

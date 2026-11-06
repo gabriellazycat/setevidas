@@ -218,13 +218,6 @@ def bathtub(coll, x0, z0, x1, z1, y=3.0):
     lib.set_material(ob, "enamel")
     smooth(ob)
     objs = [ob]
-    # rolled rim
-    rim = []
-    for i in range(48):
-        a = i / 48 * 2 * math.pi
-        rim.append((cx + math.cos(a) * (w * 0.5 - 0.02), base + h + 0.005, cz + math.sin(a) * (d * 0.5 - 0.015)))
-    rim.append(rim[0])
-    objs.append(lib.tube("tub_rim", coll, rim, 0.022, "enamel", segments=10))
     # claw feet
     for fx in (x0 + 0.22, x1 - 0.22):
         for fz in (z0 + 0.14, z1 - 0.14):

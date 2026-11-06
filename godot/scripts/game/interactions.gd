@@ -384,7 +384,7 @@ func register(g: Game) -> void:
 	for spot in Layout.data()["HIDE_SPOTS"]:
 		var sp := Layout.v3(spot["p"])
 		add({"id": "hide_" + str(spot["id"]), "pos": sp, "radius": 0.95, "above": 0.6, "below": 0.5, "omni": true, "priority": 1,
-			"prompt": func(): return tr("Esconder-se (%s)") % spot["name"],
+			"prompt": func(): return tr("Esconder-se (%s)") % tr(spot["name"]),
 			"enabled": func(): return night.call() and cat.mode == "free",
 			"on_interact": func(): g.hide_at(spot)})
 	# ---- cardboard boxes: pushed around in the morning, a one-time refuge at night

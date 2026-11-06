@@ -127,6 +127,7 @@ class Mark:
 func build() -> void:
 	space = get_world_3d().direct_space_state
 	data = HouseBuilder.build(self)
+	CatSolids.build(self)
 	nodes = data["nodes"]
 	shell = get_node("Shell")
 	nav = NavGraph.new()
@@ -290,8 +291,10 @@ func _add_device(id: String, nm: String, room: String, pos: Vector3, outlet_key:
 	pm.albedo_color = Color(0.05, 0.05, 0.05)
 	pm.roughness = 0.4
 	dv.plug.material_override = pm
+	dv.plug.name = "PLUG_" + id
 	add_child(dv.plug)
 	dv.cord = MeshInstance3D.new()
+	dv.cord.name = "CORD_" + id
 	dv.cord.material_override = pm
 	add_child(dv.cord)
 	devices.append(dv)

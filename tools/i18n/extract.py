@@ -62,6 +62,8 @@ def collect():
     lay = json.load(open(os.path.join(ROOT, "godot", "data", "layout.json"), encoding="utf-8"))
     for r in lay["ROOMS"]:
         found.setdefault(r["name"], "layout.json ROOMS")
+    for h in lay.get("HIDE_SPOTS", []):
+        found.setdefault(h["name"], "layout.json HIDE_SPOTS")
     for d in lay["DOORS"]:
         if "name" in d:
             found.setdefault(d["name"], "layout.json DOORS")

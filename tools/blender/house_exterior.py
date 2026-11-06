@@ -201,7 +201,8 @@ def porch_lamp(coll):
 # ---------------------------------------------------------------------- trees
 
 
-def dead_tree(coll, name, x, ty, z, seed, height=6.5, trunk_r=0.28, spread=1.0, lean=0.0):
+def dead_tree(coll, name, x, ty, z, seed, height=6.5, trunk_r=0.28, spread=1.0, lean=0.0, avoid=None):
+    """avoid: game-space box ((x0, y0, z0), (x1, y1, z1)); a branch that enters it is pruned there, twigs and all."""
     r = lib.rng(seed)
     bm = bmesh.new()
     sk = bm.verts.layers.skin.verify()
@@ -246,6 +247,30 @@ def dead_tree(coll, name, x, ty, z, seed, height=6.5, trunk_r=0.28, spread=1.0, 
     for v, rad in radii:
         v[sk].radius = (rad, rad)
     root[sk].use_root = True
+    rot = r.uniform(0, 2 * PI)
+    if avoid:
+        # cutting the finished mesh left the twigs of a cut branch floating: cut the skeleton instead
+        lo, hi = avoid
+        base = gv(x, ty, z)
+        ca, sa = math.cos(rot), math.sin(rot)
+        rad_of = {v: rad for v, rad in radii}
+
+        def inside(v):
+            p = v.co
+            g = lib.bg(Vector((p.x * ca - p.y * sa, p.x * sa + p.y * ca, p.z)) + base)
+            m = rad_of.get(v, 0.0) + 0.05
+            return all(lo[k] - m < g[k] < hi[k] + m for k in range(3))
+
+        keep = {root}
+        todo = [root]
+        while todo:
+            v = todo.pop()
+            for e in v.link_edges:
+                w = e.other_vert(v)
+                if w not in keep and not inside(w):
+                    keep.add(w)
+                    todo.append(w)
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if v not in keep], context="VERTS")
     me = bpy.data.meshes.new(name)
     bm.to_mesh(me)
     bm.free()
@@ -255,7 +280,7 @@ def dead_tree(coll, name, x, ty, z, seed, height=6.5, trunk_r=0.28, spread=1.0, 
     lib.add_mod(ob, "SUBSURF", levels=1, render_levels=1)
     lib.apply_mods(ob)
     ob.location = gv(x, ty, z)
-    ob.rotation_euler = (0, 0, r.uniform(0, 2 * PI))
+    ob.rotation_euler = (0, 0, rot)
     bpy.context.view_layer.update()
     lib.set_material(ob, "bark")
     lib.world_uv_object(ob, 1.0)
@@ -272,7 +297,9 @@ def trees(coll, ty):
     for i, (x, z, seed, h, rr) in enumerate(spots):
         dead_tree(coll, f"tree_{i}", x, ty, z, seed * 17, h, rr)
     # the old tree whose branches reach over the balcony railing
-    dead_tree(coll, "tree_balcony", 13.8, ty, 1.4, 99, 9.0, 0.42, spread=1.2, lean=-0.25)
+    # (the ground floor's east wall is in the way: those branches are pruned off)
+    dead_tree(coll, "tree_balcony", 13.8, ty, 1.4, 99, 9.0, 0.42, spread=1.2, lean=-0.25,
+              avoid=((-2.0, -3.0, -0.4), (12.45, 3.35, 10.4)))
     # hedges / shrubs along the facade
     r = lib.rng(9)
     for i, (x, z) in enumerate(((0.8, -0.7), (2.4, -0.8), (3.8, -0.65), (8.6, -0.7), (10.4, -0.8), (11.6, -0.65), (-0.75, 3.0), (-0.75, 7.0), (12.75, 7.5), (-6.5, -4.6), (18.5, -4.5))):

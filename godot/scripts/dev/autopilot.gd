@@ -67,6 +67,9 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if args.has("lang"):
 		TranslationServer.set_locale(str(args["lang"]))
+		# the menu was built before this: rebuild it in the new language
+		if g and g.mode == "menu":
+			g.to_menu.call_deferred()
 
 func _process(dt: float) -> void:
 	if g == null or g.mode == "boot":
@@ -89,6 +92,8 @@ func _process(dt: float) -> void:
 			tr.scene = str(args["scene"])
 			add_child(tr)
 	t += dt
+	if args.has("i18nwatch"):
+		_i18n_watch(dt)
 	_apply_overrides()
 	if args.has("e2e"):
 		_e2e(dt)
@@ -109,6 +114,43 @@ func _process(dt: float) -> void:
 			shots += 1
 			if shots >= int(args.get("count", "3")):
 				get_tree().quit()
+
+
+## --i18nwatch (with --lang=en): every 0.4 s, prints once each visible text on screen that still looks
+## Portuguese after translation ("I18N <node path> | <text>")
+var _i18n_t := 0.0
+var _i18n_seen := {}
+const _PT := "(?i)[ãõçáéíóúâêôà]|\\b(de|da|das|dos|que|não|com|para|uma|ela|ele|seu|sua|está|você|na|nas|nos|pelo|pela|mais|até|gato|noite|tarde|porta|cama|e)\\b"
+
+
+func _i18n_watch(dt: float) -> void:
+	_i18n_t += dt
+	if _i18n_t < 0.4:
+		return
+	_i18n_t = 0.0
+	var re := RegEx.create_from_string(_PT)
+	var bb := RegEx.create_from_string("\\[[^\\]]*\\]")
+	var stack: Array[Node] = [get_tree().root]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if (n is CanvasItem and not (n as CanvasItem).is_visible_in_tree()) or (n is Node3D and not (n as Node3D).is_visible_in_tree()):
+			continue
+		var txt := ""
+		if n is Label or n is Button or n is Label3D or n is RichTextLabel or n is LineEdit:
+			txt = n.atr(str(n.get("text")))
+		if n is TabBar:
+			for i in (n as TabBar).tab_count:
+				txt += " " + n.atr((n as TabBar).get_tab_title(i))
+		if n is OptionButton:
+			for i in (n as OptionButton).item_count:
+				txt += " " + n.atr((n as OptionButton).get_item_text(i))
+		if txt != "":
+			var plain := bb.sub(txt, "", true).strip_edges()
+			if re.search(plain) and not _i18n_seen.has(plain):
+				_i18n_seen[plain] = true
+				print("I18N %s | %s" % [str(n.get_path()).substr(0, 80), plain.replace("\n", " / ").substr(0, 160)])
+		for c in n.get_children():
+			stack.push_back(c)
 
 
 ## --shadowtest=1|2|3: 1 look at it -> it flees to a nook; 2 stare at the nook -> peek, red, charge, a

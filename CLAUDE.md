@@ -75,7 +75,16 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   invisíveis só para o gato (`HouseBuilder.LAYER_CAT_BLOCK`). Fora da cerca/abaixo do chão ele volta ao
   último ponto. Lá fora, "Arranhar a porta" (frente/fundos) leva para dentro. Rotas das pessoas e
   fantasmas conferidas com `godot --headless --path godot res://scenes/navcheck.tscn` (deve dar
-  `NAVCHECK CLEAN`; `-- --cattest` testa o gato). Não há mais cobertor.
+  `NAVCHECK CLEAN`; `-- --cattest` testa o gato). Não há mais cobertor. Esbarrão do gato em tudo:
+  `godot --headless --fixed-fps 60 --path godot res://scenes/navcheck.tscn -- --catbump[=nome,...]` (~15 min a
+  casa toda; deve dar `CATBUMP DONE 0`): o gato anda e corre contra cada objeto por 12 lados e cruza os
+  tampos onde pode subir, com as formas encolhidas 3 cm contra a malha visível do objeto; também confere os
+  esconderijos (`BUMPHIDE`). Passagem intencional em `BUMP_PASS` (mato, horta, duto, caminha, tigelas, fios).
+  O que os colisores do Blender deixam de fora vira colisor feito da própria malha em `godot/data/cat_solids.json`
+  (`CatSolids`): `solid` = trimesh na camada do mundo (móveis), `block` = casca convexa só para o gato
+  (coisas pequenas, vasos). A folha da porta aberta tem caixa só do gato (`Door.leaf_shape`); a caixa da
+  mudança ganha colisor ao ir ao chão (`Game._solid_prop`); esconder-se do outro lado de um móvel entra
+  pela saída do esconderijo (`hide_at`).
 - **Partículas e luz** (detalhes em `docs/ESTILO_VISUAL.md`): poeira fina na casa toda (`House.haze`, `FX.haze_mat`) e uma nuvem densa nos feixes de sol/lua por janela
   (`FX.beam_dust`, `House.aim_beams`) com o feixe desenhado (`light_shaft.gdshader`, `House._shaft_mesh`)
   e uma neblina interna `fog_in` (tudo desligado no low), folhas, vaga-lumes no

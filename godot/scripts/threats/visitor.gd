@@ -83,7 +83,7 @@ func on_stage(s: int, _prev: int) -> void:
 		Sfx.voice(cur["knock"], 10, "call", 1.0)
 		get_tree().create_timer(0.3).timeout.connect(func():
 			if stage >= 2 and cur:
-				w.hint(tr("“Clara... é a mamãe... abre %s...”") % ("a porta" if cur["id"] == "front" else "a janela"), 3.2))
+				w.hint(tr("“Clara... é a mamãe... abre %s...”") % (tr("a porta") if cur["id"] == "front" else tr("a janela")), 3.2))
 	if s == 3 and cur:
 		_send_owner()
 	if s == 5 and cur:

@@ -247,7 +247,7 @@ func urgency() -> float:
 func describe_death() -> Dictionary:
 	return {
 		"title": tr("%s foi levado(a)") % target.display_name,
-		"why": tr("%s chegou até %s.") % [display_name, target.display_name],
+		"why": tr("%s chegou até %s.") % [tr(display_name), target.display_name],
 		"tip": "Fique de olho nos sinais sonoros e resolva a ameaça antes que ela chegue.",
 	}
 

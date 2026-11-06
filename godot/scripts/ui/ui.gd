@@ -104,7 +104,7 @@ class HoldRing extends Control:
 			draw_string(font, Vector2(c.x - w / 2, c.y + fs * 0.36), key, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color("#f2ead9"))
 			if needs_hold:
 				var hs := 10
-				var label := "Segure"
+				var label := tr("Segure")
 				var lw := font.get_string_size(label, HORIZONTAL_ALIGNMENT_CENTER, -1, hs).x
 				var at := Vector2(c.x - lw / 2, size.y + 13)
 				draw_string(font, at + Vector2(0, 1), label, HORIZONTAL_ALIGNMENT_LEFT, -1, hs, Color(0, 0, 0, 0.85))
@@ -1066,7 +1066,7 @@ func hiss(state: String) -> void:
 	if state == "off":
 		create_tween().tween_property(_hiss, "modulate:a", 0.0, 0.2)
 		return
-	_hiss_lbl.text = "%s  %s" % [kbd("hiss"), "Bufar (pouco Foco)" if state == "weak" else "Bufar"]
+	_hiss_lbl.text = "%s  %s" % [kbd("hiss"), tr("Bufar (pouco Foco)") if state == "weak" else tr("Bufar")]
 	_hiss.add_theme_stylebox_override("panel", _box(Color(0.03, 0.04, 0.06, 0.7), C_MUTED if state == "weak" else C_CYAN, 2, Vector4(12, 6, 14, 6)))
 	create_tween().tween_property(_hiss, "modulate:a", 1.0, 0.2)
 
@@ -1483,11 +1483,11 @@ func show_fail(o: Dictionary) -> void:
 		w.custom_minimum_size.x = 480
 		p.add_child(w)
 	for f in o.get("facts", []):
-		p.add_child(_label("•  " + str(f), sans, 13, Color("#bfb6a8")))
+		p.add_child(_label("•  " + tr(str(f)), sans, 13, Color("#bfb6a8")))
 	if o.get("tip", "") != "":
 		var tp := PanelContainer.new()
 		tp.add_theme_stylebox_override("panel", _box(Color(0.91, 0.71, 0.42, 0.07), C_AMBER, 2))
-		var r := _rich("[b][color=#e8b46a]COMO EVITAR[/color][/b]\n" + str(o["tip"]), 14)
+		var r := _rich("[b][color=#e8b46a]%s[/color][/b]\n%s" % [tr("COMO EVITAR"), tr(str(o["tip"]))], 14)
 		r.custom_minimum_size.x = 450
 		tp.add_child(r)
 		p.add_child(tp)

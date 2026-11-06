@@ -81,7 +81,7 @@ def furnish(L, coll):
     ph(coll, "vintage_grandfather_clock_01", (0.24, 0, 1.0), HALF, fit=(None, 2.15, None), col="box", name="CLOCK")
     REG.nodes["clock"] = [0.3, 1.75, 1.0]
     ph(coll, "potted_plant_01", (4.55, 0, 5.05), 0.4, fit=(None, 1.25, None), col=None, name="plant_sala")
-    boxes(coll, 4.5, 0.55, 0, [(0.55, 0.42, 0.5), (0.45, 0.36, 0.42)], 1, "box_sala_a")
+    boxes(coll, 3.85, 0.55, 0, [(0.55, 0.42, 0.5), (0.45, 0.36, 0.42)], 1, "box_sala_a")
     boxes(coll, 4.45, 3.2, 0, [(0.5, 0.35, 0.45)], 2, "box_sala_b")
     C.radiator(coll, 1.6, 3.4, 0.1, 0.12, 0.6, 1)
     painting(coll, "fancy_picture_frame_01", "x", 5.44, -1, 2.5, 1.72, 0.7, "paint_sala_tv")
@@ -100,20 +100,20 @@ def furnish(L, coll):
     ph(coll, "dining_chair_02", (2.45, 0, 8.72), 0.0, fit=(None, 0.95, None), col=("seat", 0.47, 0.95, 0.25, "-z"), name="desk_chair")
     ph(coll, "classic_laptop", (2.4, 0.71, 9.55), PI, fit=(0.36, None, None), name="LAPTOP")
     ph(coll, "desk_lamp_arm_01", (3.05, 0.71, 9.7), PI + 0.5, fit=(None, 0.55, None), name="desk_lamp")
-    ph(coll, "wooden_bookshelf_worn", (0.3, 0, 6.3), HALF, fit=(1.2, 2.0, 0.42), col="box", name="shelf_esc")
+    ph(coll, "wooden_bookshelf_worn", (0.3, 0, 6.95), HALF, fit=(1.0, 2.0, 0.42), col="box", name="shelf_esc")
     ph(coll, "drawer_cabinet", (4.35, 0, 5.82), 0.0, fit=(1.0, None, 0.5), col="box", name="filing")
     ph(coll, "painted_wooden_nightstand", (0.32, 0, 7.75), HALF, fit=(None, 0.6, None), col="box", name="side_esc")
     boxes(coll, 4.2, 7.3, 0, [(0.6, 0.45, 0.55), (0.5, 0.4, 0.45), (0.38, 0.3, 0.36)], 3, "box_esc")
     painting(coll, "hanging_picture_frame_02", "z", 4.94, -1, 7.4, 1.6, 0.7, "paint_esc")
 
     # ================================================================== HALL
-    ph(coll, "ClassicNightstand_01", (7.2, 0, 0.85), -HALF, fit=(None, 0.8, None), col="box", name="shoe_cabinet")
+    ph(coll, "ClassicNightstand_01", (7.2, 0, 1.3), -HALF, fit=(None, 0.8, None), col="box", name="shoe_cabinet")
     C.coat_rack(coll, 5.35, 0, 0.45)
     ph(coll, "side_table_01", (7.2, 0, 2.95), -HALF, fit=(None, 0.7, 0.42), col="box", name="phone_table")
     C.rotary_phone(coll, 7.24, 0.7, 2.82, -HALF)
     C.rug(coll, "rug_hall", 5.55, 0.4, 6.95, 3.3, 0, "rug_runner")
     ph(coll, "painted_wooden_bench", (6.6, 0, 9.72), PI, fit=(0.95, None, 0.42), col=("seat", 0.45, 0.85, 0.35, "+z"), name="bench")
-    ph(coll, "ornate_mirror_01", (7.43, 1.05, 0.85), -HALF, fit=(None, 0.85, None), anchor="back", name="mirror_hall")
+    ph(coll, "ornate_mirror_01", (7.43, 1.05, 1.3), -HALF, fit=(None, 0.85, None), anchor="back", name="mirror_hall")
     painting(coll, "hanging_picture_frame_02", "z", 5.07, 1, 6.6, 1.65, 0.6, "paint_hall_w")
     painting(coll, "fancy_picture_frame_01", "z", 7.43, -1, 8.2, 1.65, 0.6, "paint_hall_e")
 
@@ -122,8 +122,6 @@ def furnish(L, coll):
     C.faucet(coll, "sink_faucet", 8.8, 0.9, 9.86, toward=(0, 0, -1), reach=0.17, height=0.24)
     REG.nodes["faucet_coz"] = {"spout": [8.8, 1.07, 9.69], "handle": [8.72, 0.95, 9.86], "basin": [8.8, 0.72, 9.6, 0.6, 0.4], "floor": [8.8, 0.0, 9.0]}
     ph(coll, "electric_stove", (9.76, 0, 9.62), PI, fit=(0.52, None, None), col="box", name="stove")
-    C.counter(coll, "counter_ne", 10.02, 9.35, 10.42, 9.94, 0.0, 0.9, front="-z")
-    C.upper_cabinet(coll, "upper_coz", 9.0, 9.6, 10.42, 9.94, 1.5, 2.2, front="-z")
     C.fridge(coll, 7.56, 3.56, 8.26, 4.26, 0.0, 1.75, front="+z")
     ph(coll, "round_wooden_table_01", (9.2, 0, 6.7), 0.0, fit=(None, 0.76, None), col="top", name="kitchen_table")
     ph(coll, "painted_wooden_chair_01", (9.2, 0, 5.82), 0.0, fit=(None, 0.95, None), col=("seat", 0.46, 0.95, 0.22, "-z"), name="chair_coz_a")
@@ -158,7 +156,7 @@ def furnish(L, coll):
 
     # ================================================================== DESPENSA (back wing)
     ph(coll, "steel_frame_shelves_01", (11.68, 0, 11.4), -HALF, fit=(1.6, 1.9, 0.5), col="box", name="shelf_desp_e")
-    ph(coll, "steel_frame_shelves_01", (8.55, 0, 12.66), PI, fit=(1.2, 1.9, 0.45), col="box", name="shelf_desp_b")
+    ph(coll, "steel_frame_shelves_01", (9.0, 0, 12.66), PI, fit=(1.2, 1.9, 0.45), col="box", name="shelf_desp_b")
     ph(coll, "wooden_crate_01", (10.0, 0, 10.45), 0.2, fit=(0.6, None, None), col="box", name="crate_desp")
     boxes(coll, 11.45, 12.6, 0, [(0.5, 0.4, 0.45), (0.42, 0.3, 0.4)], 41, "box_desp")
     ph(coll, "jug_01", (11.6, 0.885, 11.0), 0.3, fit=(0.2, None, None), name="jug_desp")
@@ -245,7 +243,7 @@ def furnish(L, coll):
     ph(coll, "GothicCommode_01", (2.8, q, 5.15), PI, fit=(1.2, 1.0, 0.56), col="box", name="dresser")
     ph(coll, "ornate_mirror_01", (2.8, q + 1.15, 5.43), PI, fit=(None, 0.8, None), anchor="back", name="mirror_quarto")
     ph(coll, "standing_picture_frame_01", (2.4, q + 1.0, 5.2), PI - 0.3, fit=(None, 0.22, None), name="frame_quarto")
-    boxes(coll, 4.5, 0.5, q, [(0.55, 0.4, 0.5), (0.42, 0.34, 0.4)], 21, "box_quarto")
+    boxes(coll, 3.85, 0.5, q, [(0.55, 0.4, 0.5), (0.42, 0.34, 0.4)], 21, "box_quarto")
     painting(coll, "fancy_picture_frame_02", "z", 4.94, -1, 3.2, 4.6, 0.5, "paint_quarto")
 
     # ================================================================== HÓSPEDES
@@ -274,14 +272,15 @@ def furnish(L, coll):
     painting(coll, "fancy_picture_frame_01", "x", 9.94, -1, 6.2, 4.6, 0.55, "paint_cor_b")
 
     # ================================================================== BANHEIRO DE CIMA
-    C.bathtub(coll, 9.9, 9.16, 11.94, 9.94, q)
+    # 2 cm off the inner faces of the walls at x 11.9 and z 9.9
+    C.bathtub(coll, 9.84, 9.1, 11.88, 9.88, q)
     sink_c, spout_c = C.pedestal_sink(coll, "sink_banc", 8.2, 6.32, q, "+z")
     REG.nodes["faucet_banc"] = {"spout": list(spout_c)}
     C.mirror(coll, "mirror_banc", "x", 6.06, 1, 7.95, 8.45, q + 1.2, q + 1.85)
     C.toilet(coll, "toilet_c", 11.52, 6.42, q, "+z")
     C.counter(coll, "cab_banc", 9.9, 6.06, 10.9, 6.55, q, 0.9, front="+z", body="wood_paint", top="countertop")
-    C.smooth(lib.lathe("hamper", coll, [(0.0, 0.0), (0.2, 0.0), (0.22, 0.5), (0.0, 0.5)], "hessian", pos=(8.22, q, 9.62), segments=20, cap=True))
-    REG.collider(8.0, q, 9.4, 8.45, q + 0.5, 9.85, tag="furniture")
+    C.smooth(lib.lathe("hamper", coll, [(0.0, 0.0), (0.2, 0.0), (0.22, 0.5), (0.0, 0.5)], "hessian", pos=(9.2, q, 9.62), segments=20, cap=True))
+    REG.collider(8.98, q, 9.4, 9.43, q + 0.5, 9.85, tag="furniture")
     C.soft_box("towel_banc", coll, 11.2, q + 1.6, 9.92, 0.4, 0.6, 0.03, "towel_blue")
 
     # ================================================================== VARANDA

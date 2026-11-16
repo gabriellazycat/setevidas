@@ -48,9 +48,13 @@ static var POSES := {
 	# both hands resting on the belly (none under the body or up in the air)
 	"lieSide": P({"hips": Vector3(-PI / 2, 0.55, 0), "hips_y": -0.43, "thL": Vector3(-0.35, 0, 0), "knL": Vector3(0.55, 0, 0), "thR": Vector3(-0.2, 0, 0), "knR": Vector3(0.35, 0, 0), "shL": Vector3(-0.3, 0, -0.15), "shR": Vector3(-0.3, 0, 0.15), "elL": Vector3(-1.3, 0, 0), "elR": Vector3(-1.3, 0, 0), "neck": Vector3(0.2, 0, 0), "head": Vector3(-0.1, -0.35, 0)}),
 	# sitting up against the pillow: hands on the thighs, elbows bent
-	"sitUp": P({"hips_y": -0.4, "thL": Vector3(-1.5, 0, 0), "thR": Vector3(-1.5, 0, 0), "knL": Vector3(0.15, 0, 0), "knR": Vector3(0.15, 0, 0), "shL": Vector3(-0.5, 0, 0.12), "shR": Vector3(-0.5, 0, -0.12), "elL": Vector3(-0.75, 0, 0), "elR": Vector3(-0.75, 0, 0), "spine": Vector3(0.12, 0, 0)}),
-	"hug": P({"hips_y": -0.42, "thL": Vector3(-2.3, 0, 0), "thR": Vector3(-2.3, 0, 0), "knL": Vector3(2.2, 0, 0), "knR": Vector3(2.2, 0, 0), "spine": Vector3(0.45, 0, 0), "chest": Vector3(0.2, 0, 0), "neck": Vector3(0.3, 0, 0), "head": Vector3(0.25, 0, 0), "shL": Vector3(-1.25, 0, 0.1), "shR": Vector3(-1.25, 0, -0.1), "elL": Vector3(-1.4, 0, 0), "elR": Vector3(-1.4, 0, 0)}),
-	"cry": P({"hips_y": -0.42, "thL": Vector3(-2.3, 0, 0), "thR": Vector3(-2.3, 0, 0), "knL": Vector3(2.2, 0, 0), "knR": Vector3(2.2, 0, 0), "spine": Vector3(0.5, 0, 0), "chest": Vector3(0.25, 0, 0), "neck": Vector3(0.35, 0, 0), "head": Vector3(0.35, 0, 0), "shL": Vector3(-2.2, 0, 0.35), "shR": Vector3(-2.2, 0, -0.35), "elL": Vector3(-2.3, 0, 0), "elR": Vector3(-2.3, 0, 0)}),
+	# (legs measured against the mattress: thighs a little above level, the heels rest on it)
+	"sitUp": P({"hips_y": -0.4, "thL": Vector3(-1.68, 0, 0), "thR": Vector3(-1.68, 0, 0), "knL": Vector3(0.12, 0, 0), "knR": Vector3(0.12, 0, 0), "shL": Vector3(-0.5, 0, 0.12), "shR": Vector3(-0.5, 0, -0.12), "elL": Vector3(-0.75, 0, 0), "elR": Vector3(-0.75, 0, 0), "spine": Vector3(0.12, 0, 0)}),
+	# hugging the knees / crying on them: knees high, the shins slant down so the feet rest on the
+	# mattress (knee 2.2 put the shins straight down, ~20 cm into it); the trunk and head straighter, the
+	# forehead on the knees (bent further, the face sank into them)
+	"hug": P({"hips_y": -0.42, "thL": Vector3(-2.6, 0, 0), "thR": Vector3(-2.6, 0, 0), "knL": Vector3(1.8, 0, 0), "knR": Vector3(1.8, 0, 0), "spine": Vector3(0.28, 0, 0), "chest": Vector3(0.1, 0, 0), "neck": Vector3(0.12, 0, 0), "head": Vector3(-0.05, 0, 0), "shL": Vector3(-1.25, 0, 0.1), "shR": Vector3(-1.25, 0, -0.1), "elL": Vector3(-1.4, 0, 0), "elR": Vector3(-1.4, 0, 0)}),
+	"cry": P({"hips_y": -0.42, "thL": Vector3(-2.6, 0, 0), "thR": Vector3(-2.6, 0, 0), "knL": Vector3(1.8, 0, 0), "knR": Vector3(1.8, 0, 0), "spine": Vector3(0.32, 0, 0), "chest": Vector3(0.12, 0, 0), "neck": Vector3(0.18, 0, 0), "head": Vector3(0.08, 0, 0), "shL": Vector3(-2.2, 0, 0.35), "shR": Vector3(-2.2, 0, -0.35), "elL": Vector3(-2.3, 0, 0), "elR": Vector3(-2.3, 0, 0)}),
 	"paralysis": P({"hips_y": -0.4, "thL": Vector3(-1.5, 0, 0), "thR": Vector3(-1.5, 0, 0), "spine": Vector3(-0.1, 0, 0), "neck": Vector3(-0.25, 0, 0), "head": Vector3(-0.2, 0, 0), "shL": Vector3(-0.4, 0, 0.2), "shR": Vector3(-0.4, 0, -0.2), "elL": Vector3(-0.35, 0, 0), "elR": Vector3(-0.35, 0, 0)}),
 	"kneel": P({"hips_y": -0.44, "thL": Vector3(0.05, 0, 0), "thR": Vector3(0.05, 0, 0), "knL": Vector3(1.55, 0, 0), "knR": Vector3(1.55, 0, 0), "spine": Vector3(0.7, 0, 0), "chest": Vector3(0.2, 0, 0), "neck": Vector3(0.1, 0, 0), "shL": Vector3(-1.3, 0, 0.15), "shR": Vector3(-1.3, 0, -0.15), "elL": Vector3(-0.3, 0, 0), "elR": Vector3(-0.3, 0, 0)}),
 	"sit": P({"hips_y": -0.44, "thL": Vector3(-1.5, 0, 0.06), "thR": Vector3(-1.5, 0, -0.06), "knL": Vector3(1.5, 0, 0), "knR": Vector3(1.5, 0, 0), "shL": Vector3(-0.3, 0, 0.1), "shR": Vector3(-0.3, 0, -0.1), "elL": Vector3(-0.8, 0, 0), "elR": Vector3(-0.8, 0, 0)}),
@@ -149,6 +153,10 @@ const HOLD_ARMS := {
 	"book_open": {"shL": Vector3(-0.8, 0, 0.15), "elL": Vector3(-1.3, 0, 0), "shR": Vector3(-0.8, 0, -0.15), "elR": Vector3(-1.3, 0, 0)},
 	"book_open_stand": {"shL": Vector3(-0.6, 0, 0.15), "elL": Vector3(-1.7, 0, 0), "shR": Vector3(-0.6, 0, -0.15), "elR": Vector3(-1.7, 0, 0)},
 }
+# held in both hands by the sides (Clara): each hand IK'd onto the middle of the thing's side face,
+# [height on the side (0 bottom .. 1 top), depth (0 back, toward her .. 1 front), out past the face (m)];
+# the forearms then wrap the sides instead of going through the thing
+const SIDE_GRIP := {"box": [0.4, 0.3, 0.06], "cushion": [0.5, 0.45, 0.015]}
 # [bone (or "hands": between them), offset in the body's frame, optional tilt (Euler, body frame)]
 const HOLD_AT := {
 	"box": ["spine_02", Vector3(0, -0.14, 0.3)],
@@ -161,6 +169,10 @@ const HOLD_AT := {
 }
 # random life while standing idle
 const IDLE_GESTURES := {"clara": ["hair", "look_back", "stretch"], "davi": ["glasses", "glasses", "cross_arms"]}
+
+# the skin under the clothes: 1 cut (the game), 0 drawn, 2 painted red (dev check, --skinmask=2)
+static var skin_mask_mode := 1.0
+static var LAYER_BACK := 0.015        # metres (dev: clara_survey --layerback=M)
 
 var who := "clara"
 var outfits := {}         # "day"/"night" -> {root, skel, body, maps, tree, ik...}
@@ -175,6 +187,10 @@ var style := "normal"     # normal | hypno | hurry
 var tremble := 0.0
 var eyes_wide := 0.0
 var asleep := false
+var bed := false          # in bed (Owner.in_bed): the hair springs get the mattress / pillow as a floor
+var bed_sit_lift := 0.0   # metres the hips rise sitting up in bed (sitUp / hug / cry); per person, cfg
+var _bed_sit_w := 0.0
+const BED_SIT := ["sitUp", "hug", "cry"]
 var cur := {}             # joint -> Euler the procedural layer is at
 var wj := {}              # joint -> 0..1 how much the procedural layer overrides the clip
 var hips_y := 0.0
@@ -225,7 +241,10 @@ var _move_k := 0.0                # 0..1 idle -> walk blend, eased (speed jumps 
 var _hand_w := 0.0
 var _hand_w_l := 0.0
 var _book_w := 0.0
+var _side_w := 0.0                  # a box / cushion held by its sides: the hands IK'd onto them
 var _belly_w := 0.0                 # lying on her back: free hands IK'd onto the sheet by the hips
+var _fix_w := {}                    # ARM_FIX key -> 0..1, eased in and out with its situation
+static var arm_fix_tune := {}       # dev (clara_survey --armfix=FILE.json): key -> fix, over ARM_FIX
 var _mood := {"joy": 0.0, "surprised": 0.0, "sorrow": 0.0, "eye_joy": 0.0}
 var _mood_want := {"joy": 0.0, "surprised": 0.0, "sorrow": 0.0, "eye_joy": 0.0}
 var _mood_hold := 0.0
@@ -379,6 +398,12 @@ func _toon_material(src: BaseMaterial3D, spec: Dictionary, part: String, key: St
 		ol.set_shader_parameter("width", {"body": 0.0014, "cloth": 0.0018, "hair": 0.0012}[part])
 		ol.set_shader_parameter("alpha_cut", float(spec.get("cutoff", 0.5)))
 		m.next_pass = ol
+	# Clara's trousers / skirt: the inner layer gives way by 1.5 cm (a thigh raised on the stairs went
+	# through the vest's hem); the outer clothes, hands and the cat win where they lie on it
+	if part == "cloth" and "bottoms" in key and who == "clara":
+		m.set_shader_parameter("layer_back", LAYER_BACK)
+		if m.next_pass:
+			(m.next_pass as ShaderMaterial).set_shader_parameter("layer_back", LAYER_BACK)
 	return m
 
 
@@ -402,7 +427,14 @@ func _dress_anime(root: Node, outfit: String) -> void:
 		for si in m.mesh.get_surface_count():
 			var src := m.mesh.surface_get_material(si) as BaseMaterial3D
 			var key: String = src.resource_name if src else ""
-			m.set_surface_override_material(si, _toon_material(src, toon.get(key, {}), part, key.to_lower()))
+			var mat := _toon_material(src, toon.get(key, {}), part, key.to_lower())
+			# the skin under the clothes is cut (its mask is the body's second UV map, build_vroid.py)
+			if part == "body" and m.mesh.surface_get_format(si) & Mesh.ARRAY_FORMAT_TEX_UV2:
+				var sm := mat as ShaderMaterial
+				while sm:
+					sm.set_shader_parameter("skin_mask", skin_mask_mode)
+					sm = sm.next_pass as ShaderMaterial
+			m.set_surface_override_material(si, mat)
 	o["blink"] = blinkers
 
 
@@ -833,8 +865,76 @@ func _build_springs(o: Dictionary) -> void:
 			cap.height = 0.42
 			cap.position_offset = Vector3(0, 0.2, 0)
 			sim.add_child(cap)
+	# the trunk, hips and arms too, a little inside the clothes: hair and skirt slide around them
+	# instead of through them (arms raised in a stretch, the braids on the chest, a hand at the ear)
+	for c in SPRING_BODY:
+		_bone_capsule(sim, sk, c[0], c[1], c[2])
+	for sd in ["l", "r"]:
+		var hand := SpringBoneCollisionSphere3D.new()
+		hand.bone_name = "hand_" + sd
+		hand.radius = 0.045
+		hand.position_offset = Vector3(0, 0.05, 0)
+		sim.add_child(hand)
+	# lying or seated: the hair and the skirt stay on top of the mattress / pillow / seat (an
+	# infinite plane at spring_floor, parked far below when it is off)
+	var floor_plane := SpringBoneCollisionPlane3D.new()
+	floor_plane.name = "Floor"
+	floor_plane.top_level = true
+	floor_plane.global_position = Vector3(0, -1000, 0)
+	sim.add_child(floor_plane)
+	o["spring_floor"] = floor_plane
+	# lying: the pillow as a big sphere just under the back of the skull (a plane at its height would
+	# also lift the braids off the mattress beside the neck)
+	var pillow := SpringBoneCollisionSphere3D.new()
+	pillow.name = "Pillow"
+	pillow.top_level = true
+	pillow.radius = PILLOW_R
+	pillow.global_position = Vector3(0, -1000, 0)
+	sim.add_child(pillow)
+	o["spring_pillow"] = pillow
 	sim.active = false
 	o["springs"] = sim
+
+
+# spring colliders on the body: [bone, child bone it reaches to, radius]
+const SPRING_BODY := [["pelvis", "spine_01", 0.1], ["spine_01", "spine_02", 0.085], ["spine_02", "spine_03", 0.08],
+	["upperarm_l", "lowerarm_l", 0.045], ["lowerarm_l", "hand_l", 0.038],
+	["upperarm_r", "lowerarm_r", 0.045], ["lowerarm_r", "hand_r", 0.038]]
+
+
+## a capsule on BONE from its head to CHILD's head (its own length and direction, from the rest pose)
+func _bone_capsule(sim: SpringBoneSimulator3D, sk: Skeleton3D, bone: String, child: String, r: float) -> void:
+	var bi := sk.find_bone(bone)
+	var ci := sk.find_bone(child)
+	if bi < 0 or ci < 0:
+		return
+	var to: Vector3 = sk.get_bone_global_rest(bi).affine_inverse() * sk.get_bone_global_rest(ci).origin
+	var cap := SpringBoneCollisionCapsule3D.new()
+	cap.bone_name = bone
+	cap.radius = r
+	cap.height = to.length() + r * 2.0
+	cap.position_offset = to * 0.5
+	cap.rotation_offset = Quaternion(Vector3.UP, to.normalized()) if to.length() > 0.001 else Quaternion.IDENTITY
+	sim.add_child(cap)
+
+
+const PILLOW_R := 0.25
+
+
+## the height (world y) the hair and skirt springs must stay above, or null: off
+func spring_floor(y = null) -> void:
+	for k in outfits:
+		var pl: Node3D = outfits[k].get("spring_floor")
+		if pl:
+			pl.global_position = Vector3(global_position.x, float(y) if y != null else -1000.0, global_position.z)
+
+
+## the pillow sphere's top at world point TOP (under the head), or null: off
+func spring_pillow(top = null) -> void:
+	for k in outfits:
+		var pl: Node3D = outfits[k].get("spring_pillow")
+		if pl:
+			pl.global_position = (top as Vector3) - Vector3(0, PILLOW_R, 0) if top != null else Vector3(0, -1000, 0)
 
 
 func reset_springs() -> void:
@@ -1195,6 +1295,18 @@ func update(dt: float) -> void:
 	_add["chest"] = Vector3(breathe * 0.5, 0, 0)
 	_add["neck"] = Vector3(hyp * 0.3, 0, hyp * 0.2) + nz * 0.5
 	_add["head"] = Vector3(tr, sleep_side * 0.5 * _sleep_k, tr * 0.5) + nz
+	# in bed the springs get a floor: the mattress under the hips, and lying, the pillow just under
+	# the back of the skull (the hair stays on it). Not on a sofa: the skirt hangs from the
+	# calves, below the seat
+	if bed and pose in ["lie", "lieSide"]:
+		spring_pillow(head_world() - Vector3(0, 0.085, 0))
+		spring_floor(bone_world("pelvis").origin.y - 0.09)
+	elif bed:
+		spring_pillow()
+		spring_floor(bone_world("pelvis").origin.y - 0.09)
+	else:
+		spring_pillow()
+		spring_floor()
 	# sleepwalking: arms held out in front, over the clip walk
 	if hyp > 0.0 and has_clips:
 		for j in ARMS:
@@ -1315,13 +1427,147 @@ func update(dt: float) -> void:
 	_hand_w = move_toward(_hand_w, 1.0 if hand_target != null else 0.0, dt * 2.5)
 	_hand_w_l = move_toward(_hand_w_l, 1.0 if hand_target_l != null else 0.0, dt * 2.5)
 	_book_w = move_toward(_book_w, 1.0 if holding() == "book_open" else 0.0, dt * 2.5)
+	_side_w = move_toward(_side_w, 1.0 if SIDE_GRIP.has(holding()) and who == "clara" else 0.0, dt * 2.5)
 	_belly_w = move_toward(_belly_w, 1.0 if pose == "lie" else 0.0, dt * 1.5)
+	_bed_sit_w = move_toward(_bed_sit_w, 1.0 if bed and pose in BED_SIT else 0.0, dt * 1.5)
+	# the arm fixes follow their situation: a clip state, a procedural pose or a gesture (its envelope)
+	if ARM_FIX.has(who):
+		for k in _arm_fix_table():
+			var on := 0.0
+			if k == _state or k == pose:
+				on = 1.0
+			elif k == "g:" + _gest:
+				var glen: float = GESTURES[_gest]["len"]
+				on = minf(clampf(_gest_t / 0.3, 0, 1), clampf((glen - _gest_t) / 0.35, 0, 1))
+			# a gesture brings its own envelope; the rest ease over ~1/3 s
+			_fix_w[k] = on if k.begins_with("g:") else move_toward(float(_fix_w.get(k, 0.0)), on, dt * 3.0)
+
+
+## the held thing's bounds in its own frame (its meshes, cached on the node)
+func _held_box(n: Node3D) -> AABB:
+	if n.has_meta("held_aabb"):
+		return n.get_meta("held_aabb")
+	var ab := AABB()
+	var first := true
+	var inv := n.global_transform.affine_inverse()
+	for mi in n.find_children("*", "MeshInstance3D", true, false):
+		var m := mi as MeshInstance3D
+		if m.mesh == null:
+			continue
+		var box := (inv * m.global_transform) * m.mesh.get_aabb()
+		ab = box if first else ab.merge(box)
+		first = false
+	n.set_meta("held_aabb", ab)
+	return ab
+
+
+# Clara's (and Davi's) arms, after the clips, the gestures and the IK, in the situations where the puffy sleeves
+# went into each other, the chest or the face (the mocap and the shared poses were tuned on thinner
+# arms). Key: a clip state (fold_arms, phone), a procedural pose (cry) or "g:" + gesture. Per side,
+# per bone ("arm" upper arm, "fore" forearm): [out, forward, up] radians, each turning the bone toward
+# that direction of her body (out = away from her middle on that side; negative turns the other way)
+const ARM_FIX := {"clara": {
+		# arms crossed (clip): elbows a little out, the right forearm lower, so the forearms stack
+		"fold_arms": {"l": {"arm": [0.2, 0, 0], "fore": [0, 0.1, 0]}, "r": {"arm": [0.2, 0, 0], "fore": [0, 0, -0.3]}},
+		# phone at the ear (clip): elbow out and forward, the cuff off the chin and the collar
+		"phone": {"r": {"arm": [0.4, 0.2, 0], "fore": [0.25, 0, 0]}},
+		# the gestures held their crossed forearms down at the hips, one inside the other: up onto the chest
+		"g:hug_self": {"l": {"arm": [0, 0.1, 0.45], "fore": [0, 0, 0.9]}, "r": {"arm": [0, 0.1, 0.45], "fore": [0, 0, 0.8]}},
+		"g:cross_arms": {"l": {"arm": [0.1, 0, 0.35], "fore": [0, 0, 0.7]}, "r": {"arm": [0.1, 0, 0.35], "fore": [0, 0, 0.5]}},
+		# crying in bed, head on the knees: the arms opened out to the sides through the hair; now in and
+		# down, wrapped around the knees, the hands by the face
+		"cry": {"l": {"arm": [-0.8, 0.0, -0.5], "fore": [-0.5, 0.0, -0.45]}, "r": {"arm": [-0.8, 0.0, -0.5], "fore": [-0.5, 0.0, -0.45]}},
+	},
+	# Davi: crying in bed, as Clara (his idle cross_arms is not fixed: four tries left the forearms either
+	# out in front or inside the belly, see tools/review/clipping/folhas/davi_C*.png)
+	"davi": {
+		"cry": {"l": {"arm": [-0.8, 0.0, -0.5], "fore": [-0.5, 0.0, -0.45]}, "r": {"arm": [-0.8, 0.0, -0.5], "fore": [-0.5, 0.0, -0.45]}},
+	},
+}
+
+
+func _arm_fix_table() -> Dictionary:
+	var base: Dictionary = ARM_FIX.get(who, {})
+	if arm_fix_tune.is_empty() or who != str(arm_fix_tune.get("_who", "clara")):
+		return base
+	var t := base.duplicate()
+	t.merge(arm_fix_tune, true)
+	t.erase("_who")
+	return t
+
+
+func _arm_fix(o: Dictionary) -> void:
+	if not ARM_FIX.has(who):
+		return
+	var tab := _arm_fix_table()
+	var sk: Skeleton3D = o["skel"]
+	var idx: Dictionary = o["maps"]["idx"]
+	for k in tab:
+		var w: float = _fix_w.get(k, 0.0)
+		if w <= 0.001:
+			continue
+		w = w * w * (3.0 - 2.0 * w)
+		var ul: int = idx.get("upperarm_l", -1)
+		var ur: int = idx.get("upperarm_r", -1)
+		var s1: int = idx.get("spine_01", -1)
+		var nk: int = idx.get("neck_01", -1)
+		var fl: int = idx.get("foot_l", -1)
+		var bl := sk.find_bone("ball_l")
+		if ul < 0 or ur < 0 or s1 < 0 or nk < 0 or fl < 0 or bl < 0:
+			return
+		var side := (sk.get_bone_global_pose(ur).origin - sk.get_bone_global_pose(ul).origin).normalized()
+		var up := (sk.get_bone_global_pose(nk).origin - sk.get_bone_global_pose(s1).origin).normalized()
+		var fwd := up.cross(side).normalized()
+		var toe := sk.get_bone_global_pose(bl).origin - sk.get_bone_global_pose(fl).origin
+		if fwd.dot(toe) < 0.0:
+			fwd = -fwd
+		var fix: Dictionary = tab[k]
+		for sd in ["l", "r"]:
+			if not fix.has(sd):
+				continue
+			var outw := side * (1.0 if sd == "r" else -1.0)
+			var chain := [idx.get("upperarm_" + sd, -1), idx.get("lowerarm_" + sd, -1), idx.get("hand_" + sd, -1)]
+			if -1 in chain:
+				continue
+			for seg in [0, 1]:
+				var v = (fix[sd] as Dictionary).get("arm" if seg == 0 else "fore")
+				if v == null:
+					continue
+				var bi: int = chain[seg]
+				var d := (sk.get_bone_global_pose(chain[seg + 1]).origin - sk.get_bone_global_pose(bi).origin).normalized()
+				var q := Quaternion.IDENTITY
+				var dirs := [outw, fwd, up]
+				for a in 3:
+					var ang: float = float(v[a]) * w
+					if absf(ang) < 1e-5:
+						continue
+					var ax := d.cross(dirs[a])
+					if ax.length_squared() < 1e-8:
+						continue
+					q = Quaternion(ax.normalized(), ang) * q
+				var g := sk.get_bone_global_pose(bi).basis.orthonormalized()
+				var par := sk.get_bone_parent(bi)
+				var pg := sk.get_bone_global_pose(par).basis.orthonormalized() if par >= 0 else Basis.IDENTITY
+				sk.set_bone_pose_rotation(bi, (pg.inverse() * (Basis(q) * g)).get_rotation_quaternion())
 
 
 ## after the hand IK: an open book held at its outer edges, each hand behind the cover with the fingers
 ## spread under it toward the spine, the thumb over the pages. The wrist turns so the palm faces the
 ## book (frames built from the hand's own finger bones, so any skeleton works)
-func _post_modify(outfit: String, _dt: float) -> void:
+func _post_modify(outfit: String, dt: float) -> void:
+	_post_modify_inner(outfit, dt)
+	# the final pose again, now with the hand / foot IK and the arm fixes in: bone_world() (and what
+	# reads it: held things, the clip watch) saw the arms as before the IK
+	var sk: Skeleton3D = outfits[outfit]["skel"]
+	var n := sk.get_bone_count()
+	if _final.size() != n:
+		_final.resize(n)
+	for i in n:
+		_final[i] = sk.get_bone_global_pose(i)
+
+
+func _post_modify_inner(outfit: String, _dt: float) -> void:
+	_arm_fix(outfits[outfit])
 	if _book_w <= 0.001 or not held.has("hand") or not is_instance_valid(held["hand"][0]):
 		return
 	var o: Dictionary = outfits[outfit]
@@ -1473,7 +1719,7 @@ func _modify(outfit: String, dt: float) -> void:
 	if pi >= 0:
 		var pb: Basis = m["pg"][pi]
 		var rest_p: Vector3 = m["rest_pos"][pi]
-		var drop := hips_y - pelvis_d * clampf(-hips_y / 0.3, 0.0, 1.0)
+		var drop := hips_y - pelvis_d * clampf(-hips_y / 0.3, 0.0, 1.0) + bed_sit_lift * _bed_sit_w * _bed_sit_w * (3.0 - 2.0 * _bed_sit_w)
 		var bob := absf(sin(g)) * 0.03 * w
 		var pp := rest_p + pb.inverse() * Vector3(0, drop - bob, 0)
 		var pm := sk.get_bone_pose_position(pi) if has_clips else pp
@@ -1665,6 +1911,13 @@ func _ik_targets(o: Dictionary, sk: Skeleton3D, m: Dictionary) -> void:
 			var gx: float = grip_tune.get("wx", 0.19)
 			tgt = (held["hand"][0] as Node3D).global_transform * Vector3(-gx if sd == "r" else gx, grip_tune.get("wy", -0.045), grip_tune.get("wz", 0.0))
 			wv = _book_w
+		if tgt == null and _side_w > 0.001 and SIDE_GRIP.has(holding()) and is_instance_valid(held["hand"][0]):
+			var hn: Node3D = held["hand"][0]
+			var ab := _held_box(hn)
+			var gs: Array = SIDE_GRIP[holding()]
+			var hx: float = (ab.position.x - float(gs[2])) if sd == "r" else (ab.end.x + float(gs[2]))
+			tgt = hn.global_transform * Vector3(hx, ab.position.y + ab.size.y * float(gs[0]), ab.position.z + ab.size.z * float(gs[1]))
+			wv = _side_w
 		if belly:
 			# arm stretched out along the body, the whole arm lying on the sheet: the hand at almost full
 			# reach toward the feet (a little out from the hip) and at the height of the mattress top
@@ -1687,4 +1940,11 @@ func _ik_targets(o: Dictionary, sk: Skeleton3D, m: Dictionary) -> void:
 			var ep := sk.global_transform * sk.get_bone_global_pose(idx["lowerarm_" + sd]).origin
 			# lying: the (barely bent) elbow points out and up, never down into the mattress
 			var pole := side * 0.4 + Vector3(0, 0.15, 0) if belly else side * 0.4 - Vector3(0, 0.3, 0)
+			# seated, reaching down into the lap (the cat): the elbow out and up, the forearm comes onto
+			# the back from above instead of through the body
+			if who == "clara" and not belly and _state in SEATED and (tgt as Vector3).y < ep.y and _side_w <= 0.001 and _book_w <= 0.001:
+				pole = side * 0.35 + Vector3(0, 0.5, 0) - fwd * 0.25
+				# and the hand on the near half of the back (her side of the cat), a little higher
+				tgt = (tgt as Vector3) - fwd * 0.05 + Vector3(0, 0.03, 0)
+				(tg["hand_" + sd] as Node3D).global_position = tgt
 			(tg["elbow_" + sd] as Node3D).global_position = ep + pole

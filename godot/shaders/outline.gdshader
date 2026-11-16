@@ -11,17 +11,22 @@ uniform float width = 0.0016;          // metres at arm's length
 uniform float darken = 0.38;
 uniform float alpha_cut = 0.5;
 uniform float hide_v = 9.0;            // as in toon.gdshaderinc
+uniform float skin_mask = 0.0;         // as in toon.gdshaderinc
+uniform float layer_back = 0.0;        // as in toon.gdshaderinc
 
 void vertex() {
 	// grow a little with distance so the line keeps reading, but never past 2.5x
 	vec3 wp = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float d = clamp(length(CAMERA_POSITION_WORLD - wp) / 1.2, 0.6, 2.5);
 	VERTEX += NORMAL * width * d;
+	vec4 vp = MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
+	vp.xyz += normalize(vp.xyz) * layer_back;
+	POSITION = PROJECTION_MATRIX * vp;
 }
 
 void fragment() {
 	vec4 t = texture(albedo_tex, UV) * albedo;
-	if (t.a < alpha_cut || UV.y > hide_v) {
+	if (t.a < alpha_cut || UV.y > hide_v || (skin_mask > 0.5 && skin_mask < 1.5 && UV2.x > 0.5)) {
 		discard;
 	}
 	ALBEDO = t.rgb * tint * darken;

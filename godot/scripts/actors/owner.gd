@@ -19,7 +19,7 @@ const DAVI := {
 	"id": "davi", "name": "Davi", "skeptic": true, "fear_scale": 0.7,
 	"bed_spot": "davBed", "bedside_spot": "davBedside", "bed_room": "hospedes", "bed_node": "f_hosp_bed",
 	"bed_side": Vector3(1.5, 3, 7.3), "bed_top": Vector3(1.55, 3.58, 7.95), "purr_pos": Vector3(1.1, 3.57, 7.98), "purr_yaw": -PI / 2,
-	"lamp": 17, "voice_pitch": 0.62, "bed_offset": Vector3(-0.2, -0.12, 0), "seat_deep": 0.45, "seat_adj": 0.01,
+	"lamp": 17, "voice_pitch": 0.62, "bed_offset": Vector3(-0.2, -0.12, 0), "bed_sit_lift": 0.06, "seat_deep": 0.45, "seat_adj": 0.01,
 }
 
 var cfg: Dictionary
@@ -38,6 +38,8 @@ var in_bed := false:
 		# the night outfits come with shoes (VRoid): off in bed
 		if model:
 			model.hide_shoes(v)
+			model.bed = v
+			model.bed_sit_lift = float(cfg.get("bed_sit_lift", 0.0))
 var asleep := false
 var task = null          # {name, steps, idx, timer, priority, on_done, started}
 var purring := false
@@ -137,6 +139,7 @@ func set_night(v: bool) -> void:
 
 
 func place(spot: Dictionary) -> void:
+	seat_exit = null
 	global_position = Layout.v3(spot["p"])
 	yaw = spot["yaw"]
 	rotation.y = yaw
@@ -327,15 +330,37 @@ func _auto_look(dt: float):
 	return null
 
 
+## sat somewhere with no room in front (Davi at the desk, the chair under him): where to get up to.
+## Any task that walks (run) first slides there while standing up, instead of walking off through
+## the chair; null once he has got up
+var seat_exit = null
+
+
 func run(nm: String, steps: Array, priority := 1, on_done: Callable = Callable()) -> bool:
 	if task != null and task["priority"] > priority:
 		return false
+	if seat_exit != null:
+		for i in steps.size():
+			if str(steps[i].get("t", "")) in ["walk", "spot"]:
+				steps = steps.slice(0, i) + _seat_exit_steps() + steps.slice(i)
+				break
 	task = {"name": nm, "steps": steps, "idx": 0, "timer": 0.0, "priority": priority, "on_done": on_done, "started": false}
 	_path = []
 	in_bed = false
 	asleep = false
 	paralysis = false
 	return true
+
+
+func _seat_exit_steps() -> Array:
+	var to: Vector3 = seat_exit
+	return [
+		{"t": "do", "fn": func():
+			seat_exit = null
+			var tw := create_tween()
+			tw.tween_property(self, "global_position", to, 0.8).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)},
+		{"t": "pose", "pose": "stand", "dur": 0.8},
+	]
 
 
 ## a short errand in the middle of whatever she is doing (filling the water bowl): the steps go in

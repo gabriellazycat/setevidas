@@ -93,7 +93,7 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   porão. Cada noite tem uma regra (`rule`): N2 fita suja (lavar na pia do banheiro de baixo, do chão ou em cima dela), N3 anel no ralo da pia
   de baixo, N4 peça que só aparece com a luz apagada, N5 carta na caixa de correio da porteira, N6
   ordem do diário (`Story.RELIC_ORDER_HINT`). A portinhola da despensa está liberada desde o dia 1; as manhãs liberam as outras rotas (duto, basculante, janela do porão, árvore), a caixa de
-  papelão (refúgio de um uso) e a luz noturna (`Story.MORNING_TASKS`). A luz noturna mantém o
+  papelão (refúgio de um uso; quem pisa nela a empurra para longe, `Game._tick_box_nudge`) e a luz noturna (`Story.MORNING_TASKS`). A luz noturna mantém o
   cômodo aceso contra a Sombra, mas é um aparelho (`House.Device` "nightlight") onde o Sussurrador
   pode entrar; tirá-la da tomada apaga a proteção até ele religar.
 - **Tardes**: comer sempre e mais 2 tarefas sorteadas por dia de `Story.PATIENCE_POOL` (carinho,
@@ -124,9 +124,11 @@ sempre headless). A pasta não é um repositório git: antes de sobrescrever arq
   `--visitorat=ID --visitorhiss=SEC --vislog`; Sussurrador `--whisperlog --whisperodds`; Coisa
   `--killthing=SEC`; ritual da noite 7 `--phase=night --day=7 --ritualtest --dirlog`; espiada da Sombra presa num nook `--peekat=ID [--peekshots=DIR] [--peekheat=0..1] [--peekfurn=near] [--peeklook=0]` (log
   `face_to_cat`/`stares` por vista); Clara andando `--claraat=x,y,z,yaw --clarato=nós --follow=34`; cama `--bedpose=`.
-  Mais: `--shadowtest=6` (luz acesa com ela escondida), `--carry=ID|relic:KIND --catcam=ANG`, `--carrytune=all|ID,... --tunedir=DIR [--carryfile=GRIPS.json]`
+  Mais: `--playtoy=toy|yarn --carrylog` (em janela, sem `--fixed-fps`: o gato dá o bote, pega e anda; `off_mm`/`jitter_mm`
+  = quanto o item é desenhado fora da boca, deve dar 0; o item na boca fica fora da interpolação de física, `Game._held_node`),
+  `--shadowtest=6` (luz acesa com ela escondida), `--carry=ID|relic:KIND --catcam=ANG`, `--carrytune=all|ID,... --tunedir=DIR [--carryfile=GRIPS.json]`
   (cada item na boca em sequência, fotos de perto em 4 vistas; offsets em `Carry.GRIPS`),
-  `--bathtest`, `--orbtest`, `--dirlog`, `--ending=good`, `--intrude`, `--ruletest`, `--esctest`, `--clarahold=book|book_open`, `--holdtune=FILE.json --tunedir=DIR [--views=front,34,side]` (várias tentativas de braço × ângulos numa só execução), `--dolltarget=davi`, `--catgo=YAW` (o gato anda nessa direção; no devctl `arg catgo=PI` / `unarg catgo`, com `g.rig.yaw` apontando para lá), `--lang=en`, `--shotfrom=SEC`.
+  `--bathtest`, `--orbtest`, `--dirlog`, `--ending=good`, `--intrude`, `--ruletest`, `--esctest`, `--clarahold=book|book_open`, `--clipwatch[=OUT.json] [--clipquit=SEC] [--clipphase] [--clipdepth=M] [--clipshots=DIR]` (clipping de todo esqueleto visível, Clara, Davi, fantasmas, Cão e gato, contra o mundo: osso cruzando colisor, com a profundidade e a malha visível que confirma; `scripts/dev/clip_watch.gd`; varredura das tardes e noites em `tools/review/clipping/watch/sweep*.sh`), `--clarasurvey=DIR [--cases=a,b] [--outfits=day,night,bath] [--views=..] [--close=OSSO,DIST] [--who=davi] [--bones=a,b] [--armfix=F.json] [--posefix=F.json] [--hidehair] [--layerback=M]` (clipping: cada situação da Clara congelada e fotografada sempre das mesmas câmeras, para antes/depois; `scripts/dev/clara_survey.gd`, levantamento em `tools/review/clipping/LEVANTAMENTO.md`), `--holdtune=FILE.json --tunedir=DIR [--views=front,34,side]` (várias tentativas de braço × ângulos numa só execução), `--dolltarget=davi`, `--catgo=YAW` (o gato anda nessa direção; no devctl `arg catgo=PI` / `unarg catgo`, com `g.rig.yaw` apontando para lá), `--lang=en`, `--shotfrom=SEC`.
   Prints: `tools/dev/shrink.py` (folha de contato). Trailer: `--nohud`, `--campath=FILE.json` (chaves
   `t/pos/look/fov/roll/hand/ease`, `rel` ao gato/Clara; devctl `campath FILE`), `--scene=lap|bowl|bed|peek|doll`
   (`scripts/dev/trailer.gd`); grava um plano em MP4 com `python tools/dev/capture.py OUT.mp4 --size=1080x1920

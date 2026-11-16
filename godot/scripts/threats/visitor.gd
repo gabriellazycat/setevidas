@@ -333,7 +333,11 @@ func tick(dt: float) -> void:
 	fig.alpha = 0.95 * vis
 	var fp: Vector3 = e["figure"]
 	if stage >= 5 and e.has("door"):
-		fp = fp.lerp(Vector3(6.45, 0, 0.3), 0.5)
+		# in the doorway, clear of the open leaf on his left (x 6.5..6.7)
+		fp = fp.lerp(Vector3(6.45, 0, 0.3), 0.5) + Vector3(-0.2, 0, 0)
+	elif e.has("door"):
+		# a step back from the wood (looming, 2.3 m tall and bent ~1 m forward, his head went into it)
+		fp -= Vector3(sin(float(e["yaw"])), 0, cos(float(e["yaw"]))) * (0.45 if stage >= 4 else 0.1)
 	fig_pos = fp
 	fig_yaw = e["yaw"]
 	fig.global_position = fp
@@ -348,6 +352,16 @@ func tick(dt: float) -> void:
 		fig.rig.pose = "loom"
 	else:
 		fig.rig.pose = "listen" if _listen_t < 0.0 and stage >= 2 else "knock"
+	# the right hand on the wood: the poses alone raised it to ~2.2 m on a 2.3 m figure, onto the wall
+	# over the frame and into it. Knocking at his chest's height, listening flat beside his head
+	if e.has("door") and stage < 4 and fig.rig.pose in ["knock", "listen"]:
+		var fwd := Vector3(sin(float(e["yaw"])), 0, cos(float(e["yaw"])))
+		var right := Vector3(-fwd.z, 0, fwd.x)
+		var kp: Vector3 = e["knock"]
+		var at := Vector3(kp.x, fp.y, kp.z) - fwd * 0.08
+		fig.rig.hand_target = at + right * (0.08 if fig.rig.pose == "knock" else 0.24) + Vector3(0, 1.45 if fig.rig.pose == "knock" else 1.75, 0)
+	else:
+		fig.rig.hand_target = null
 	# the head follows the voice it fakes: toward whoever it is calling
 	var lt: Vector3 = e["knock"]
 	if stage >= 2 and target and target.present:

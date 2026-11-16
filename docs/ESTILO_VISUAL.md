@@ -56,6 +56,16 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
     espessura ~1,2–1,8 mm. Sem contorno em olhos, sobrancelhas, delineado e boca.
   - O deslocamento do MToon tem sinal invertido no nosso ramp (`shade_shift = -shift`); o rosto do VRoid
     usa ~0,7 para ficar limpo.
+  - **Máscara de pele** (Clara de dia e de noite): o `build_vroid.py` (`skin_mask`, `SKIN_MASK`) marca
+    num segundo mapa UV os vértices do `_body` cobertos pela roupa (raio pela normal até um texel opaco
+    do `_cloth`, sem os sapatos; 6 cm, 15 cm no quadril e coxas sob a saia; mãos, cabeça e pés nunca;
+    margem de 2,5 cm de pele junto às bordas). Os shaders toon/outline descartam esses pixels
+    (`skin_mask`, como o `hide_v`), então o corpo não vaza pela roupa em pose nenhuma.
+    `HumanRig.skin_mask_mode`: 1 corta (jogo), 0 desenha, 2 pinta de vermelho (conferir com `--skinmask=2`).
+  - **Camada de baixo cede** (Clara): a calça e a saia (`Bottoms`) são desenhadas 1,5 cm para trás ao longo
+    do raio da câmera (`layer_back`, `HumanRig.LAYER_BACK`; só a profundidade, o lugar na tela é o mesmo):
+    a barra do colete/suéter, as mãos e o gato ganham onde encostam (a coxa erguida na escada passava pela
+    barra do colete). Roupa contra roupa não tem máscara: a máscara é fixa na pose de repouso.
 - **Rosto:** o `build_vroid.py` mantém, além do `eyes_closed`, `mouth_a/i/o`, `joy`, `surprised`,
   `sorrow` e `eye_joy` (das `Fcl_*` do VRoid). A boca segue as vogais da fala (`HumanRig.talk`); o humor
   (`set_mood`): ^^ com o gato ronronando, susto, tristeza com medo alto. Dormindo: olhos fechados,
@@ -84,19 +94,31 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
      pose sem modificações: use `bone_global()`/`bone_world()` (cópia `_final`).
   3. `TwoBoneIK3D`: pés no chão/degrau (raycast; ignora desníveis > 0,25 m), mãos em `hand_target`
      (carinho no gato, colo).
-  4. `SpringBoneSimulator3D`: cabelo `J_Sec_Hair*` e saia da Clara de dia (colisores na cabeça e pernas).
+  4. `SpringBoneSimulator3D`: cabelo `J_Sec_Hair*` e saia da Clara de dia. Colisores na cabeça,
+     pernas, tronco, quadril e braços (cápsulas `SPRING_BODY` um pouco dentro da roupa) e esferas nas
+     mãos; na cama, um plano no colchão sob o quadril (`spring_floor`) e, deitada, uma esfera no
+     travesseiro sob a nuca (`spring_pillow`, ligados por `HumanRig.bed`). A rigidez das molas não muda.
+  5. Depois do IK (`_post_modify`), por pessoa (`ARM_FIX[who]`; Clara e, só no choro, o Davi): gira braço e antebraço em direção a
+     "fora / frente / cima" do corpo por situação (clipes `fold_arms` e `phone`, gestos `g:hug_self` e
+     `g:cross_arms`, pose `cry`), com peso que entra e sai com a situação: as mangas fofas do suéter
+     não entram umas nas outras, no peito ou no rosto. Afinar com `--clarasurvey ... --armfix=FILE.json`.
 - **Objetos na boca do gato:** presos ao quadro da boca (`CatRig.mouth_frame`, segue a cabeça), com o
   ponto de mordida e o jeito de pendurar de cada objeto em `Carry.GRIPS` (planos pendem pela borda de
   cima, inclinados para a frente do peito).
 - **Objetos nas mãos:** `HumanRig.hold(node, kind)` (`box`, `suitcase`, `doll`, `book`, `cushion`,
-  `backpack`, `book` abraçado ao peito, `book_open` aberto para ler) com pose de braços própria. No `book_open` as mãos vão por IK às bordas do livro (cotovelos para fora, nunca dentro do tronco) e um modificador depois do IK (`HumanRig._post_modify`, `HumanPoseMod.post`) vira as palmas para a capa de trás, com os dedos rumo à lombada; o livro fica preso ao peito, mais alto em pé. Afinar com `--holdtune` (`"_grip"`) e `--tunefocus --views=front,under,eyes`. Turbante de toalha do banho: `tools/blender/build_turban.py`
+  `backpack`, `book` abraçado ao peito, `book_open` aberto para ler) com pose de braços própria. No `book_open` as mãos vão por IK às bordas do livro (cotovelos para fora, nunca dentro do tronco) e um modificador depois do IK (`HumanRig._post_modify`, `HumanPoseMod.post`) vira as palmas para a capa de trás, com os dedos rumo à lombada; o livro fica preso ao peito, mais alto em pé. Caixa e almofada (Clara): cada mão vai por IK ao meio da face lateral do objeto (`SIDE_GRIP`), e os antebraços abraçam os lados em vez de atravessá-lo. No colo (sentada, mão abaixo do cotovelo) o cotovelo dela sobe e sai para fora, e a mão pousa na metade de perto das costas do gato. Afinar com `--holdtune` (`"_grip"`) e `--tunefocus --views=front,under,eyes`. Turbante de toalha do banho: `tools/blender/build_turban.py`
   → `turban.glb`, textura `tools/textures/gen_towel.py`, preso à cabeça como os óculos do Davi.
 - **Poses:** quedas de quadril de sentar/deitar/banho são absolutas (altura do assento/colchão):
   `pelvis_d` (altura da pelve nova − MPFB) entra nas quedas grandes. Sem cobertor (removido: bugava).
   Deitada o tronco fica plano e o travesseiro ergue a cabeça (pose `lie`). `bed_offset` (`owner.gd`)
   da Clara = (-0,11, 0, -0,3) (no travesseiro do lado dela, longe da cabeceira; uma mão na barriga,
   joelhos um pouco dobrados); Davi = (-0,2, -0,12, 0) (colchão de hóspedes em 3,55). Sentado, o Davi
-  entra mais no assento (`seat_deep` 0,45, `seat_adj` -0,07 no cfg).
+  entra mais no assento (`seat_deep` 0,45, `seat_adj` -0,07 no cfg). Pernas na cama medidas contra o
+  colchão (`--clarasurvey --bones=`): `hug`/`cry` com coxa 2,6 e joelho 1,8 (os pés pousam no colchão;
+  com joelho 2,2 a canela descia reta ~20 cm para dentro dele) e `sitUp` com coxa 1,68 (os calcanhares
+  apoiam); vale para os dois. Tronco e cabeça de `hug`/`cry` mais retos (a testa nos joelhos; dobrado,
+  o rosto afundava neles). Davi sentado na cama (`sitUp`/`hug`/`cry`) ergue o quadril 6 cm
+  (`bed_sit_lift` no cfg): o `bed_offset` dele é para deitar no colchão baixo de hóspedes.
 
 ## Gato (Mingau)
 

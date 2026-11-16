@@ -1,6 +1,6 @@
 """Clara and Davi from VRoid Studio: tools/vroid/<id>.vrm -> godot/assets/models/people/<id>.glb.
 
-usage: blender -b -P tools/blender/build_vroid.py -- [--only clara_day,...] [--preview dir]
+usage: blender -b -P tools/blender/build_vroid.py -- [--only clara_day,...] [--preview dir] [--out dir]
 
 Each VRM (VRM 1.0, one body and face per character, two outfits) is converted to what HumanRig
 expects from the old MPFB characters:
@@ -30,11 +30,13 @@ argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ONLY = argv[argv.index("--only") + 1].split(",") if "--only" in argv else None
 PREVIEW = argv[argv.index("--preview") + 1] if "--preview" in argv else None
 VROID = os.path.join(lib.ROOT, "tools", "vroid")
-OUT = os.path.join(lib.GODOT, "assets", "models", "people")
+OUT = argv[argv.index("--out") + 1] if "--out" in argv else os.path.join(lib.GODOT, "assets", "models", "people")
 
 CHARACTERS = {"clara_day": "clara", "clara_night": "clara", "clara_bath": "clara", "davi_day": "davi", "davi_night": "davi"}
 # pieces cut after scaling (so the skeleton matches the other outfits): the bath outfit is barefoot
 DROP = {"clara_bath": ("shoes_",)}
+# outfits whose body gets the under-the-cloth mask (skin_mask below)
+SKIN_MASK = ("clara_day", "clara_night")
 
 # VRM 1.0 humanoid bone -> game (Unreal-style) bone name
 HUMANOID = {
@@ -304,6 +306,98 @@ def drop_materials(ob, keys):
     return len(faces)
 
 
+# skin under the clothes: a body vertex counts as covered when a ray along its normal meets an opaque
+# texel of the outfit (not the shoes: in bed they are cut away and the bare feet show) within
+# MASK_RAY, and no uncovered vertex is closer than MASK_MARGIN (neck, wrists, ankles and neckline keep
+# a band of skin under the edge). Written as a second UV map (u = 1 covered): the toon / outline
+# shaders discard those pixels when skin_mask is on, so the body can never poke through the cloth.
+MASK_RAY = 0.06
+MASK_MARGIN = 0.025
+# hips and thighs: a long skirt hangs well away from them
+MASK_RAY_LOW = 0.15
+MASK_LOW_BONES = ("pelvis", "thigh_", "spine_01")
+# never cut: hands, head, feet (the sleeves, the collar and the trouser hems cover their edges, and
+# the bare feet show in bed)
+MASK_NEVER = ("hand_", "thumb_", "index_", "middle_", "ring_", "pinky_", "head", "foot_", "ball_", "J_Sec_Hair")
+
+
+def _image_alpha(mat):
+    """(width, height, flat RGBA list) of the image feeding the material's base colour, or None"""
+    if not mat or not mat.use_nodes:
+        return None
+    for n in mat.node_tree.nodes:
+        if n.type == "TEX_IMAGE" and n.image and n.image.size[0] > 0:
+            return (n.image.size[0], n.image.size[1], list(n.image.pixels))
+    return None
+
+
+def skin_mask(cid, parts):
+    from mathutils.bvhtree import BVHTree
+    from mathutils import geometry, kdtree
+    body, cloth = parts.get("body"), parts.get("cloth")
+    if not body or not cloth:
+        return 0
+    bm = bmesh.new()
+    bm.from_mesh(cloth.data)
+    bm.transform(cloth.matrix_world)
+    skip = {i for i, m in enumerate(cloth.data.materials) if m and "shoes" in m.name.lower()}
+    bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.material_index in skip], context="FACES")
+    bmesh.ops.triangulate(bm, faces=bm.faces[:])
+    bm.faces.ensure_lookup_table()
+    uvl = bm.loops.layers.uv.active
+    tree = BVHTree.FromBMesh(bm)
+    imgs = {i: _image_alpha(m) for i, m in enumerate(cloth.data.materials)}
+
+    def opaque(fi, loc):
+        f = bm.faces[fi]
+        img = imgs.get(f.material_index)
+        if img is None or uvl is None:
+            return True
+        a, b, c = (lp.vert.co for lp in f.loops)
+        ua, ub, uc = (Vector((lp[uvl].uv.x, lp[uvl].uv.y, 0.0)) for lp in f.loops)
+        uv = geometry.barycentric_transform(loc, a, b, c, ua, ub, uc)
+        w, h, px = img
+        x = min(w - 1, max(0, int((uv.x % 1.0) * w)))
+        y = min(h - 1, max(0, int((uv.y % 1.0) * h)))
+        return px[(y * w + x) * 4 + 3] >= 0.5
+
+    mw = body.matrix_world
+    nm = mw.to_3x3().inverted().transposed()
+    verts = body.data.vertices
+    gname = {g.index: g.name for g in body.vertex_groups}
+    covered = []
+    for v in verts:
+        bone = gname.get(max(v.groups, key=lambda g: g.weight).group, "") if v.groups else ""
+        if bone.startswith(MASK_NEVER):
+            covered.append(False)
+            continue
+        p = mw @ v.co
+        n = (nm @ v.normal).normalized()
+        hit = tree.ray_cast(p - n * 0.002, n, MASK_RAY_LOW if bone.startswith(MASK_LOW_BONES) else MASK_RAY)
+        covered.append(hit[0] is not None and opaque(hit[2], hit[0]))
+    bare = [i for i, c in enumerate(covered) if not c]
+    kd = kdtree.KDTree(len(bare))
+    for k, i in enumerate(bare):
+        kd.insert(mw @ verts[i].co, k)
+    kd.balance()
+    mask = []
+    for i, c in enumerate(covered):
+        if c and bare:
+            _, _, dist = kd.find(mw @ verts[i].co)
+            c = dist >= MASK_MARGIN
+        mask.append(1.0 if c else 0.0)
+    bm.free()
+    first = body.data.uv_layers.active
+    layer = body.data.uv_layers.new(name="skin_mask")
+    for lp in body.data.loops:
+        layer.data[lp.index].uv = (mask[lp.vertex_index], 0.0)
+    body.data.uv_layers.active = first
+    first.active_render = True
+    n = int(sum(mask))
+    print("MASK %s: %d of %d body vertices under the cloth" % (cid, n, len(verts)))
+    return n
+
+
 def bounds(meshes):
     zs = [(o.matrix_world @ v.co).z for o in meshes for v in o.data.vertices]
     return min(zs), max(zs)
@@ -423,6 +517,8 @@ def build(cid, who):
             n = drop_materials(ob, DROP[cid])
             if n:
                 print("DROP %s %s: %d faces" % (cid, ob.name, n))
+    if cid in SKIN_MASK:
+        skin_mask(cid, parts)
     arm.name = f"{cid}_rig"
     check(cid, who, got, missing, parts, meshes)
     export(cid, arm, meshes, toon)

@@ -81,6 +81,7 @@ var _info_held := 0.0
 var _menu_t := 0.0
 var _transitioning := false
 var _purr_who: Owner = null
+var _held_node: Node3D = null   # the thing in the cat's mouth, off physics interpolation while there
 var _hide_spot = null
 var _epoch := 0
 var _night7_lamp := false     # night 7: the bedroom light Clara left on, until it burns out near 01:00
@@ -839,11 +840,12 @@ func _setup_davi() -> void:
 	dv.place(Layout.spot("desk"))
 	dv.model.seat_lift = 0.21
 	dv.model.snap_pose("sit")
+	dv.seat_exit = DESK_OUT
 	var bedtime := randf_range(0.9, 1.3)
 	dv.run("work", [
 		{"t": "until", "cond": func(): return hour >= bedtime, "pose": "read"},
 		{"t": "say", "text": "Chega por hoje. Boa noite, casa velha.", "dur": 3.0, "kind": "whisper"},
-		{"t": "pose", "pose": "stand", "dur": 0.4},
+		# (up off the chair to its right side first: Owner.seat_exit, DESK_OUT)
 		{"t": "spot", "spot": Layout.spot("davBedside")},
 		{"t": "bed"},
 	], 1)
@@ -1436,6 +1438,12 @@ func _switch_stand(li: int) -> Array:
 			var p := Layout.v3(d["sw"]["p"])
 			var n := Layout.v3(d["sw"]["n"])
 			var floor_y := p.y - 1.1
+			# "stand": [x, z] where something stands right in front of the switch (the sala floor lamp:
+			# her arm and feet went through it); she reaches for it on the slant
+			if d["sw"].has("stand"):
+				var sp := Vector3(float(d["sw"]["stand"][0]), floor_y, float(d["sw"]["stand"][1]))
+				var to := p - sp
+				return [sp, atan2(to.x, to.z), p]
 			return [Vector3(p.x + n.x * 0.42, floor_y, p.z + n.z * 0.42), atan2(-n.x, -n.z), p]
 	return []
 
@@ -2450,10 +2458,16 @@ func _davi_day_steps() -> Array:
 	]
 
 
+## where Davi stands up from the desk chair (the chair 2.29..2.62 x 8.52..8.95, the desk from z 9.07)
+const DESK_OUT := Vector3(3.02, 0.0, 8.55)
+
+
 ## the road beyond the gate, where the car stops: Davi gets out there and walks up to the porch
 # day 6: where Clara waits in the hall for Davi and the diary (off his way to the phone table)
 const DIARY_WAIT := {"node": "g_hall_mid", "p": [5.95, 0.0, 2.2], "yaw": 2.75}
-const DAVI_ROAD := [Vector3(6.45, -0.9, -13.0), Vector3(6.45, -0.9, -5.6), Vector3(6.45, -0.9, -2.7), Vector3(6.45, 0.0, -1.55), Vector3(6.45, 0.0, -0.75)]
+# through the gate by its latch side (x 6.98): the leaf left ajar reaches x ~6.7 across the gap, the post
+# stands at 7.3; then back to the porch steps' middle
+const DAVI_ROAD := [Vector3(6.98, -0.9, -13.0), Vector3(6.98, -0.9, -5.6), Vector3(6.6, -0.9, -2.7), Vector3(6.45, 0.0, -1.55), Vector3(6.45, 0.0, -0.75)]
 
 
 func _davi_moves_in() -> void:
@@ -3793,6 +3807,42 @@ func _tick_push() -> void:
 		Sfx.creak(p, 0.08, 0.3, 2.2)
 
 
+## people don't walk through the cardboard boxes: one that someone steps into slides away from their
+## feet (never into a wall or off the floor) and stays where it ends up, as if the cat had pushed it
+const BOX_CLEAR := 0.52     # from a person's root to the box's centre (box 0.56 x 0.44, a step's room)
+
+
+func _tick_box_nudge() -> void:
+	for i in house.boxes.size():
+		var b: Dictionary = house.boxes[i]
+		var n: Node3D = b["node"]
+		if not n.visible or i == _pushing or (cat.mode == "hidden" and _hide_spot is Dictionary and str(_hide_spot.get("id", "")) == "box%d" % i):
+			continue
+		for o: Owner in [clara, davi]:
+			if o == null or not o.visible:
+				continue
+			var bp: Vector3 = b["pos"]
+			var d := Vector3(bp.x - o.global_position.x, 0, bp.z - o.global_position.z)
+			if absf(bp.y - o.global_position.y) > 0.6 or d.length() >= BOX_CLEAR:
+				continue
+			var dir := d.normalized() if d.length() > 0.01 else Vector3(sin(o.yaw), 0, cos(o.yaw))
+			var to := o.global_position + dir * BOX_CLEAR
+			to.y = bp.y
+			var gy := house.ground_height(to.x, to.z, bp.y + 0.3)
+			if gy < -500 or absf(gy - bp.y) > 0.05:
+				continue
+			# not through a wall or a piece of furniture (the box's own body left out)
+			var q := PhysicsRayQueryParameters3D.create(bp + Vector3(0, 0.18, 0), to + dir * 0.3 + Vector3(0, 0.18, 0), HouseBuilder.LAYER_WORLD, [(b["body"] as CollisionObject3D).get_rid()])
+			if not get_world_3d().direct_space_state.intersect_ray(q).is_empty():
+				continue
+			b["pos"] = to
+			n.global_position = to
+			if flags.has("boxes") and flags["boxes"][i] != null:
+				flags["boxes"][i]["x"] = to.x
+				flags["boxes"][i]["z"] = to.z
+			house.set_box(i, to, b["yaw"], true, flags["boxes"][i]["used"] if flags.has("boxes") and flags["boxes"][i] != null else false)
+
+
 ## dive into a box: a hiding place; while hunted, the hunter follows it in and is gone, and the box is ruined
 func enter_box(i: int) -> void:
 	var b: Dictionary = house.boxes[i]
@@ -4152,11 +4202,26 @@ func _simulate(dt: float) -> void:
 	_tick_eat(dt)
 	c.tick(dt, rig.yaw, controls)
 	_tick_push()
+	_tick_box_nudge()
+	# the thing in the mouth is drawn where the mouth is drawn. The cat's body is drawn interpolated between
+	# physics ticks while its bones pose at once: left to its own interpolation the thing trailed the mouth
+	# by a tick and shook in it (3–4 mm from one frame to the next). So it is taken off interpolation while
+	# carried and put straight on the skeleton as drawn this frame.
+	var held: Node3D = c.carrying.node if c.carrying else null
+	if held != _held_node:
+		if is_instance_valid(_held_node):
+			_held_node.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_INHERIT
+			_held_node.reset_physics_interpolation()
+		_held_node = held
+		if held:
+			held.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	if c.carrying:
 		var cr: PropSystem.Carryable = c.carrying
 		var mf := c.rig.mouth_frame()
 		mf.origin += mf.basis.y * -0.012 + mf.basis.z * -0.005
-		cr.node.global_transform = Carry.held_transform(str(cr.node.get_meta("grip", cr.id)), mf, cr.node.scale)
+		var sk: Skeleton3D = c.rig.skel
+		var drawn := sk.get_global_transform_interpolated() * sk.global_transform.affine_inverse()
+		cr.node.global_transform = drawn * Carry.held_transform(str(cr.node.get_meta("grip", cr.id)), mf, cr.node.scale)
 		cr.pos = c.global_position
 	if c.mode == "free":
 		h.props.interact_cat(c.global_position, c.vel, 0.14)

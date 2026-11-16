@@ -17,13 +17,28 @@ uniform float ring_height = 0.42;      // view-space normal.y where the ring sit
 uniform float ring_width = 0.07;
 uniform float alpha_cut = 0.5;
 uniform float hide_v = 9.0;            // texels past this UV.y are cut (the towel skirt in the tub)
+uniform float skin_mask = 0.0;         // body: 1 cuts the skin under the clothes (UV2.x = 1, build_vroid.py
+                                       // skin_mask), 2 paints it red instead (dev check of the mask)
+
+uniform float layer_back = 0.0;        // metres pushed back along the view ray (depth only, the same
+                                       // place on screen): an inner layer (trousers, skirt) gives way to
+                                       // whatever lies on it within that much (a vest hem, a hand, the cat)
+
+void vertex() {
+	vec4 vp = MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
+	vp.xyz += normalize(vp.xyz) * layer_back;
+	POSITION = PROJECTION_MATRIX * vp;
+}
 
 void fragment() {
-	if (UV.y > hide_v) {
+	if (UV.y > hide_v || (skin_mask > 0.5 && skin_mask < 1.5 && UV2.x > 0.5)) {
 		discard;
 	}
 	vec4 t = texture(albedo_tex, UV) * albedo;
 	ALBEDO = t.rgb * tint;
+	if (skin_mask > 1.5 && UV2.x > 0.5) {
+		ALBEDO = vec3(1.0, 0.05, 0.05);
+	}
 	ALPHA = t.a;
 #ifdef TOON_SCISSOR
 	ALPHA_SCISSOR_THRESHOLD = alpha_cut;

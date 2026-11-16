@@ -84,6 +84,20 @@ func _process(dt: float) -> void:
 			dc.g = g
 			add_child(dc)
 			dc.start(int(args["devctl"]) if str(args["devctl"]).is_valid_int() and args["devctl"] != "1" else 7777)
+		if args.has("clarasurvey"):
+			var sv: Node = load("res://scripts/dev/clara_survey.gd").new()
+			sv.name = "ClaraSurvey"
+			sv.ap = self
+			sv.g = g
+			add_child(sv)
+			sv.start(str(args["clarasurvey"]))
+		if args.has("clipwatch"):
+			var cw: Node = load("res://scripts/dev/clip_watch.gd").new()
+			cw.name = "ClipWatch"
+			cw.ap = self
+			cw.g = g
+			add_child(cw)
+			cw.start(str(args["clipwatch"]))
 		if args.has("scene"):
 			var tr: Node = load("res://scripts/dev/trailer.gd").new()
 			tr.name = "Trailer"
@@ -788,6 +802,59 @@ func _apply_overrides() -> void:
 				c.node.visible = true
 		g.cat.carrying = c
 		c.carried = true
+	# --playtoy=toy|yarn: the toy 0.9 m ahead of the cat and "Brincar" (pounce, then it is in the mouth);
+	# --carrylog prints, each frame, where the thing is in the cat's own space and the head's yaw
+	if args.has("playtoy") and t > 2.0 and not has_meta("playtoy_done"):
+		var pc: PropSystem.Carryable = g.house.carryables.get(str(args["playtoy"]) if str(args["playtoy"]) != "1" else "toy")
+		pc.place(g.cat.global_position + g.cat.forward * 0.9, 0.0)
+		if g.cat.mode == "frozen":
+			g.cat.mode = "free"
+		if g.cat.pounce_at(pc.node, func():
+				Sfx.paw_step(pc.pos, false, true)
+				g.inter.pick(g, pc.id)):
+			set_meta("playtoy_done", t)
+			print("PLAYTOY pounce t=%.2f" % t)
+		elif Engine.get_process_frames() % 120 == 0:
+			print("PLAYTOY waiting mode=%s grounded=%s arc=%s stun=%.1f act=%s" % [g.cat.mode, g.cat.grounded, g.cat.arc != null, g.cat.stun_t, g.cat.acting()])
+	if args.has("playtoy") and has_meta("playtoy_done"):
+		var since: float = t - float(get_meta("playtoy_done"))
+		# after the catch: a walk, a run and a turn with it in the mouth
+		if since > 3.0 and since < 6.0:
+			if not has_meta("playtoy_turned"):
+				# back the way it came (clear floor)
+				set_meta("playtoy_turned", true)
+				g.rig.yaw += PI
+			Input.action_press("move_forward")
+			if since > 4.5:
+				Input.action_press("run")
+		elif since >= 6.0:
+			Input.action_release("move_forward")
+			Input.action_release("run")
+		if since > 7.5:
+			get_tree().quit()
+	# as drawn (physics interpolation), how far the thing in the mouth strays from where the mouth is drawn:
+	# the worst of each half second, in mm (0 = it sits still in the mouth)
+	if args.has("carrylog") and g.cat.carrying != null:
+		var cn: Node3D = g.cat.carrying.node
+		var sk: Skeleton3D = g.cat.rig.skel
+		# (a node taken off interpolation is drawn where it was put: the interpolated getter is not valid for it)
+		var cn_drawn := cn.global_position if cn.physics_interpolation_mode == Node.PHYSICS_INTERPOLATION_MODE_OFF else cn.get_global_transform_interpolated().origin
+		var drawn := sk.get_global_transform_interpolated().affine_inverse() * cn_drawn
+		var mfr: Transform3D = g.cat.rig.mouth_frame()
+		mfr.origin += mfr.basis.y * -0.012 + mfr.basis.z * -0.005
+		var real := sk.global_transform.affine_inverse() * Carry.held_transform(str(cn.get_meta("grip", g.cat.carrying.id)), mfr, cn.scale).origin
+		var e := (drawn - real).length() * 1000.0
+		var prev: Vector3 = get_meta("cl_prev", drawn - real)
+		set_meta("cl_prev", drawn - real)
+		set_meta("cl_max", maxf(float(get_meta("cl_max", 0.0)), e))
+		set_meta("cl_jit", maxf(float(get_meta("cl_jit", 0.0)), (drawn - real - prev).length() * 1000.0))
+		set_meta("cl_n", int(get_meta("cl_n", 0)) + 1)
+		if t - float(get_meta("cl_t", 0.0)) >= 0.5:
+			print("CARRYLOG t=%.1f off_mm=%.2f jitter_mm=%.2f frames=%d speed=%.1f act=%s at=%.2f,%.2f" % [t, get_meta("cl_max"), get_meta("cl_jit"), get_meta("cl_n"), g.cat.vel.length(), g.cat.acting(), g.cat.global_position.x, g.cat.global_position.z])
+			set_meta("cl_t", t)
+			set_meta("cl_max", 0.0)
+			set_meta("cl_jit", 0.0)
+			set_meta("cl_n", 0)
 	if args.has("walk"):
 		if t > 1.0 and t < 3.0:
 			Input.action_press("move_forward")

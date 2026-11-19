@@ -16,7 +16,7 @@ Refeita em **Godot 4.7** com modelos e texturas feitos no **Blender 5.2**:
 
 **Jogar:** abra `build/SeteVidas/SeteVidas.exe` (ou extraia `build/SeteVidas.zip` em outro computador).
 
-**Editar:** abra a pasta `godot/` no Godot 4.7. Ferramentas de geração em `tools/`: `tools/blender/build_house.py` e `house_kit.py` (casa e móveis), `build_cat2.py` (gato), `build_humans.py` (fantasmas), `build_vroid.py` (Clara e Davi), `build_hound.py`, `build_thing.py`, `build_turban.py`; animações com `godot/scripts/dev/retarget.gd`; áudio com `tools/audio/synth.py`. Regras do jogo e testes em `CLAUDE.md`.
+**Editar:** abra a pasta `godot/` no Godot 4.7. Depois de um `git pull` que traga modelos novos, abra o editor uma vez (ou rode `godot --headless --path godot --import`) antes de jogar: rodando o jogo direto, o Godot usa a importação antiga (o jogo avisa na tela). Ferramentas de geração em `tools/`: `tools/blender/build_house.py` e `house_kit.py` (casa e móveis), `build_cat2.py` (gato), `build_humans.py` (fantasmas), `build_vroid.py` (Clara e Davi), `build_hound.py`, `build_thing.py`, `build_turban.py`; animações com `godot/scripts/dev/retarget.gd`; áudio com `tools/audio/synth.py`. Regras do jogo e testes em `CLAUDE.md`.
 
 **Exportar:** `godot --headless --path godot --export-release "Windows Desktop"` (gera `build/SeteVidas/SeteVidas.exe`).
 

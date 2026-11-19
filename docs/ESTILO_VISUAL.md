@@ -42,7 +42,12 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
     Top" com a camada padrão oculta (pele limpa). Os sapatos são apagados no Blender (`DROP` no
     `build_vroid.py`, depois da escala, para o esqueleto bater com as outras roupas). Na banheira a saia
     abaixo do quadril some (`HumanRig.hide_skirt`, uniform `hide_v` nos shaders toon/outline), senão
-    ela atravessa a água por cima dos joelhos dobrados.
+    ela atravessa a água por cima dos joelhos dobrados. A faixa da frente sobre o peito vinha com alfa 0
+    (o peito aparecia por ela): o `build_vroid.py` (`towel_fix`, `TOWEL_BAND`) a deixa opaca e o banho
+    também tem máscara de pele (`SKIN_MASK`; na banheira, com a saia cortada, `hide_skirt` desliga a
+    máscara para as pernas aparecerem). No jogo a toalha usa `clara_bath_towel.png` e o corpo
+    `clara_bath_body.png` (mamilos da pele do VRoid apagados; apareciam na borda de cima), e o avesso da
+    toalha visto por cima da borda é iluminado como o lado de fora (`inner_lit` no toon).
 - **Pipeline:** `tools/blender/measure_vrm.py` (confere razões) → `tools/blender/build_vroid.py`
   (ossos com nomes do jogo, A-pose de 42,5°, partes `_body/_eyes/_eyebrows/_eyelashes/_hair/_cloth`,
   shape key `eyes_closed`, MToon → Principled, escala, export GLB + `<id>.toon.json`).
@@ -66,6 +71,10 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
     do raio da câmera (`layer_back`, `HumanRig.LAYER_BACK`; só a profundidade, o lugar na tela é o mesmo):
     a barra do colete/suéter, as mãos e o gato ganham onde encostam (a coxa erguida na escada passava pela
     barra do colete). Roupa contra roupa não tem máscara: a máscara é fixa na pose de repouso.
+    O empurrão só liga se o corpo do modelo tem a máscara (UV2): uma importação do GLB anterior à
+    máscara (checkout em que o Godot não reimportou) deixava o corpo inteiro atrás da saia, com manchas
+    pretas na cintura e sob a saia; agora ela cai no visual antigo e avisa no log. Depois de um pull que
+    muda os `.glb`, abrir o editor uma vez ou rodar `godot --headless --path godot --import`.
 - **Rosto:** o `build_vroid.py` mantém, além do `eyes_closed`, `mouth_a/i/o`, `joy`, `surprised`,
   `sorrow` e `eye_joy` (das `Fcl_*` do VRoid). A boca segue as vogais da fala (`HumanRig.talk`); o humor
   (`set_mood`): ^^ com o gato ronronando, susto, tristeza com medo alto. Dormindo: olhos fechados,
@@ -107,13 +116,18 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
   cima, inclinados para a frente do peito).
 - **Objetos nas mãos:** `HumanRig.hold(node, kind)` (`box`, `suitcase`, `doll`, `book`, `cushion`,
   `backpack`, `book` abraçado ao peito, `book_open` aberto para ler) com pose de braços própria. No `book_open` as mãos vão por IK às bordas do livro (cotovelos para fora, nunca dentro do tronco) e um modificador depois do IK (`HumanRig._post_modify`, `HumanPoseMod.post`) vira as palmas para a capa de trás, com os dedos rumo à lombada; o livro fica preso ao peito, mais alto em pé. Caixa e almofada (Clara): cada mão vai por IK ao meio da face lateral do objeto (`SIDE_GRIP`), e os antebraços abraçam os lados em vez de atravessá-lo. No colo (sentada, mão abaixo do cotovelo) o cotovelo dela sobe e sai para fora, e a mão pousa na metade de perto das costas do gato. Afinar com `--holdtune` (`"_grip"`) e `--tunefocus --views=front,under,eyes`. Turbante de toalha do banho: `tools/blender/build_turban.py`
-  → `turban.glb`, textura `tools/textures/gen_towel.py`, preso à cabeça como os óculos do Davi.
+  → `turban.glb`, textura `tools/textures/gen_towel.py`, preso à cabeça como os óculos do Davi. O
+  turbante é toon com contorno (`turban_terry.png`; com material comum o domo creme parecia careca) e o
+  cabelo não some inteiro: o shader corta só o que fica acima da borda do turbante e a trança atrás da
+  nuca (`cut_on`/`cut_xf` em toon/outline, `TURBAN_RIM_Y`/`TURBAN_EARS_X`), e a franja aparece.
 - **Poses:** quedas de quadril de sentar/deitar/banho são absolutas (altura do assento/colchão):
   `pelvis_d` (altura da pelve nova − MPFB) entra nas quedas grandes. Sem cobertor (removido: bugava).
   Deitada o tronco fica plano e o travesseiro ergue a cabeça (pose `lie`). `bed_offset` (`owner.gd`)
   da Clara = (-0,11, 0, -0,3) (no travesseiro do lado dela, longe da cabeceira; uma mão na barriga,
   joelhos um pouco dobrados); Davi = (-0,2, -0,12, 0) (colchão de hóspedes em 3,55). Sentado, o Davi
-  entra mais no assento (`seat_deep` 0,45, `seat_adj` -0,07 no cfg). Pernas na cama medidas contra o
+  entra mais no assento (`seat_adj` -0,07 no cfg). Os dois param a 0,4 m à frente do ponto do assento
+  (`seat_front`; a 0,3 os calcanhares entravam na base do sofá ao sentar e levantar) e o `seat_deep`
+  devolve o quadril ao lugar (Clara 0,34, Davi 0,79: 0,1 m / 0,296 do `sit_pel` a mais). Pernas na cama medidas contra o
   colchão (`--clarasurvey --bones=`): `hug`/`cry` com coxa 2,6 e joelho 1,8 (os pés pousam no colchão;
   com joelho 2,2 a canela descia reta ~20 cm para dentro dele) e `sitUp` com coxa 1,68 (os calcanhares
   apoiam); vale para os dois. Tronco e cabeça de `hug`/`cry` mais retos (a testa nos joelhos; dobrado,
@@ -234,7 +248,7 @@ projeto**; dele só usamos medidas de proporção tiradas das imagens oficiais d
 - Roupas de noite são roupas de casa montadas com presets (não pijama de verdade).
 - Faixa de sombra marcada no rosto com luz lateral.
 - Desvios de proporção aceitos: Clara perna +6,9% e olho estreito -9,4%; Davi cabeça -6,6% e olho alto +4,4%.
-- Toalha de banho: o topo frouxo deixa ver um pouco do avesso no peito; descalça, os pés ficam ~1,6 cm
+- Toalha de banho: a frente termina um pouco abaixo das costas e o avesso aparece por cima da borda (agora claro, `inner_lit`); subir os vértices da frente rasgou o painel (tentado em 19/11); descalça, os pés ficam ~1,6 cm
   acima de onde a sola do tênis apoiava (o IK dos pés compensa no chão).
 - Ajoelhar é o agachamento do clipe (`Crouch_Idle`): a biblioteca não tem ajoelhar em loop.
 - Espiada da Sombra (cabeça e mãos): conferida em captura nos 10 esconderijos; no sofá a cabeça

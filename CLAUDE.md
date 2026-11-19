@@ -1,8 +1,10 @@
 # Sete Vidas
 
 Jogo de terror em Godot 4.7 (`godot/`), com modelos e ferramentas no Blender 5.2 (`tools/blender/`,
-sempre headless). A pasta não é um repositório git: antes de sobrescrever arquivos, copie-os para
-`tools/backup/`.
+sempre headless). Antes de sobrescrever arquivos, copie-os para `tools/backup/`. Mudou um `.glb`/textura
+fora do editor: `godot --headless --path godot --import` antes de testar; o jogo compara o md5 de cada
+`.glb` com a importação e avisa na tela (`Game._warn_stale_imports`) — num pull sem reimportar, a Clara
+rodava sem máscara de pele (manchas pretas na saia).
 
 ## Jogo (direção atual)
 

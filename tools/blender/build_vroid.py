@@ -36,7 +36,7 @@ CHARACTERS = {"clara_day": "clara", "clara_night": "clara", "clara_bath": "clara
 # pieces cut after scaling (so the skeleton matches the other outfits): the bath outfit is barefoot
 DROP = {"clara_bath": ("shoes_",)}
 # outfits whose body gets the under-the-cloth mask (skin_mask below)
-SKIN_MASK = ("clara_day", "clara_night")
+SKIN_MASK = ("clara_day", "clara_night", "clara_bath")
 
 # VRM 1.0 humanoid bone -> game (Unreal-style) bone name
 HUMANOID = {
@@ -331,6 +331,44 @@ def _image_alpha(mat):
     return None
 
 
+# the bath towel (a strapless "Sleeveless Dress" from VRoid): its front panel stopped under the bust while
+# the back went up to the armpits, and the texture band over the chest had alpha 0, so the chest and the
+# towel's inside showed above the front edge. The band is made opaque (copied from the towel below it);
+# with the skin mask on the bath body too, the bust no longer pokes through the front. (Lifting the
+# front's vertices to the back's height was tried: it tore the panel open in the middle.)
+TOWEL_BAND = (0.385, 0.535, 0.17, 0.83)   # image v (from the top) and u ranges of the band
+
+
+def towel_fix(cid, parts):
+    cloth = parts.get("cloth")
+    if not cloth:
+        return
+    for m in cloth.data.materials:
+        if not m or "shoes" in m.name.lower() or not m.use_nodes:
+            continue
+        for n in m.node_tree.nodes:
+            if n.type != "TEX_IMAGE" or not n.image or n.image.size[0] == 0:
+                continue
+            img = n.image
+            w, h = img.size
+            px = list(img.pixels)
+            v0, v1, u0, u1 = TOWEL_BAND
+            shift = int(0.2 * h)
+            for row in range(h):
+                vt = 1.0 - (row + 0.5) / h         # Blender rows start at the bottom
+                if not (v0 <= vt < v1):
+                    continue
+                src = max(0, row - shift)
+                dark = 0.82 if vt < v0 + 0.03 else 1.0
+                for x in range(int(u0 * w), int(u1 * w) + 1):
+                    i, j = (row * w + x) * 4, (src * w + x) * 4
+                    px[i:i + 3] = [c * dark for c in px[j:j + 3]]
+                    px[i + 3] = 1.0
+            img.pixels = px
+            img.pack()
+            print("TOWEL %s band opaque in %s" % (cid, img.name))
+
+
 def skin_mask(cid, parts):
     from mathutils.bvhtree import BVHTree
     from mathutils import geometry, kdtree
@@ -517,6 +555,8 @@ def build(cid, who):
             n = drop_materials(ob, DROP[cid])
             if n:
                 print("DROP %s %s: %d faces" % (cid, ob.name, n))
+    if cid == "clara_bath":
+        towel_fix(cid, parts)
     if cid in SKIN_MASK:
         skin_mask(cid, parts)
     arm.name = f"{cid}_rig"

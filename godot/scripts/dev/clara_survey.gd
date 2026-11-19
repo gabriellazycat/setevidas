@@ -362,6 +362,13 @@ func _cam(o: Owner, view: String) -> void:
 	dirs["hi34l"] = ((fw - rt).normalized() * 0.55 + up).normalized()
 	dirs["hifoot"] = (dirs["foot"] * 0.55 + up).normalized()
 	dirs["front_hi"] = (fw + up * 0.75).normalized()
+	# "lo..." = the cat's eye: from low down (about 25 cm over the floor) looking up at the centre
+	if view.begins_with("lo"):
+		var hd: Vector3 = dirs.get(view.substr(2), fw)
+		var p := c + hd * dist
+		p.y = o.global_position.y + 0.25
+		g.rig.override_pose = {"pos": p, "look": c, "blend": 1.0, "fov": fov}
+		return
 	var d: Vector3 = dirs.get(view, fw)
 	var lift := 0.15 if view != "top" and not ap.args.has("close") else 0.0
 	g.rig.override_pose = {"pos": c + d * dist + Vector3(0, lift, 0), "look": c, "blend": 1.0, "fov": fov}

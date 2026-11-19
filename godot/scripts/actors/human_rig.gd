@@ -173,6 +173,9 @@ const IDLE_GESTURES := {"clara": ["hair", "look_back", "stretch"], "davi": ["gla
 # the skin under the clothes: 1 cut (the game), 0 drawn, 2 painted red (dev check, --skinmask=2)
 static var skin_mask_mode := 1.0
 static var LAYER_BACK := 0.015        # metres (dev: clara_survey --layerback=M)
+var _skin_masked := false              # the model being dressed has the skin mask (UV2 on the body)
+const BATH_TOWEL_TEX := "res://assets/models/people/clara_bath_towel.png"
+const BATH_BODY_TEX := "res://assets/models/people/clara_bath_body.png"
 
 var who := "clara"
 var outfits := {}         # "day"/"night" -> {root, skel, body, maps, tree, ik...}
@@ -363,6 +366,16 @@ func _toon_material(src: BaseMaterial3D, spec: Dictionary, part: String, key: St
 	var m := ShaderMaterial.new()
 	m.shader = TOON_BLEND if blend else TOON
 	var tex: Texture2D = src.albedo_texture if src else null
+	# the bath towel: the texture from VRoid left the front band over the chest with alpha 0 (the body
+	# showed through it); this copy has that band opaque, with a hem at the top edge
+	if key == "clara_bath_tops_01_cloth":
+		m.set_shader_parameter("inner_lit", 1.0)
+		if ResourceLoader.exists(BATH_TOWEL_TEX):
+			tex = load(BATH_TOWEL_TEX)
+	# her body in the bath outfit: the VRoid skin had the nipples drawn, and they showed at the towel's
+	# top edge (the skin mask keeps a band of skin under every edge); this copy has them painted out
+	if key == "clara_bath_body_00_skin" and ResourceLoader.exists(BATH_BODY_TEX):
+		tex = load(BATH_BODY_TEX)
 	var col: Color = src.albedo_color if src else Color(1, 1, 1)
 	m.set_shader_parameter("albedo_tex", tex)
 	m.set_shader_parameter("albedo", col)
@@ -400,7 +413,10 @@ func _toon_material(src: BaseMaterial3D, spec: Dictionary, part: String, key: St
 		m.next_pass = ol
 	# Clara's trousers / skirt: the inner layer gives way by 1.5 cm (a thigh raised on the stairs went
 	# through the vest's hem); the outer clothes, hands and the cat win where they lie on it
-	if part == "cloth" and "bottoms" in key and who == "clara":
+	# Only with the skin mask in the model: an import of the GLB from before the mask (a checkout where
+	# Godot did not reimport it) has no UV2, and then the push put the trousers / skirt behind the uncut
+	# body (its black under-the-clothes texels showed through the skirt and at the waist)
+	if part == "cloth" and "bottoms" in key and who == "clara" and _skin_masked:
 		m.set_shader_parameter("layer_back", LAYER_BACK)
 		if m.next_pass:
 			(m.next_pass as ShaderMaterial).set_shader_parameter("layer_back", LAYER_BACK)
@@ -411,6 +427,19 @@ func _dress_anime(root: Node, outfit: String) -> void:
 	var o: Dictionary = outfits[outfit]
 	var toon := _toon_data(o["id"])
 	var blinkers: Array = []
+	# does this model carry the skin mask (the body's second UV map, build_vroid.py)? Decided before any
+	# material is made: the bottoms' depth push depends on it (_toon_material)
+	_skin_masked = false
+	for mi in root.find_children("*", "MeshInstance3D", true, false):
+		var bm := mi as MeshInstance3D
+		var bn := bm.name.to_lower()
+		if bn.get_slice("_", bn.get_slice_count("_") - 1) == "body" and bm.mesh:
+			for si in bm.mesh.get_surface_count():
+				if bm.mesh.surface_get_format(si) & Mesh.ARRAY_FORMAT_TEX_UV2:
+					_skin_masked = true
+	# (the bath towel is built without a mask, SKIN_MASK in build_vroid.py)
+	if not _skin_masked and o["id"] in ["clara_day", "clara_night"]:
+		push_warning("HumanRig: %s has no skin mask (UV2) — the GLB import is older than the model; reimport it (open the editor once, or godot --headless --import)" % o["id"])
 	for mi in root.find_children("*", "MeshInstance3D", true, false):
 		var m := mi as MeshInstance3D
 		var n := m.name.to_lower()
@@ -591,6 +620,8 @@ func _build_glasses() -> void:
 ## Clara's towel turban for the bath (tools/blender/build_turban.py): sized to the hair and glued to
 ## the head bone like the glasses; the hair underneath is hidden
 var turban: Node3D
+const TURBAN_RIM_Y := 0.0      # turban model space: hair above this is under the towel
+const TURBAN_EARS_X := -0.05   # and behind this (x toward the forehead), below the nape, the braid is tucked in
 
 
 ## the bath outfit's towel is a dress: in the tub its skirt would stick out of the water over the
@@ -604,6 +635,16 @@ func hide_skirt(on: bool) -> void:
 		while mat:
 			mat.set_shader_parameter("hide_v", 0.64 if on else 9.0)
 			mat = mat.next_pass as ShaderMaterial
+	# the skin under the towel is cut (skin mask); with its skirt cut away in the tub the legs under it
+	# must show again, so the mask is off there (the water hides the rest)
+	var bd: MeshInstance3D = outfits["bath"].get("body")
+	if bd:
+		for si in bd.mesh.get_surface_count():
+			var bmat := bd.get_surface_override_material(si) as ShaderMaterial
+			while bmat:
+				if bmat.get_shader_parameter("skin_mask") != null and bd.mesh.surface_get_format(si) & Mesh.ARRAY_FORMAT_TEX_UV2:
+					bmat.set_shader_parameter("skin_mask", 0.0 if on else skin_mask_mode)
+				bmat = bmat.next_pass as ShaderMaterial
 
 
 ## the shoes are their own surface of each outfit's cloth (VRoid "Shoes_"): cut away whole in bed,
@@ -627,20 +668,38 @@ func set_turban(on: bool) -> void:
 	if on and turban == null and ResourceLoader.exists("res://assets/models/people/turban.glb"):
 		turban = (load("res://assets/models/people/turban.glb") as PackedScene).instantiate()
 		add_child(turban)
-		var tm := StandardMaterial3D.new()
-		tm.albedo_texture = load("res://assets/textures/gen/towel_cream.png")
-		tm.albedo_color = Color(0.98, 0.93, 0.86)
-		tm.uv1_scale = Vector3(4, 4, 1)
-		tm.roughness = 0.95
-		tm.rim_enabled = true
-		tm.rim = 0.25
+		# toon like her clothes (cel bands and the coloured outline): with a plain lit material the cream
+		# dome read as a bald head. A little warmer and whiter than skin, with the terry grain
+		var tm := ShaderMaterial.new()
+		tm.shader = TOON
+		tm.set_shader_parameter("albedo_tex", load("res://assets/models/people/turban_terry.png"))
+		tm.set_shader_parameter("albedo", Color(1.0, 0.97, 0.92))
+		tm.set_shader_parameter("shade_color", Color(0.78, 0.66, 0.62))
+		tm.set_shader_parameter("shade_amount", 0.62)
+		tm.set_shader_parameter("shade_soft", 0.08)
+		tm.set_shader_parameter("rim_strength", 0.14)
+		var ol := ShaderMaterial.new()
+		ol.shader = OUTLINE
+		ol.set_shader_parameter("albedo", Color(0.86, 0.72, 0.62))
+		ol.set_shader_parameter("width", 0.0018)
+		ol.set_shader_parameter("darken", 0.55)
+		tm.next_pass = ol
 		for mi in turban.find_children("*", "MeshInstance3D", true, false):
 			(mi as MeshInstance3D).material_override = tm
+			(mi as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	if turban:
 		turban.visible = on
+	# the hair is not hidden whole: what the turban covers and what lies behind the ears is cut in the
+	# shader (cut_xf, set each frame in _update_turban), so the fringe and the front locks show under it
 	for k in outfits:
 		for mi in (outfits[k]["root"] as Node).find_children("*_hair", "MeshInstance3D", true, false):
-			(mi as MeshInstance3D).visible = not on
+			var hm := mi as MeshInstance3D
+			hm.visible = true
+			for si in hm.mesh.get_surface_count():
+				var mat := hm.get_surface_override_material(si) as ShaderMaterial
+				while mat:
+					mat.set_shader_parameter("cut_on", 1.0 if on else 0.0)
+					mat = mat.next_pass as ShaderMaterial
 
 
 func _update_turban(sk: Skeleton3D, idx: Dictionary) -> void:
@@ -660,8 +719,20 @@ func _update_turban(sk: Skeleton3D, idx: Dictionary) -> void:
 			var ab := hair.mesh.get_aabb()
 			w = minf(ab.size.x, 0.26)
 		# the model's twist points along +x: turn it to the forehead
-		o["turban_local"] = rest.affine_inverse() * Transform3D(Basis(Vector3.UP, -PI / 2).scaled(Vector3.ONE * w * 1.0), c + Vector3(0, 0.05, -0.02))
+		o["turban_local"] = rest.affine_inverse() * Transform3D(Basis(Vector3.UP, -PI / 2).scaled(Vector3.ONE * w * 1.08), c + Vector3(0, 0.025, -0.02))
 	turban.global_transform = sk.global_transform * bone_global(idx["head"]) * (o["turban_local"] as Transform3D)
+	# world -> turban space (unit model: the skull ~1 wide), shifted so the rim is y 0 and the ears x 0
+	var inv := turban.global_transform.affine_inverse()
+	inv = Transform3D(Basis.IDENTITY, Vector3(-TURBAN_EARS_X, -TURBAN_RIM_Y, 0)) * inv
+	var b := inv.basis
+	var xf := Projection(Vector4(b.x.x, b.x.y, b.x.z, 0), Vector4(b.y.x, b.y.y, b.y.z, 0), Vector4(b.z.x, b.z.y, b.z.z, 0), Vector4(inv.origin.x, inv.origin.y, inv.origin.z, 1))
+	for mi in (o["root"] as Node).find_children("*_hair", "MeshInstance3D", true, false):
+		var hm := mi as MeshInstance3D
+		for si in hm.mesh.get_surface_count():
+			var mat := hm.get_surface_override_material(si) as ShaderMaterial
+			while mat:
+				mat.set_shader_parameter("cut_xf", xf)
+				mat = mat.next_pass as ShaderMaterial
 
 
 func _update_glasses() -> void:

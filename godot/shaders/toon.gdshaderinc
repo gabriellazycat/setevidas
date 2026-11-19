@@ -24,14 +24,31 @@ uniform float layer_back = 0.0;        // metres pushed back along the view ray 
                                        // place on screen): an inner layer (trousers, skirt) gives way to
                                        // whatever lies on it within that much (a vest hem, a hand, the cat)
 
+// hair under the bath turban: cut_xf takes world space to the turban's (x toward the forehead, y up,
+// shifted so the rim sits at y 0 and the ears at x 0); hair above the rim is under the towel, and
+// behind the ears below the nape (the braid) it is tucked in; the fringe and the locks stay
+uniform float inner_lit = 0.0;
+uniform float cut_on = 0.0;
+uniform mat4 cut_xf = mat4(1.0);
+varying vec3 v_world;
+
+bool turban_cut() {
+	if (cut_on < 0.5) {
+		return false;
+	}
+	vec4 q = cut_xf * vec4(v_world, 1.0);
+	return q.y > 0.0 || (q.x < 0.0 && q.y < -0.55);
+}
+
 void vertex() {
+	v_world = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	vec4 vp = MODELVIEW_MATRIX * vec4(VERTEX, 1.0);
 	vp.xyz += normalize(vp.xyz) * layer_back;
 	POSITION = PROJECTION_MATRIX * vp;
 }
 
 void fragment() {
-	if (UV.y > hide_v || (skin_mask > 0.5 && skin_mask < 1.5 && UV2.x > 0.5)) {
+	if (UV.y > hide_v || (skin_mask > 0.5 && skin_mask < 1.5 && UV2.x > 0.5) || turban_cut()) {
 		discard;
 	}
 	vec4 t = texture(albedo_tex, UV) * albedo;
@@ -44,7 +61,9 @@ void fragment() {
 	ALPHA_SCISSOR_THRESHOLD = alpha_cut;
 #endif
 	if (!FRONT_FACING) {
-		NORMAL = -NORMAL;
+		// inner_lit: the inside of a garment seen over its edge (the bath towel's back panel above the
+		// front's edge) is lit as if it faced the camera, so it reads as towel, not as a dark hole
+		NORMAL = normalize(mix(-NORMAL, VIEW, inner_lit));
 	}
 	ROUGHNESS = 1.0;
 	SPECULAR = 0.0;

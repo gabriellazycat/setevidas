@@ -849,9 +849,27 @@ func _apply_overrides() -> void:
 		set_meta("cl_max", maxf(float(get_meta("cl_max", 0.0)), e))
 		set_meta("cl_jit", maxf(float(get_meta("cl_jit", 0.0)), (drawn - real - prev).length() * 1000.0))
 		set_meta("cl_n", int(get_meta("cl_n", 0)) + 1)
+		# independent of the placement formula: the thing's pose in the head bone's frame (both as posed this
+		# frame) should hold still; rot_deg / move_mm = the worst change from one frame to the next
+		var hb: int = sk.find_bone("head")
+		if hb >= 0:
+			var hrel: Transform3D = (sk.global_transform * sk.get_bone_global_pose(hb)).affine_inverse() * (sk.global_transform * sk.get_global_transform_interpolated().affine_inverse() * cn.global_transform)
+			if has_meta("cl_hprev"):
+				var hp: Transform3D = get_meta("cl_hprev")
+				var dq := Quaternion(hp.basis.orthonormalized()).inverse() * Quaternion(hrel.basis.orthonormalized())
+				set_meta("cl_rot", maxf(float(get_meta("cl_rot", 0.0)), rad_to_deg(dq.get_angle())))
+				set_meta("cl_mov", maxf(float(get_meta("cl_mov", 0.0)), (hrel.origin - hp.origin).length() * 1000.0))
+				if args.has("carryframes") and g.cat.acting():
+					var jb: int = sk.find_bone("jaw")
+					print("CARRYFRAME t=%.3f rot=%.2f mov=%.2f jaw=%s fwd_up=%.3f" % [t, rad_to_deg(dq.get_angle()), (hrel.origin - hp.origin).length() * 1000.0, str(sk.get_bone_pose_rotation(jb).get_euler()) if jb >= 0 else "-", mfr.basis.z.dot(Vector3.UP)])
+			set_meta("cl_hprev", hrel)
+			set_meta("cl_fy", maxf(float(get_meta("cl_fy", 0.0)), absf(mfr.basis.z.dot(Vector3.UP))))
 		if t - float(get_meta("cl_t", 0.0)) >= 0.5:
-			print("CARRYLOG t=%.1f off_mm=%.2f jitter_mm=%.2f frames=%d speed=%.1f act=%s at=%.2f,%.2f" % [t, get_meta("cl_max"), get_meta("cl_jit"), get_meta("cl_n"), g.cat.vel.length(), g.cat.acting(), g.cat.global_position.x, g.cat.global_position.z])
+			print("CARRYLOG t=%.1f off_mm=%.2f jitter_mm=%.2f head_rot_deg=%.2f head_mov_mm=%.2f fwd_up=%.2f frames=%d speed=%.1f act=%s at=%.2f,%.2f" % [t, get_meta("cl_max"), get_meta("cl_jit"), get_meta("cl_rot", 0.0), get_meta("cl_mov", 0.0), get_meta("cl_fy", 0.0), get_meta("cl_n"), g.cat.vel.length(), g.cat.acting(), g.cat.global_position.x, g.cat.global_position.z])
 			set_meta("cl_t", t)
+			set_meta("cl_rot", 0.0)
+			set_meta("cl_mov", 0.0)
+			set_meta("cl_fy", 0.0)
 			set_meta("cl_max", 0.0)
 			set_meta("cl_jit", 0.0)
 			set_meta("cl_n", 0)

@@ -13,13 +13,13 @@ const CLARA := {
 	"id": "clara", "name": "Clara", "skeptic": false, "fear_scale": 1.0,
 	"bed_spot": "bed", "bedside_spot": "bedside", "bed_room": "quarto", "bed_node": "f_quarto_bed",
 	"bed_side": Vector3(1.6, 3, 1.4), "bed_top": Vector3(1.55, 3.6, 2.15), "purr_pos": Vector3(0.9, 3.4, 2.93), "purr_yaw": -PI / 2,
-	"lamp": 8, "voice_pitch": 1.0, "bed_offset": Vector3(-0.11, 0, -0.3),
+	"lamp": 8, "voice_pitch": 1.0, "bed_offset": Vector3(-0.11, 0, -0.3), "seat_front": 0.4, "seat_deep": 0.34,
 }
 const DAVI := {
 	"id": "davi", "name": "Davi", "skeptic": true, "fear_scale": 0.7,
 	"bed_spot": "davBed", "bedside_spot": "davBedside", "bed_room": "hospedes", "bed_node": "f_hosp_bed",
 	"bed_side": Vector3(1.5, 3, 7.3), "bed_top": Vector3(1.55, 3.58, 7.95), "purr_pos": Vector3(1.1, 3.57, 7.98), "purr_yaw": -PI / 2,
-	"lamp": 17, "voice_pitch": 0.62, "bed_offset": Vector3(-0.2, -0.12, 0), "bed_sit_lift": 0.06, "seat_deep": 0.45, "seat_adj": 0.01,
+	"lamp": 17, "voice_pitch": 0.62, "bed_offset": Vector3(-0.2, -0.12, 0), "bed_sit_lift": 0.06, "seat_front": 0.4, "seat_deep": 0.79, "seat_adj": 0.01,
 }
 
 var cfg: Dictionary
@@ -641,7 +641,10 @@ func tick(dt: float) -> void:
 							model.seat_lift = sp3.y - floor_y + float(cfg.get("seat_adj", 0.0))
 							model.seat_back = true
 							model.seat_deep = float(cfg.get("seat_deep", 0.0))
-							sp3 = Vector3(sp3.x, floor_y, sp3.z) + Vector3(sin(sy), 0, cos(sy)) * 0.3
+							# where she stops, in front of the seat point: at 0.3 m her heels were inside the sofa's
+							# base (it reaches 0.27 m past the seat point); seat_front puts her clear of it and
+							# seat_deep takes the hips the extra way back
+							sp3 = Vector3(sp3.x, floor_y, sp3.z) + Vector3(sin(sy), 0, cos(sy)) * float(cfg.get("seat_front", 0.3))
 							task["seat_p"] = sp3
 						_start_path(st["spot"]["node"], sp3)
 					model.pose = "stand"

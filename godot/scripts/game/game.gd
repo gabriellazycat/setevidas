@@ -108,7 +108,58 @@ func _step(p: float, msg: String) -> void:
 	await get_tree().process_frame
 
 
+## Run from the project folder (not an export), a git pull can bring new models while Godot's import
+## cache still holds the old ones: the game then runs new scripts on old meshes (Clara without her skin
+## mask showed black patches through the skirt). The cache records the md5 of the source each import
+## was made from: compare, and say so on screen when they differ. An export has no .md5 files: skipped.
+func _stale_imports() -> Array:
+	var stale: Array = []
+	var dirs := ["res://assets/models"]
+	while not dirs.is_empty():
+		var d: String = dirs.pop_back()
+		var da := DirAccess.open(d)
+		if da == null:
+			continue
+		for sub in da.get_directories():
+			dirs.append(d.path_join(sub))
+		for f in da.get_files():
+			if not f.ends_with(".glb"):
+				continue
+			var src := d.path_join(f)
+			var imp := ConfigFile.new()
+			if imp.load(src + ".import") != OK:
+				continue
+			var dest := str(imp.get_value("remap", "path", ""))
+			var md5_path := dest.get_basename() + ".md5"
+			if dest == "" or not FileAccess.file_exists(md5_path):
+				continue
+			var txt := FileAccess.get_file_as_string(md5_path)
+			var m := RegEx.create_from_string("source_md5=\"([0-9a-f]+)\"").search(txt)
+			if m and m.get_string(1) != FileAccess.get_md5(src):
+				stale.append(src.get_file())
+	return stale
+
+
+func _warn_stale_imports() -> void:
+	var stale := _stale_imports()
+	if stale.is_empty():
+		return
+	push_error("Imported models are older than their files: %s. Open the project in the Godot editor once (or run godot --headless --path godot --import), then start the game again." % ", ".join(stale))
+	var layer := CanvasLayer.new()
+	layer.layer = 120
+	var lb := Label.new()
+	lb.text = "Modelos desatualizados (%s).\nAbra a pasta godot/ no editor do Godot uma vez, ou rode:\ngodot --headless --path godot --import\ne abra o jogo de novo." % ", ".join(stale.slice(0, 4))
+	lb.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	lb.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	lb.add_theme_constant_override("outline_size", 6)
+	lb.add_theme_font_size_override("font_size", 20)
+	lb.position = Vector2(24, 24)
+	layer.add_child(lb)
+	add_child(layer)
+
+
 func _boot() -> void:
+	_warn_stale_imports()
 	await _step(0.05, "Pintando as paredes")
 	cam = Camera3D.new()
 	cam.near = 0.03
